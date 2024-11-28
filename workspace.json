@@ -1,0 +1,745 @@
+{
+  "configuration" : { },
+  "description" : "High level context diagram for all products within Digital Transformation of Screening",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedDate" : "2024-11-28T13:52:35Z",
+  "model" : {
+    "people" : [ {
+      "description" : "External user eligible for screening",
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "Participant users",
+      "properties" : {
+        "structurizr.dsl.identifier" : "u"
+      },
+      "relationships" : [ {
+        "description" : "Views screening information using",
+        "destinationId" : "14",
+        "id" : "45",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Manages appointment using",
+        "destinationId" : "5",
+        "id" : "46",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Interacts with campaigns using",
+        "destinationId" : "8",
+        "id" : "47",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Requests support using",
+        "destinationId" : "17",
+        "id" : "48",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person,external"
+    }, {
+      "description" : "Internal staff users including clinical and administrative staff",
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "Staff users",
+      "properties" : {
+        "structurizr.dsl.identifier" : "st"
+      },
+      "relationships" : [ {
+        "description" : "Manages clinical investigation using",
+        "destinationId" : "19",
+        "id" : "49",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Manages participant appointments using",
+        "destinationId" : "5",
+        "id" : "50",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Manages participant's episode using",
+        "destinationId" : "14",
+        "id" : "51",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Manages participant queries using",
+        "destinationId" : "17",
+        "id" : "52",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Internal users, but not concerned with day to day operations",
+      "id" : "3",
+      "location" : "Unspecified",
+      "name" : "Secondary users",
+      "properties" : {
+        "structurizr.dsl.identifier" : "s"
+      },
+      "relationships" : [ {
+        "description" : "Manages Pathway definitions using",
+        "destinationId" : "18",
+        "id" : "53",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Manages Capacity using",
+        "destinationId" : "10",
+        "id" : "54",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Analyses screening data using",
+        "destinationId" : "6",
+        "id" : "55",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Creates campaigns using",
+        "destinationId" : "8",
+        "id" : "56",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Manages capacity and demand using",
+        "destinationId" : "9",
+        "id" : "57",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "description" : "Service that appropriately allocates a participant to a slot",
+      "documentation" : { },
+      "id" : "4",
+      "location" : "Unspecified",
+      "name" : "Appointment Allocator",
+      "properties" : {
+        "structurizr.dsl.identifier" : "appointmentallocator"
+      },
+      "relationships" : [ {
+        "description" : "Gets available slots using",
+        "destinationId" : "5",
+        "id" : "27",
+        "sourceId" : "4",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Retrieves participants usage patterns",
+        "destinationId" : "6",
+        "id" : "28",
+        "sourceId" : "4",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Publishes data to",
+        "destinationId" : "6",
+        "id" : "42",
+        "sourceId" : "4",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service for both participant and staff to manage appointments",
+      "documentation" : { },
+      "id" : "5",
+      "location" : "Unspecified",
+      "name" : "Appointment Booker",
+      "properties" : {
+        "structurizr.dsl.identifier" : "appointmentbooker"
+      },
+      "relationships" : [ {
+        "description" : "Notifies of business audit events using",
+        "destinationId" : "7",
+        "id" : "38",
+        "sourceId" : "5",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Publishes data to",
+        "destinationId" : "6",
+        "id" : "41",
+        "sourceId" : "5",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service for analysing Screening data",
+      "documentation" : { },
+      "id" : "6",
+      "location" : "Unspecified",
+      "name" : "BI and Data Analysis",
+      "properties" : {
+        "structurizr.dsl.identifier" : "bianddataanalysis"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service that provides immutable audit datastore used for analysis and non-repudiation",
+      "documentation" : { },
+      "id" : "7",
+      "location" : "Unspecified",
+      "name" : "Business Audit",
+      "properties" : {
+        "structurizr.dsl.identifier" : "businessaudit"
+      },
+      "relationships" : [ {
+        "description" : "Publishes data to",
+        "destinationId" : "6",
+        "id" : "40",
+        "sourceId" : "7",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service for launching and monitoring campaigns to improve uptake",
+      "documentation" : { },
+      "id" : "8",
+      "location" : "Unspecified",
+      "name" : "Campaign Manager",
+      "properties" : {
+        "structurizr.dsl.identifier" : "campaignmanager"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service for optimising capacity vs demand constraints",
+      "documentation" : { },
+      "id" : "9",
+      "location" : "Unspecified",
+      "name" : "Capacity and Demand Planner",
+      "properties" : {
+        "structurizr.dsl.identifier" : "capacityanddemandplanner"
+      },
+      "relationships" : [ {
+        "description" : "Creates unresourced slots using",
+        "destinationId" : "5",
+        "id" : "26",
+        "sourceId" : "9",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Receives demand from",
+        "destinationId" : "12",
+        "id" : "34",
+        "sourceId" : "9",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service to centralise the overall system capacity",
+      "documentation" : { },
+      "id" : "10",
+      "location" : "Unspecified",
+      "name" : "Capacity Manager",
+      "properties" : {
+        "structurizr.dsl.identifier" : "capacitymanager"
+      },
+      "relationships" : [ {
+        "description" : "Receives capacity from",
+        "destinationId" : "9",
+        "id" : "35",
+        "sourceId" : "10",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service which produces a list of eligible participants based on a cohort definition",
+      "documentation" : { },
+      "id" : "11",
+      "location" : "Unspecified",
+      "name" : "Cohoring as a Service",
+      "properties" : {
+        "structurizr.dsl.identifier" : "cohortingasaservice"
+      },
+      "relationships" : [ {
+        "description" : "Notifies of new eligible participant",
+        "destinationId" : "12",
+        "id" : "21",
+        "sourceId" : "11",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service used for managing eligible participants in lieu of high quality data",
+      "documentation" : { },
+      "id" : "12",
+      "location" : "Unspecified",
+      "name" : "Cohort Manager",
+      "properties" : {
+        "structurizr.dsl.identifier" : "cohortmanager"
+      },
+      "relationships" : [ {
+        "description" : "Creates new participant record using",
+        "destinationId" : "14",
+        "id" : "22",
+        "sourceId" : "12",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service for centralising all communincation from screening programmes to the participant",
+      "documentation" : { },
+      "id" : "13",
+      "location" : "Unspecified",
+      "name" : "Communications Manager",
+      "properties" : {
+        "structurizr.dsl.identifier" : "communicationsmanager"
+      },
+      "relationships" : [ {
+        "description" : "Communicates with the participant using",
+        "destinationId" : "20",
+        "id" : "31",
+        "sourceId" : "13",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "containers" : [ {
+        "documentation" : { },
+        "id" : "15",
+        "name" : "Web Application",
+        "properties" : {
+          "structurizr.dsl.identifier" : "webapp"
+        },
+        "tags" : "Element,Container"
+      }, {
+        "documentation" : { },
+        "id" : "16",
+        "name" : "Participant Data Store",
+        "properties" : {
+          "structurizr.dsl.identifier" : "database"
+        },
+        "tags" : "Element,Container"
+      } ],
+      "description" : "Service for managing a participant's episodes and encounters",
+      "documentation" : { },
+      "id" : "14",
+      "location" : "Unspecified",
+      "name" : "Participant Manager",
+      "properties" : {
+        "structurizr.dsl.identifier" : "participantmanager"
+      },
+      "relationships" : [ {
+        "description" : "Notifies of participant ready for screening using",
+        "destinationId" : "18",
+        "id" : "23",
+        "sourceId" : "14",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Notifies of business audit events using",
+        "destinationId" : "7",
+        "id" : "36",
+        "sourceId" : "14",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Publishes data to",
+        "destinationId" : "6",
+        "id" : "44",
+        "sourceId" : "14",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service for managing inbound help requests from participants",
+      "documentation" : { },
+      "id" : "17",
+      "location" : "Unspecified",
+      "name" : "Participant Support",
+      "properties" : {
+        "structurizr.dsl.identifier" : "participantsupport"
+      },
+      "relationships" : [ {
+        "description" : "Notifies of business audit events using",
+        "destinationId" : "7",
+        "id" : "39",
+        "sourceId" : "17",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service that implements a pathway definition",
+      "documentation" : { },
+      "id" : "18",
+      "location" : "Unspecified",
+      "name" : "Pathway Coordinator",
+      "properties" : {
+        "structurizr.dsl.identifier" : "pathwaycoordinator"
+      },
+      "relationships" : [ {
+        "description" : "Manages participant's episode using",
+        "destinationId" : "14",
+        "id" : "24",
+        "sourceId" : "18",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Gets slot for participant using",
+        "destinationId" : "4",
+        "id" : "25",
+        "sourceId" : "18",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Allocates appointment to Participant",
+        "destinationId" : "5",
+        "id" : "29",
+        "sourceId" : "18",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Sends invitations to participant using",
+        "destinationId" : "13",
+        "id" : "30",
+        "sourceId" : "18",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Executes clinical investigation using",
+        "destinationId" : "19",
+        "id" : "32",
+        "sourceId" : "18",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Service for coordinating and capturing the clinical investigation processes",
+      "documentation" : { },
+      "id" : "19",
+      "location" : "Unspecified",
+      "name" : "Screening Event Manager",
+      "properties" : {
+        "structurizr.dsl.identifier" : "screeningeventmanager"
+      },
+      "relationships" : [ {
+        "description" : "Notification of clinical outcome using",
+        "destinationId" : "18",
+        "id" : "33",
+        "sourceId" : "19",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Notifies of business audit events using",
+        "destinationId" : "7",
+        "id" : "37",
+        "sourceId" : "19",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Publishes data to",
+        "destinationId" : "6",
+        "id" : "43",
+        "sourceId" : "19",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "NHS Wide service for providing communication to the Citizen",
+      "documentation" : { },
+      "id" : "20",
+      "location" : "Unspecified",
+      "name" : "NHS Notify",
+      "properties" : {
+        "structurizr.dsl.identifier" : "nhsnotify"
+      },
+      "tags" : "Element,Software System,external"
+    } ]
+  },
+  "name" : "Digital Transformation of Screening",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlICJEaWdpdGFsIFRyYW5zZm9ybWF0aW9uIG9mIFNjcmVlbmluZyIgIkhpZ2ggbGV2ZWwgY29udGV4dCBkaWFncmFtIGZvciBhbGwgcHJvZHVjdHMgd2l0aGluIERpZ2l0YWwgVHJhbnNmb3JtYXRpb24gb2YgU2NyZWVuaW5nIiB7CgogICAgbW9kZWwgewogICAgICAgIHUgPSBwZXJzb24gIlBhcnRpY2lwYW50IHVzZXJzIiAiRXh0ZXJuYWwgdXNlciBlbGlnaWJsZSBmb3Igc2NyZWVuaW5nIiAiZXh0ZXJuYWwiCiAgICAgICAgc3QgPSBwZXJzb24gIlN0YWZmIHVzZXJzIiAiSW50ZXJuYWwgc3RhZmYgdXNlcnMgaW5jbHVkaW5nIGNsaW5pY2FsIGFuZCBhZG1pbmlzdHJhdGl2ZSBzdGFmZiIKICAgICAgICBzID0gcGVyc29uICJTZWNvbmRhcnkgdXNlcnMiICJJbnRlcm5hbCB1c2VycywgYnV0IG5vdCBjb25jZXJuZWQgd2l0aCBkYXkgdG8gZGF5IG9wZXJhdGlvbnMiCgoKICAgICAgICBhcHBvaW50bWVudEFsbG9jYXRvciA9IHNvZnR3YXJlU3lzdGVtICJBcHBvaW50bWVudCBBbGxvY2F0b3IiICJTZXJ2aWNlIHRoYXQgYXBwcm9wcmlhdGVseSBhbGxvY2F0ZXMgYSBwYXJ0aWNpcGFudCB0byBhIHNsb3QiCiAgICAgICAgYXBwb2ludG1lbnRCb29rZXIgPSBzb2Z0d2FyZVN5c3RlbSAiQXBwb2ludG1lbnQgQm9va2VyIiAiU2VydmljZSBmb3IgYm90aCBwYXJ0aWNpcGFudCBhbmQgc3RhZmYgdG8gbWFuYWdlIGFwcG9pbnRtZW50cyIKICAgICAgICBiaWFuZERhdGFBbmFseXNpcyA9IHNvZnR3YXJlU3lzdGVtICJCSSBhbmQgRGF0YSBBbmFseXNpcyIgIlNlcnZpY2UgZm9yIGFuYWx5c2luZyBTY3JlZW5pbmcgZGF0YSIKICAgICAgICBidXNpbmVzc0F1ZGl0ID0gc29mdHdhcmVTeXN0ZW0gIkJ1c2luZXNzIEF1ZGl0IiAiU2VydmljZSB0aGF0IHByb3ZpZGVzIGltbXV0YWJsZSBhdWRpdCBkYXRhc3RvcmUgdXNlZCBmb3IgYW5hbHlzaXMgYW5kIG5vbi1yZXB1ZGlhdGlvbiIKICAgICAgICBjYW1wYWlnbk1hbmFnZXIgPSBzb2Z0d2FyZVN5c3RlbSAiQ2FtcGFpZ24gTWFuYWdlciIgIlNlcnZpY2UgZm9yIGxhdW5jaGluZyBhbmQgbW9uaXRvcmluZyBjYW1wYWlnbnMgdG8gaW1wcm92ZSB1cHRha2UiCiAgICAgICAgY2FwYWNpdHlBbmREZW1hbmRQbGFubmVyID0gc29mdHdhcmVTeXN0ZW0gIkNhcGFjaXR5IGFuZCBEZW1hbmQgUGxhbm5lciIgIlNlcnZpY2UgZm9yIG9wdGltaXNpbmcgY2FwYWNpdHkgdnMgZGVtYW5kIGNvbnN0cmFpbnRzIgogICAgICAgIGNhcGFjaXR5TWFuYWdlciA9IHNvZnR3YXJlU3lzdGVtICJDYXBhY2l0eSBNYW5hZ2VyIiAiU2VydmljZSB0byBjZW50cmFsaXNlIHRoZSBvdmVyYWxsIHN5c3RlbSBjYXBhY2l0eSIKICAgICAgICBjb2hvcnRpbmdBc0FTZXJ2aWNlID0gc29mdHdhcmVTeXN0ZW0gIkNvaG9yaW5nIGFzIGEgU2VydmljZSIgIlNlcnZpY2Ugd2hpY2ggcHJvZHVjZXMgYSBsaXN0IG9mIGVsaWdpYmxlIHBhcnRpY2lwYW50cyBiYXNlZCBvbiBhIGNvaG9ydCBkZWZpbml0aW9uIgogICAgICAgIGNvaG9ydE1hbmFnZXIgPSBzb2Z0d2FyZVN5c3RlbSAiQ29ob3J0IE1hbmFnZXIiICJTZXJ2aWNlIHVzZWQgZm9yIG1hbmFnaW5nIGVsaWdpYmxlIHBhcnRpY2lwYW50cyBpbiBsaWV1IG9mIGhpZ2ggcXVhbGl0eSBkYXRhIgogICAgICAgIGNvbW11bmljYXRpb25zTWFuYWdlciA9IHNvZnR3YXJlU3lzdGVtICJDb21tdW5pY2F0aW9ucyBNYW5hZ2VyIiAiU2VydmljZSBmb3IgY2VudHJhbGlzaW5nIGFsbCBjb21tdW5pbmNhdGlvbiBmcm9tIHNjcmVlbmluZyBwcm9ncmFtbWVzIHRvIHRoZSBwYXJ0aWNpcGFudCIKICAgICAgICBwYXJ0aWNpcGFudE1hbmFnZXIgPSBzb2Z0d2FyZVN5c3RlbSAiUGFydGljaXBhbnQgTWFuYWdlciIgIlNlcnZpY2UgZm9yIG1hbmFnaW5nIGEgcGFydGljaXBhbnQncyBlcGlzb2RlcyBhbmQgZW5jb3VudGVycyIgewogICAgICAgICAgICB3ZWJhcHAgPSBjb250YWluZXIgIldlYiBBcHBsaWNhdGlvbiIKICAgICAgICAgICAgZGF0YWJhc2UgPSBjb250YWluZXIgIlBhcnRpY2lwYW50IERhdGEgU3RvcmUiCiAgICAgICAgfQogICAgICAgIHBhcnRpY2lwYW50U3VwcG9ydCA9IHNvZnR3YXJlU3lzdGVtICJQYXJ0aWNpcGFudCBTdXBwb3J0IiAiU2VydmljZSBmb3IgbWFuYWdpbmcgaW5ib3VuZCBoZWxwIHJlcXVlc3RzIGZyb20gcGFydGljaXBhbnRzIgogICAgICAgIHBhdGh3YXlDb29yZGluYXRvciA9IHNvZnR3YXJlU3lzdGVtICJQYXRod2F5IENvb3JkaW5hdG9yIiAiU2VydmljZSB0aGF0IGltcGxlbWVudHMgYSBwYXRod2F5IGRlZmluaXRpb24iCiAgICAgICAgc2NyZWVuaW5nRXZlbnRNYW5hZ2VyID0gc29mdHdhcmVTeXN0ZW0gIlNjcmVlbmluZyBFdmVudCBNYW5hZ2VyIiAiU2VydmljZSBmb3IgY29vcmRpbmF0aW5nIGFuZCBjYXB0dXJpbmcgdGhlIGNsaW5pY2FsIGludmVzdGlnYXRpb24gcHJvY2Vzc2VzIgogICAgICAgIG5oc05vdGlmeSA9IHNvZnR3YXJlU3lzdGVtICJOSFMgTm90aWZ5IiAiTkhTIFdpZGUgc2VydmljZSBmb3IgcHJvdmlkaW5nIGNvbW11bmljYXRpb24gdG8gdGhlIENpdGl6ZW4iICJleHRlcm5hbCIKCiAgICAgICAgY29ob3J0aW5nQXNBU2VydmljZSAtPiBjb2hvcnRNYW5hZ2VyICJOb3RpZmllcyBvZiBuZXcgZWxpZ2libGUgcGFydGljaXBhbnQiCiAgICAgICAgY29ob3J0TWFuYWdlciAtPiBwYXJ0aWNpcGFudE1hbmFnZXIgIkNyZWF0ZXMgbmV3IHBhcnRpY2lwYW50IHJlY29yZCB1c2luZyIKICAgICAgICBwYXJ0aWNpcGFudE1hbmFnZXIgLT4gcGF0aHdheUNvb3JkaW5hdG9yICJOb3RpZmllcyBvZiBwYXJ0aWNpcGFudCByZWFkeSBmb3Igc2NyZWVuaW5nIHVzaW5nIgogICAgICAgIHBhdGh3YXlDb29yZGluYXRvciAtPiBwYXJ0aWNpcGFudE1hbmFnZXIgIk1hbmFnZXMgcGFydGljaXBhbnQncyBlcGlzb2RlIHVzaW5nIgogICAgICAgIHBhdGh3YXlDb29yZGluYXRvciAtPiBhcHBvaW50bWVudEFsbG9jYXRvciAiR2V0cyBzbG90IGZvciBwYXJ0aWNpcGFudCB1c2luZyIKICAgICAgICBjYXBhY2l0eUFuZERlbWFuZFBsYW5uZXIgLT4gYXBwb2ludG1lbnRCb29rZXIgIkNyZWF0ZXMgdW5yZXNvdXJjZWQgc2xvdHMgdXNpbmciCiAgICAgICAgYXBwb2ludG1lbnRBbGxvY2F0b3IgLT4gYXBwb2ludG1lbnRCb29rZXIgIkdldHMgYXZhaWxhYmxlIHNsb3RzIHVzaW5nIgogICAgICAgIGFwcG9pbnRtZW50QWxsb2NhdG9yIC0+IGJpYW5kRGF0YUFuYWx5c2lzICJSZXRyaWV2ZXMgcGFydGljaXBhbnRzIHVzYWdlIHBhdHRlcm5zIgogICAgICAgIHBhdGh3YXlDb29yZGluYXRvciAtPiBhcHBvaW50bWVudEJvb2tlciAiQWxsb2NhdGVzIGFwcG9pbnRtZW50IHRvIFBhcnRpY2lwYW50IiAgICAgICAgCiAgICAgICAgcGF0aHdheUNvb3JkaW5hdG9yIC0+IGNvbW11bmljYXRpb25zTWFuYWdlciAiU2VuZHMgaW52aXRhdGlvbnMgdG8gcGFydGljaXBhbnQgdXNpbmciCiAgICAgICAgY29tbXVuaWNhdGlvbnNNYW5hZ2VyIC0+IG5oc05vdGlmeSAiQ29tbXVuaWNhdGVzIHdpdGggdGhlIHBhcnRpY2lwYW50IHVzaW5nIgogICAgICAgIHBhdGh3YXlDb29yZGluYXRvciAtPiBzY3JlZW5pbmdFdmVudE1hbmFnZXIgIkV4ZWN1dGVzIGNsaW5pY2FsIGludmVzdGlnYXRpb24gdXNpbmciCiAgICAgICAgc2NyZWVuaW5nRXZlbnRNYW5hZ2VyIC0+IHBhdGh3YXlDb29yZGluYXRvciAiTm90aWZpY2F0aW9uIG9mIGNsaW5pY2FsIG91dGNvbWUgdXNpbmciCiAgICAgICAgY2FwYWNpdHlBbmREZW1hbmRQbGFubmVyIC0+IGNvaG9ydE1hbmFnZXIgIlJlY2VpdmVzIGRlbWFuZCBmcm9tIgogICAgICAgIGNhcGFjaXR5TWFuYWdlciAtPiBjYXBhY2l0eUFuZERlbWFuZFBsYW5uZXIgIlJlY2VpdmVzIGNhcGFjaXR5IGZyb20iCgogICAgICAgIHBhcnRpY2lwYW50TWFuYWdlciAtPiBidXNpbmVzc0F1ZGl0ICJOb3RpZmllcyBvZiBidXNpbmVzcyBhdWRpdCBldmVudHMgdXNpbmciCiAgICAgICAgc2NyZWVuaW5nRXZlbnRNYW5hZ2VyIC0+IGJ1c2luZXNzQXVkaXQgIk5vdGlmaWVzIG9mIGJ1c2luZXNzIGF1ZGl0IGV2ZW50cyB1c2luZyIKICAgICAgICBhcHBvaW50bWVudEJvb2tlciAtPiBidXNpbmVzc0F1ZGl0ICJOb3RpZmllcyBvZiBidXNpbmVzcyBhdWRpdCBldmVudHMgdXNpbmciCiAgICAgICAgcGFydGljaXBhbnRTdXBwb3J0IC0+IGJ1c2luZXNzQXVkaXQgIk5vdGlmaWVzIG9mIGJ1c2luZXNzIGF1ZGl0IGV2ZW50cyB1c2luZyIKICAgICAgICBidXNpbmVzc0F1ZGl0IC0+IGJpYW5kRGF0YUFuYWx5c2lzICJQdWJsaXNoZXMgZGF0YSB0byIKICAgICAgICBhcHBvaW50bWVudEJvb2tlciAtPiBiaWFuZERhdGFBbmFseXNpcyAiUHVibGlzaGVzIGRhdGEgdG8iCiAgICAgICAgYXBwb2ludG1lbnRBbGxvY2F0b3IgLT4gYmlhbmREYXRhQW5hbHlzaXMgIlB1Ymxpc2hlcyBkYXRhIHRvIgogICAgICAgIHNjcmVlbmluZ0V2ZW50TWFuYWdlciAtPiBiaWFuZERhdGFBbmFseXNpcyAiUHVibGlzaGVzIGRhdGEgdG8iCiAgICAgICAgcGFydGljaXBhbnRNYW5hZ2VyIC0+IGJpYW5kRGF0YUFuYWx5c2lzICJQdWJsaXNoZXMgZGF0YSB0byIKCgogICAgICAgIHUgLT4gcGFydGljaXBhbnRNYW5hZ2VyICJWaWV3cyBzY3JlZW5pbmcgaW5mb3JtYXRpb24gdXNpbmciCiAgICAgICAgdSAtPiBhcHBvaW50bWVudEJvb2tlciAiTWFuYWdlcyBhcHBvaW50bWVudCB1c2luZyIKICAgICAgICB1IC0+IGNhbXBhaWduTWFuYWdlciAiSW50ZXJhY3RzIHdpdGggY2FtcGFpZ25zIHVzaW5nIgogICAgICAgIHUgLT4gcGFydGljaXBhbnRTdXBwb3J0ICJSZXF1ZXN0cyBzdXBwb3J0IHVzaW5nIgoKCiAgICAgICAgc3QgLT4gc2NyZWVuaW5nRXZlbnRNYW5hZ2VyICJNYW5hZ2VzIGNsaW5pY2FsIGludmVzdGlnYXRpb24gdXNpbmciCiAgICAgICAgc3QgLT4gYXBwb2ludG1lbnRCb29rZXIgIk1hbmFnZXMgcGFydGljaXBhbnQgYXBwb2ludG1lbnRzIHVzaW5nIgogICAgICAgIHN0IC0+IHBhcnRpY2lwYW50TWFuYWdlciAiTWFuYWdlcyBwYXJ0aWNpcGFudCdzIGVwaXNvZGUgdXNpbmciCiAgICAgICAgc3QgLT4gcGFydGljaXBhbnRTdXBwb3J0ICJNYW5hZ2VzIHBhcnRpY2lwYW50IHF1ZXJpZXMgdXNpbmciCiAgICAgICAgCiAgICAgICAgcyAtPiBwYXRod2F5Q29vcmRpbmF0b3IgIk1hbmFnZXMgUGF0aHdheSBkZWZpbml0aW9ucyB1c2luZyIKICAgICAgICBzIC0+IGNhcGFjaXR5TWFuYWdlciAiTWFuYWdlcyBDYXBhY2l0eSB1c2luZyIKICAgICAgICBzIC0+IGJpYW5kRGF0YUFuYWx5c2lzICJBbmFseXNlcyBzY3JlZW5pbmcgZGF0YSB1c2luZyIKICAgICAgICBzIC0+IGNhbXBhaWduTWFuYWdlciAiQ3JlYXRlcyBjYW1wYWlnbnMgdXNpbmciCiAgICAgICAgcyAtPiBjYXBhY2l0eUFuZERlbWFuZFBsYW5uZXIgIk1hbmFnZXMgY2FwYWNpdHkgYW5kIGRlbWFuZCB1c2luZyIKCgogICAgfQoKICAgIHZpZXdzIHsKCiAgICAgICAgc3lzdGVtTGFuZHNjYXBlIHNsICJPdmVyYWxsIHN5c3RlbSBsYW5kc2NhcGUiewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICB9CgogICAgICAgIGNvbnRhaW5lciBwYXJ0aWNpcGFudE1hbmFnZXIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KICAgICAgICBzdHlsZXMgewogICAgICAgICAgICBlbGVtZW50ICJFbGVtZW50IiB7CiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiUGVyc29uIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMxMTY4YmQKICAgICAgICAgICAgICAgIHNoYXBlIHBlcnNvbgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlNvZnR3YXJlIFN5c3RlbSIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMTE2OGJkCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiQ29udGFpbmVyIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMxMTY4YmQKICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgZWxlbWVudCAiRGF0YWJhc2UiIHsKICAgICAgICAgICAgICAgIHNoYXBlIGN5bGluZGVyCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiZXh0ZXJuYWwiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgI2VhZWFlYQogICAgICAgICAgICAgICAgY29sb3IgIzAwMDAwMAogICAgICAgICAgICB9CgogICAgICAgIH0KICAgIH0KCn0="
+  },
+  "views" : {
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "sl",
+      "styles" : {
+        "elements" : [ {
+          "color" : "#ffffff",
+          "tag" : "Element"
+        }, {
+          "background" : "#1168bd",
+          "shape" : "Person",
+          "tag" : "Person"
+        }, {
+          "background" : "#1168bd",
+          "tag" : "Software System"
+        }, {
+          "background" : "#1168bd",
+          "tag" : "Container"
+        }, {
+          "shape" : "Cylinder",
+          "tag" : "Database"
+        }, {
+          "background" : "#eaeaea",
+          "color" : "#000000",
+          "tag" : "external"
+        } ]
+      },
+      "terminology" : { }
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "elements" : [ {
+        "id" : "15",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "generatedKey" : true,
+      "key" : "Container-001",
+      "order" : 2,
+      "softwareSystemId" : "14"
+    } ],
+    "systemLandscapeViews" : [ {
+      "description" : "Overall system landscape",
+      "dimensions" : {
+        "height" : 6426,
+        "width" : 8813
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 3858,
+        "y" : 200
+      }, {
+        "id" : "2",
+        "x" : 2063,
+        "y" : 320
+      }, {
+        "id" : "3",
+        "x" : 6530,
+        "y" : 205
+      }, {
+        "id" : "4",
+        "x" : 5225,
+        "y" : 3020
+      }, {
+        "id" : "5",
+        "x" : 3698,
+        "y" : 1540
+      }, {
+        "id" : "6",
+        "x" : 5223,
+        "y" : 5610
+      }, {
+        "id" : "7",
+        "x" : 995,
+        "y" : 5440
+      }, {
+        "id" : "8",
+        "x" : 5185,
+        "y" : 265
+      }, {
+        "id" : "9",
+        "x" : 6435,
+        "y" : 1545
+      }, {
+        "id" : "10",
+        "x" : 7455,
+        "y" : 1535
+      }, {
+        "id" : "11",
+        "x" : 7490,
+        "y" : 2565
+      }, {
+        "id" : "12",
+        "x" : 6445,
+        "y" : 2535
+      }, {
+        "id" : "13",
+        "x" : 6455,
+        "y" : 3740
+      }, {
+        "id" : "14",
+        "x" : 2518,
+        "y" : 1530
+      }, {
+        "id" : "17",
+        "x" : 1880,
+        "y" : 1540
+      }, {
+        "id" : "18",
+        "x" : 3110,
+        "y" : 3705
+      }, {
+        "id" : "19",
+        "x" : 1210,
+        "y" : 1545
+      }, {
+        "id" : "20",
+        "x" : 7540,
+        "y" : 3760
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "sl",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "21"
+      }, {
+        "id" : "22"
+      }, {
+        "id" : "23",
+        "vertices" : [ {
+          "x" : 3315,
+          "y" : 2720
+        } ]
+      }, {
+        "id" : "24",
+        "vertices" : [ {
+          "x" : 3010,
+          "y" : 2590
+        } ]
+      }, {
+        "id" : "25"
+      }, {
+        "id" : "26"
+      }, {
+        "id" : "27"
+      }, {
+        "id" : "28",
+        "vertices" : [ {
+          "x" : 5258,
+          "y" : 3935
+        } ]
+      }, {
+        "id" : "29"
+      }, {
+        "id" : "30"
+      }, {
+        "id" : "31"
+      }, {
+        "id" : "32",
+        "vertices" : [ {
+          "x" : 2985,
+          "y" : 3280
+        } ]
+      }, {
+        "id" : "33",
+        "vertices" : [ {
+          "x" : 2425,
+          "y" : 3170
+        } ]
+      }, {
+        "id" : "34"
+      }, {
+        "id" : "35"
+      }, {
+        "id" : "36",
+        "vertices" : [ {
+          "x" : 2448,
+          "y" : 1955
+        }, {
+          "x" : 1935,
+          "y" : 3090
+        }, {
+          "x" : 1410,
+          "y" : 4635
+        } ]
+      }, {
+        "id" : "37"
+      }, {
+        "id" : "38",
+        "vertices" : [ {
+          "x" : 3890,
+          "y" : 5110
+        }, {
+          "x" : 3910,
+          "y" : 5695
+        }, {
+          "x" : 2225,
+          "y" : 5690
+        }, {
+          "x" : 1615,
+          "y" : 5685
+        } ]
+      }, {
+        "id" : "39",
+        "vertices" : [ {
+          "x" : 1545,
+          "y" : 2755
+        }, {
+          "x" : 1485,
+          "y" : 3455
+        } ]
+      }, {
+        "id" : "40",
+        "vertices" : [ {
+          "x" : 3898,
+          "y" : 5725
+        } ]
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42",
+        "vertices" : [ {
+          "x" : 5778,
+          "y" : 4065
+        } ]
+      }, {
+        "id" : "43",
+        "vertices" : [ {
+          "x" : 675,
+          "y" : 1720
+        }, {
+          "x" : 630,
+          "y" : 5905
+        }, {
+          "x" : 5455,
+          "y" : 6015
+        } ]
+      }, {
+        "id" : "44",
+        "vertices" : [ {
+          "x" : 2735,
+          "y" : 2400
+        }, {
+          "x" : 2745,
+          "y" : 5430
+        } ]
+      }, {
+        "id" : "45"
+      }, {
+        "id" : "46"
+      }, {
+        "id" : "47"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "49"
+      }, {
+        "id" : "50",
+        "vertices" : [ {
+          "x" : 3020,
+          "y" : 1255
+        } ]
+      }, {
+        "id" : "51"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "53"
+      }, {
+        "id" : "54"
+      }, {
+        "id" : "55",
+        "vertices" : [ {
+          "x" : 8558,
+          "y" : 1675
+        }, {
+          "x" : 8513,
+          "y" : 5735
+        } ]
+      }, {
+        "id" : "56"
+      }, {
+        "id" : "57"
+      } ]
+    } ]
+  }
+}
