@@ -28,10 +28,9 @@ jobs:
       # Step 5: Start Structurizr Lite in Docker
       - name: Start Structurizr container
         run: |
-          docker run -d --name structurizr-github-action \
-            -v "${{ github.workspace }}:/usr/local/structurizr" \
-            -p 8080:8080 \
-            structurizr/lite
+          docker run --name structurizr-github-action \
+          -it --rm -p 8080:8080 -v \
+          ./:/usr/local/structurizr structurizr/lite
 
       # Step 6: Test Structurizr Lite is accessible
       - name: Test Structurizr Lite accessibility
