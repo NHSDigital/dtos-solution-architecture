@@ -25,7 +25,7 @@ jobs:
           cd puppeteer
           npm i puppeteer
 
-      # Step 4: Start Structurizr Lite in Docker
+      # Step 5: Start Structurizr Lite in Docker
       - name: Start Structurizr container
         run: |
           docker run -d --name structurizr-github-action \
@@ -33,6 +33,16 @@ jobs:
             -p 8080:8080 \
             structurizr/lite
 
+      # Step 6: Test Structurizr Lite is accessible
+      - name: Test Structurizr Lite accessibility
+        run: |
+          curl -I http://localhost:8080
+
+      # Step 7: Verify workspace.dsl exists in container
+      - name: Check workspace.dsl in Structurizr container
+        run: |
+          docker exec structurizr-github-action ls /usr/local/structurizr
+          
       # Step: Run Puppeteer script
       - name: Export diagrams
         run: |
