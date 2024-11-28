@@ -2,8 +2,6 @@ name: Generate Structurizr PNGs
 
 on:
   pull_request:
-    paths:
-      - 'workspace.dsl'  # Trigger only when workspace.dsl changes
 
 jobs:
   generate-diagrams:
