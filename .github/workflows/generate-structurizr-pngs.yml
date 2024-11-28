@@ -1,0 +1,58 @@
+name: Generate Structurizr PNGs
+
+on:
+  pull_request:
+    paths:
+      - 'workspace.dsl'  # Trigger only when workspace.dsl changes
+
+jobs:
+  generate-diagrams:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Use a stable Node.js version compatible with Puppeteer
+    
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      # Step 3: Download Structurizr Puppeteer repository
+      - name: Download Structurizr Puppeteer
+        run: |
+          git clone https://github.com/structurizr/puppeteer.git
+
+      # Step 4: Start Structurizr Lite in Docker
+      - name: Start Structurizr container
+        run: |
+          docker run -d --name structurizr-github-action \
+            -v "${{ github.workspace }}:/usr/local/structurizr" \
+            -p 8080:8080 \
+            structurizr/lite
+
+      # Step 5: Generate PNG diagrams using Puppeteer
+      - name: Generate diagrams with Puppeteer
+        run: |
+          cd puppeteer
+          node export-diagrams.js http://localhost:8080/workspace/diagrams png \
+            --output ../output
+
+      # Step 6: Upload generated PNGs as artifacts
+      - name: Upload diagrams as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: struct-diagrams
+          path: output
+          
+      # Step 7: Stop and remove the Docker container
+      - name: Clean up Docker container
+        if: always()
+        run: |
+          docker stop structurizr-github-action || true
+          docker rm structurizr-github-action || true
