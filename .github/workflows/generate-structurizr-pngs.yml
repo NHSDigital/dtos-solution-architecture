@@ -50,7 +50,7 @@ jobs:
       - name: Export diagrams
         run: |
           cd puppeteer
-          node export-diagrams.js http://localhost:8080/workspace/diagrams png --output output
+          node export-diagrams.js http://localhost:8080/workspace/diagrams png
 
       # Step 6: Upload generated PNGs as artifacts
       - name: Upload diagrams as artifacts
