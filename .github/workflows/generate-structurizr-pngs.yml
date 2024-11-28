@@ -33,12 +33,11 @@ jobs:
             -p 8080:8080 \
             structurizr/lite
 
-      
-      # Step 5: Export diagram
-      - name: Export diagrm
+      # Step: Run Puppeteer script
+      - name: Export diagrams
         run: |
           cd puppeteer
-          node export-diagrams.js http://localhost:8080/workspace/diagrams png
+          node export-diagrams.js http://localhost:8080/workspace/diagrams png --output output
 
       # Step 6: Upload generated PNGs as artifacts
       - name: Upload diagrams as artifacts
