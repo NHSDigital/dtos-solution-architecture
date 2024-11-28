@@ -32,6 +32,10 @@ jobs:
           -it --rm -p 8080:8080 -v \
           ./:/usr/local/structurizr structurizr/lite
 
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+
       # Step 6: Test Structurizr Lite is accessible
       - name: Test Structurizr Lite accessibility
         run: |
