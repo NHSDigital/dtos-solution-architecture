@@ -29,7 +29,7 @@ jobs:
       - name: Start Structurizr container
         run: |
           docker run --name structurizr-github-action \
-          -it --rm -p 8080:8080 -v \
+          -d --rm -p 8080:8080 -v \
           ./:/usr/local/structurizr structurizr/lite
 
       - name: Sleep for 30 seconds
