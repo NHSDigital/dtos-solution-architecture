@@ -57,7 +57,7 @@ jobs:
       - name: Copy diagrams to /images
         run: |
           mkdir -p images
-          cp puppeteer/output/*.png images/
+          cp puppeteer/*.png images/
       
       # Step 10: Commit and push diagrams to the PR branch
       - name: Commit and push diagrams
