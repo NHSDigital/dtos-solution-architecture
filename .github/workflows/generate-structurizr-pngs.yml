@@ -25,13 +25,14 @@ jobs:
           cd puppeteer
           npm i puppeteer
 
-      # Step 5: Start Structurizr Lite in Docker
+      # Step 4: Start Structurizr Lite in Docker
       - name: Start Structurizr container
         run: |
           docker run --name structurizr-github-action \
           -d --rm -p 8080:8080 -v \
           ./:/usr/local/structurizr structurizr/lite
 
+      # Step 5: Sleep until the docker container is ready
       - name: Sleep for 30 seconds
         run: sleep 30s
         shell: bash
@@ -46,20 +47,28 @@ jobs:
         run: |
           docker exec structurizr-github-action ls /usr/local/structurizr
           
-      # Step: Run Puppeteer script
+      # Step 8: Run Puppeteer script
       - name: Export diagrams
         run: |
           cd puppeteer
           node export-diagrams.js http://localhost:8080/workspace/diagrams png
 
-      # Step 6: Upload generated PNGs as artifacts
-      - name: Upload diagrams as artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: struct-diagrams
-          path: puppeteer/*.png
-          
-      # Step 7: Stop and remove the Docker container
+      # Step 9: Copy pngs to images folder
+      - name: Copy diagrams to /images
+        run: |
+          mkdir -p images
+          cp puppeteer/output/*.png images/
+      
+      # Step 10: Commit and push diagrams to the PR branch
+      - name: Commit and push diagrams
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add images/
+          git diff --cached --quiet || git commit -m "Add generated diagrams to /images"
+          git push origin HEAD    
+      
+      # Step 11: Stop and remove the Docker container
       - name: Clean up Docker container
         if: always()
         run: |
