@@ -6,11 +6,17 @@ on:
 jobs:
   generate-diagrams:
     runs-on: ubuntu-latest
-
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+      
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       # Step 2: Install Node.js
       - name: Setup Node.js
@@ -58,15 +64,10 @@ jobs:
         run: |
           mkdir -p images
           cp puppeteer/*.png images/
+          rm -rf puppeteer
       
       # Step 10: Commit and push diagrams to the PR branch
-      - name: Commit and push diagrams
-        run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
-          git add images/
-          git diff --cached --quiet || git commit -m "Add generated diagrams to /images"
-          git push origin HEAD    
+      - uses: stefanzweifel/git-auto-commit-action@v5
       
       # Step 11: Stop and remove the Docker container
       - name: Clean up Docker container
