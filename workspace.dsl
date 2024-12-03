@@ -103,58 +103,59 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         systemLandscape dtosSystemContext "Overall system landscape"{
             include *
         }
-        container appointmentAllocator {
+        container appointmentAllocator AppointmentAllocator {
             include *
             autoLayout lr
         }
-        container appointmentBooker {
+        container appointmentBooker AppointmentBooker {
             include *
             autoLayout lr
         }
-        container participantManager {
+        container biandDataAnalysis BIAndDataAnalysis {
             include *
             autoLayout lr
         }
-        container biandDataAnalysis {
+        container businessAudit BusinessAudit {
             include *
             autoLayout lr
         }
-        container businessAudit {
+        container campaignManager CampaignManager {
             include *
             autoLayout lr
         }
-        container campaignManager {
+        container capacityAndDemandPlanner CapacityAndDemandPlanner {
             include *
             autoLayout lr
         }
-        container capacityAndDemandPlanner {
+        container capacityManager CapacityManager {
             include *
             autoLayout lr
         }
-        container capacityManager {
+        container cohortManager CohortManager {
             include *
             autoLayout lr
         }
-        container cohortManager {
+        container communicationsManager CommunicationsManager {
             include *
             autoLayout lr
         }
-        container communicationsManager {
+        container participantSupport ParticipantSupport {
             include *
             autoLayout lr
         }
-        container participantSupport {
+        container pathwayCoordinator PathwayCoordinator {
             include *
             autoLayout lr
         }
-        container pathwayCoordinator {
+        container screeningEventManager ScreeningEventManager {
             include *
             autoLayout lr
         }
-        container screeningEventManager {
+        container participantManager ParticipantManager {
             include *
             autoLayout lr
         }
+        
         
         styles {
             element "Element" {
