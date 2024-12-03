@@ -6,10 +6,36 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         s = person "Secondary users" "Internal users, but not concerned with day to day operations"
 
 
-        appointmentAllocator = softwareSystem "Appointment Allocator" "Service that appropriately allocates a participant to a slot"
-        appointmentBooker = softwareSystem "Appointment Booker" "Service for both participant and staff to manage appointments"
-        biandDataAnalysis = softwareSystem "BI and Data Analysis" "Service for analysing Screening data"
-        businessAudit = softwareSystem "Business Audit" "Service that provides immutable audit datastore used for analysis and non-repudiation"
+        appointmentAllocator = softwareSystem "Appointment Allocator" "Service that appropriately allocates a participant to a slot"{
+            appointmentAllocator_apiApp = container "API Application"
+
+        }
+        appointmentBooker = softwareSystem "Appointment Booker" "Service for both participant and staff to manage appointments"{
+            appointmentBooker_userWeb = container "Citizen facing web interface"
+            appointmentBooker_staffWeb = container "Staff facing web interface"
+            appointmentBooker_apiApp = container "API Layer"
+            appointmentBooker_db = container "Booking database"
+            u -> appointmentBooker_userWeb "Books appointments using"
+            st -> appointmentBooker_staffWeb "Manages appointments using"
+            appointmentBooker_userWeb -> appointmentBooker_apiApp "Accesses database using"
+            appointmentBooker_staffWeb -> appointmentBooker_apiApp "Access database using"
+            appointmentBooker_apiApp -> appointmentBooker_db "Reads/Writes data using"
+        }
+        biandDataAnalysis = softwareSystem "BI and Data Analysis" "Service for analysing Screening data"{
+            biandDataAnalysis_analytics = container "Web interface for running queries"
+            biandDataAnalysis_participantManager = container "Read replica of particpant database"
+            biandDataAnalysis_businessAudit = container "Read replica of audit database"
+            s -> biandDataAnalysis_analytics "Queries data using"
+            biandDataAnalysis_analytics -> biandDataAnalysis_participantManager "Reads data from"
+            biandDataAnalysis_analytics -> biandDataAnalysis_businessAudit "Reads data from"
+        }
+        businessAudit = softwareSystem "Business Audit" "Service that provides immutable audit datastore used for analysis and non-repudiation"{
+            businessAudit_api = container "Audit api"
+            businessAudit_db = container "Immutable audit data store"
+            businessAudit_api -> businessAudit_db "Writes audit data using"
+            businessAudit_db -> biandDataAnalysis_businessAudit "Publishes read replica to"
+        }
+
         campaignManager = softwareSystem "Campaign Manager" "Service for launching and monitoring campaigns to improve uptake"
         capacityAndDemandPlanner = softwareSystem "Capacity and Demand Planner" "Service for optimising capacity vs demand constraints"
         capacityManager = softwareSystem "Capacity Manager" "Service to centralise the overall system capacity"
@@ -74,14 +100,62 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
     views {
 
-        systemLandscape sl "Overall system landscape"{
+        systemLandscape dtosSystemContext "Overall system landscape"{
             include *
         }
-
+        container appointmentAllocator {
+            include *
+            autoLayout lr
+        }
+        container appointmentBooker {
+            include *
+            autoLayout lr
+        }
         container participantManager {
             include *
             autoLayout lr
         }
+        container biandDataAnalysis {
+            include *
+            autoLayout lr
+        }
+        container businessAudit {
+            include *
+            autoLayout lr
+        }
+        container campaignManager {
+            include *
+            autoLayout lr
+        }
+        container capacityAndDemandPlanner {
+            include *
+            autoLayout lr
+        }
+        container capacityManager {
+            include *
+            autoLayout lr
+        }
+        container cohortManager {
+            include *
+            autoLayout lr
+        }
+        container communicationsManager {
+            include *
+            autoLayout lr
+        }
+        container participantSupport {
+            include *
+            autoLayout lr
+        }
+        container pathwayCoordinator {
+            include *
+            autoLayout lr
+        }
+        container screeningEventManager {
+            include *
+            autoLayout lr
+        }
+        
         styles {
             element "Element" {
                 color #ffffff
