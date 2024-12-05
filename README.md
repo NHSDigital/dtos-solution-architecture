@@ -27,7 +27,7 @@ The model is defined within the workspace.dsl file. It is a fairly simple domain
 
 It basically operates on a hierarchy where we have a top-level SystemContext, followed then by Containers, Components and Code. The expectation is to definitely go do to the Container level, but to only go to Component level if it makes sense to do so. 
 
-Once you've made changes to the DSL and happy with the images as they've been generated. Make git changes as per any other git repository. This will likely see changes to the images and the workspace.dsl. 
+Changes should be made on branch and a Pull Request created. This will trigger a github action to generate a set of images which get picked up by confluence. DO NOT MERGE DIRECTLY INTO MAIN
 
 If you have updated an existig definition, it should mean because the images are referenced in Confluence, they automatically get updated. 
 
