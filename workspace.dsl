@@ -1,58 +1,59 @@
 workspace "Digital Transformation of Screening" "High level context diagram for all products within Digital Transformation of Screening" {
 
     model {
-        u = person "Participant users" "External user eligible for screening" "external"
+        u = person "P9 Participant users" "External user eligible for screening" "external"
+        u1 = person "Unauthenticated Participant users" "External users without NHS Login account" "external"
+
         st = person "Staff users" "Internal staff users including clinical and administrative staff"
         s = person "Secondary users" "Internal users, but not concerned with day to day operations"
 
-
+        nhsNotify = softwareSystem "NHS Notify" "NHS Wide service for providing communication to the Citizen" "external"
+        nhsLogin = softwareSystem "NHS Login" "NHS Wide service for authenticating the Citizen" "external"
+        nhsIdentity = softwareSystem "NHS Identity" "NHS Wide service for authenticating Staff" "external"
+        nhsApp = softwareSystem "NHS App" "National Mobile Application for NHS" "Mobile App" 
         appointmentAllocator = softwareSystem "Appointment Allocator" "Service that appropriately allocates a participant to a slot"{
             appointmentAllocator_apiApp = container "API Application"
-
         }
         appointmentBooker = softwareSystem "Appointment Booker" "Service for both participant and staff to manage appointments"{
-            appointmentBooker_userWeb = container "Citizen facing web interface"
-            appointmentBooker_staffWeb = container "Staff facing web interface"
-            appointmentBooker_apiApp = container "API Layer"
-            appointmentBooker_db = container "Booking database"
-            u -> appointmentBooker_userWeb "Books appointments using"
-            st -> appointmentBooker_staffWeb "Manages appointments using"
-            appointmentBooker_userWeb -> appointmentBooker_apiApp "Accesses database using"
-            appointmentBooker_staffWeb -> appointmentBooker_apiApp "Access database using"
-            appointmentBooker_apiApp -> appointmentBooker_db "Reads/Writes data using"
+            appointmentBooker_userWeb = container "Citizen facing web interface" "External facing web application to manage your booking" "Web App" "Web Browser"
+            appointmentBooker_staffWeb = container "Staff facing web interface" "Internal facing web application use to manage appointment bookings and attendance" "Web App" "Web Browser"
+            appointmentBooker_apiApp = container "API Layer" "API used to access underlying booking information" 
+            appointmentBooker_db = container "Booking database" "Underlying booking data store" "Database" "Database"
         }
         biandDataAnalysis = softwareSystem "BI and Data Analysis" "Service for analysing Screening data"{
-            biandDataAnalysis_analytics = container "Web interface for running queries"
-            biandDataAnalysis_participantManager = container "Read replica of particpant database"
-            biandDataAnalysis_businessAudit = container "Read replica of audit database"
-            s -> biandDataAnalysis_analytics "Queries data using"
-            biandDataAnalysis_analytics -> biandDataAnalysis_participantManager "Reads data from"
-            biandDataAnalysis_analytics -> biandDataAnalysis_businessAudit "Reads data from"
+            biandDataAnalysis_analytics = container "Web interface for running queries" "Web portal used to access analysis and queries" "Web App" "Web Browser"
+            biandDataAnalysis_participantManager = container "Read replica of participant database" "Copy of participant dataset containing episode information" "Database" "Database"
+            biandDataAnalysis_businessAudit = container "Read replica of audit database" "Copy of audit database for analytics purposes" "Database" "Database"
         }
         businessAudit = softwareSystem "Business Audit" "Service that provides immutable audit datastore used for analysis and non-repudiation"{
             businessAudit_api = container "Audit api"
-            businessAudit_db = container "Immutable audit data store"
-            businessAudit_api -> businessAudit_db "Writes audit data using"
-            businessAudit_db -> biandDataAnalysis_businessAudit "Publishes read replica to"
+            businessAudit_db = container "Audit datastore" "Immutable audit data store containing all audit information" "Database" "Database" 
         }
 
         campaignManager = softwareSystem "Campaign Manager" "Service for launching and monitoring campaigns to improve uptake"
         capacityAndDemandPlanner = softwareSystem "Capacity and Demand Planner" "Service for optimising capacity vs demand constraints"
         capacityManager = softwareSystem "Capacity Manager" "Service to centralise the overall system capacity"
-        cohortingAsAService = softwareSystem "Cohoring as a Service" "Service which produces a list of eligible participants based on a cohort definition"
+        cohortingAsAService = softwareSystem "Cohorting as a Service" "Service which produces a list of eligible participants based on a cohort definition"
         cohortManager = softwareSystem "Cohort Manager" "Service used for managing eligible participants in lieu of high quality data"
-        communicationsManager = softwareSystem "Communications Manager" "Service for centralising all communincation from screening programmes to the participant"
-        participantManager = softwareSystem "Participant Manager" "Service for managing a participant's episodes and encounters" {
-            webapp = container "Web Application"
-            database = container "Participant Data Store"
+        communicationsManager = softwareSystem "Communications Manager" "Service for centralising all communication from screening programmes to the participant"
+        participantManager = softwareSystem "Participant Manager" "Service for managing a participant's episodes and encounters" {     
+            participantManager_internalWebapp = container "Staff Facing Web Application" "Internal facing web application for staff to manage participant episode information" "Web App" "Web Browser"
+            participantManager_database = container "Participant Data Store" "System of record datastore for Participants and Episodes" "Database" "Database"
+            participantManager_externalWebApp = container "Participant Facing Web Application" "External facing web interface for participants to engage with the screening service" "Web App" "Web Browser"
+            participantManager_noAuthWebApp = container "Unauthenticated Web Application" "External facing web interface that requires minimal authentication to provide access to some screening services" "Web App" "Web Browser"
+            participantManager_API = container "Participant API"
         }
         participantSupport = softwareSystem "Participant Support" "Service for managing inbound help requests from participants"
-        pathwayCoordinator = softwareSystem "Pathway Coordinator" "Service that implements a pathway definition"
+        pathwayCoordinator = softwareSystem "Pathway Coordinator" "Service that implements a pathway definition"{
+            pathwayCoordinator_EventSubscriber = container "Event filtering service"
+            pathwayCoordinator_PathwaySelector = container "Pathway selector service"
+            pathwayCoordinator_PathwayExecutionService = container "Executes a pathway for a specific participant"
+            pathwayCoordinator_Workers = container "Collection of discrete functions invoked by a pathway"
+        }
         screeningEventManager = softwareSystem "Screening Event Manager" "Service for coordinating and capturing the clinical investigation processes"
-        nhsNotify = softwareSystem "NHS Notify" "NHS Wide service for providing communication to the Citizen" "external"
-
-        cohortingAsAService -> cohortManager "Notifies of new eligible participant"
-        cohortManager -> participantManager "Creates new participant record using"
+        
+        cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
+        cohortManager -> pathwayCoordinator "Notifies of new eligible participant using"
         participantManager -> pathwayCoordinator "Notifies of participant ready for screening using"
         pathwayCoordinator -> participantManager "Manages participant's episode using"
         pathwayCoordinator -> appointmentAllocator "Gets slot for participant using"
@@ -94,6 +95,47 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         s -> biandDataAnalysis "Analyses screening data using"
         s -> campaignManager "Creates campaigns using"
         s -> capacityAndDemandPlanner "Manages capacity and demand using"
+
+        # Appointment allocator
+        appointmentAllocator_apiApp -> BIAndDataAnalysis "Accesses historical attendance patterns using"
+
+        #Appointment Booker
+        u -> appointmentBooker_userWeb "Books appointments using"
+        st -> appointmentBooker_staffWeb "Manages appointments using"
+        appointmentBooker_userWeb -> appointmentBooker_apiApp "Accesses database using"
+        appointmentBooker_staffWeb -> appointmentBooker_apiApp "Access database using"
+        appointmentBooker_apiApp -> appointmentBooker_db "Reads/Writes data using"
+
+        #BI & Data Analysis
+        s -> biandDataAnalysis_analytics "Queries data using"
+        biandDataAnalysis_analytics -> biandDataAnalysis_participantManager "Reads data from"
+        biandDataAnalysis_analytics -> biandDataAnalysis_businessAudit "Reads data from"
+
+        # Business Audit
+        businessAudit_api -> businessAudit_db "Writes audit data using"
+        businessAudit_api -> biandDataAnalysis_businessAudit "Streams events to"
+
+        
+
+        # Participant manager
+        u -> nhsLogin "Authenticates using"
+        u -> nhsApp "Accesses secure NHS services using"
+        nhsApp -> participantManager_externalWebApp "Interacts with screening service using"
+        u -> participantManager_externalWebApp "Interacts with screening service using"
+        participantManager_externalWebApp -> participantManager_noAuthWebApp "Accesses low security area using"
+        u1 -> participantManager_noAuthWebApp "Access low security information using"
+        participantManager_externalWebApp -> participantManager_API "Retrieves data using"
+        participantManager_internalWebapp -> participantManager_API "Retrieves data using"
+        participantManager_API -> participantManager_database "Accesses data using"
+        s -> participantManager_internalWebapp "Interacts with participant screening history using"
+        s -> nhsIdentity "Authenticates using"
+
+        # Pathway Coordinator
+        cohortManager -> pathwayCoordinator_EventSubscriber "Published New Eligible Participant Event using"
+        pathwayCoordinator_EventSubscriber -> participantManager_API "Accesses participant information using"
+        pathwayCoordinator_EventSubscriber -> pathwayCoordinator_PathwaySelector "Selects appropriate pathway using"
+        pathwayCoordinator_EventSubscriber -> pathwayCoordinator_PathwayExecutionService "Executes pathway using"
+        pathwayCoordinator_PathwayExecutionService -> pathwayCoordinator_Workers "Performs pathway actions using"
 
 
     }
@@ -153,7 +195,6 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         }
         container participantManager ParticipantManager {
             include *
-            autoLayout lr
         }
         
         
@@ -169,10 +210,16 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
                 background #1168bd
             }
             element "Container" {
-                background #1168bd
+                background #438dd5
             }
-                element "Database" {
-                shape cylinder
+            element "Web Browser" {
+                shape WebBrowser
+            }
+            element "Mobile App" {
+                shape MobileDeviceLandscape
+            }
+            element "Database" {
+                shape Cylinder
             }
             element "external" {
                 background #eaeaea
