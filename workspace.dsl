@@ -40,16 +40,21 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             participantManager_internalWebapp = container "Staff Facing Web Application" "Internal facing web application for staff to manage participant episode information" "Web App" "Web Browser"
             participantManager_database = container "Participant Data Store" "System of record datastore for Participants and Episodes" "Database" "Database"
             participantManager_externalWebApp = container "Participant Facing Web Application" "External facing web interface for participants to engage with the screening service" "Web App" "Web Browser"
-            participantManager_noAuthWebApp = container "Unauthenticated Web Application" "External facing web interface that requires minimal authentication to provide access to some screening services" "Web App" "Web Browser"
+            participantManager_noAuthWebApp = container "Anonymous Web Application" "External facing web interface that requires minimal authentication to provide access to some screening services" "Web App" "Web Browser"
             participantManager_API = container "Participant API"
         }
         participantSupport = softwareSystem "Participant Support" "Service for managing inbound help requests from participants"
         pathwayCoordinator = softwareSystem "Pathway Coordinator" "Service that implements a pathway definition"{
-            pathwayCoordinator_EventSubscriber = container "Event filtering service"
-            pathwayCoordinator_PathwaySelector = container "Pathway selector service"
-            pathwayCoordinator_PathwayExecutionService = container "Executes a pathway for a specific participant"
-            pathwayCoordinator_Workers = container "Collection of discrete functions invoked by a pathway"
+            pathwayCoordinator_ParticipantEventsQueue = container "Participants Events Queue" "Main queue where participant related events are received" "Servicebus" "Queue"
+            pathwayCoordinator_ParticipantEventHandler = container "Participant Event Handler" "Function responsible to acting on Participant Events" "Azure Function"
+            pathwayCoordinator_PathwayManager = container "Pathway Manager" "Based on the triggering event and the pathway, determines the next action" ".net Class"
+            pathwayCoordinator_PathwaySteps = container "Pathway Steps" "Collection of discrete pathway steps invoked by a pathway" ".net Class"
         }
+
+        pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_ParticipantEventsQueue "Subscribes to messages from"
+        pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_PathwayManager "Executes pathway using"
+        pathwayCoordinator_PathwayManager -> pathwayCoordinator_PathwaySteps "Invokes pathway steps using"
+
         screeningEventManager = softwareSystem "Screening Event Manager" "Service for coordinating and capturing the clinical investigation processes"
         
         cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
@@ -87,7 +92,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         st -> screeningEventManager "Manages clinical investigation using"
         st -> appointmentBooker "Manages participant appointments using"
-        st -> participantManager "Manages participant's episode using"
+        st -> participantManager "Manages participant's episode u qsing"
         st -> participantSupport "Manages participant queries using"
         
         s -> pathwayCoordinator "Manages Pathway definitions using"
@@ -131,12 +136,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         s -> nhsIdentity "Authenticates using"
 
         # Pathway Coordinator
-        cohortManager -> pathwayCoordinator_EventSubscriber "Published New Eligible Participant Event using"
-        pathwayCoordinator_EventSubscriber -> participantManager_API "Accesses participant information using"
-        pathwayCoordinator_EventSubscriber -> pathwayCoordinator_PathwaySelector "Selects appropriate pathway using"
-        pathwayCoordinator_EventSubscriber -> pathwayCoordinator_PathwayExecutionService "Executes pathway using"
-        pathwayCoordinator_PathwayExecutionService -> pathwayCoordinator_Workers "Performs pathway actions using"
-
+        cohortManager -> pathwayCoordinator_ParticipantEventsQueue "Published New Eligible Participant Event using"
 
     }
 
@@ -211,6 +211,9 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             }
             element "Container" {
                 background #438dd5
+            }
+            element "Queue" {
+                shape "Pipe"
             }
             element "Web Browser" {
                 shape WebBrowser
