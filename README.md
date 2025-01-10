@@ -17,6 +17,10 @@ This pulls down the latest structurizr lite image
 
 ```docker run -it --rm -p 8080:8080 -v ./:/usr/local/structurizr structurizr/lite```
 
+Since the macos update to Sequoia 15.2 this docker command was causing a sigterm exception, this can be fixed by running the following command line instead
+
+```docker run --rm -e JAVA_TOOL_OPTIONS="-XX:UseSVE=0" -p 8080:8080 -v ./:/usr/local/structurizr structurizr/lite```
+
 This actually runs the container pointing at the files in the directory you're running from.
 
 This will allow you to access the live view of the model in your local browser by navigating to http://localhost:8080
@@ -29,5 +33,5 @@ It basically operates on a hierarchy where we have a top-level SystemContext, fo
 
 Changes should be made on branch and a Pull Request created. This will trigger a github action to generate a set of images which get picked up by confluence. DO NOT MERGE DIRECTLY INTO MAIN
 
-If you have updated an existig definition, it should mean because the images are referenced in Confluence, they automatically get updated. 
+If you have updated an existing definition, it should mean because the images are referenced in Confluence, they automatically get updated. 
 

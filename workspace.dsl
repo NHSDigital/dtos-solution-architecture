@@ -51,6 +51,8 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             pathwayCoordinator_PathwaySteps = container "Pathway Steps" "Collection of discrete pathway steps invoked by a pathway" ".net Class"
         }
 
+        serviceLayer = softwareSystem "Service Layer" "Service integration layer used to transition from legacy to the future platform"
+
         pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_ParticipantEventsQueue "Subscribes to messages from"
         pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_PathwayManager "Executes pathway using"
         pathwayCoordinator_PathwayManager -> pathwayCoordinator_PathwaySteps "Invokes pathway steps using"
@@ -137,6 +139,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         # Pathway Coordinator
         cohortManager -> pathwayCoordinator_ParticipantEventsQueue "Published New Eligible Participant Event using"
+        serviceLayer -> pathwayCoordinator_ParticipantEventHandler "Publishes participant level event to"
 
     }
 
