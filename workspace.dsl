@@ -56,7 +56,8 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         pathwayCoordinator_PathwayManager -> pathwayCoordinator_PathwaySteps "Invokes pathway steps using"
 
         screeningEventManager = softwareSystem "Screening Event Manager" "Service for coordinating and capturing the clinical investigation processes"
-        
+        serviceLayer = softwareSystem "Service Layer" "Service integration layer used to transition from legacy to the future platform"
+
         cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
         cohortManager -> pathwayCoordinator "Notifies of new eligible participant using"
         participantManager -> pathwayCoordinator "Notifies of participant ready for screening using"
@@ -120,8 +121,6 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         businessAudit_api -> businessAudit_db "Writes audit data using"
         businessAudit_api -> biandDataAnalysis_businessAudit "Streams events to"
 
-        
-
         # Participant manager
         u -> nhsLogin "Authenticates using"
         u -> nhsApp "Accesses secure NHS services using"
@@ -137,6 +136,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         # Pathway Coordinator
         cohortManager -> pathwayCoordinator_ParticipantEventsQueue "Published New Eligible Participant Event using"
+        serviceLayer -> pathwayCoordinator_ParticipantEventsQueue "Publishes participant level event to"
 
     }
 
@@ -195,6 +195,11 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         }
         container participantManager ParticipantManager {
             include *
+        }
+
+        container serviceLayer ServiceLayer {
+            include *
+            autoLayout lr
         }
         
         
