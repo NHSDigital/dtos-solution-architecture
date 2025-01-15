@@ -12,8 +12,12 @@ Docker can be installed from this location - https://www.docker.com/get-started/
 
 Once installed, you will need to run the following commands from within your local git repo.
 
+This pulls down the latest Structurizr lite image   
 ```docker pull structurizr/lite```
-This pulls down the latest structurizr lite image
+
+The commands (slight variation between MacOS and Windows) below actually runs the container pointing at the files in the directory you're running from.  Once the container is running, it will allow you to access the live view of the model in your local browser by navigating to http://localhost:8080
+
+### MacOS and Linux
 
 ```docker run -it --rm -p 8080:8080 -v ./:/usr/local/structurizr structurizr/lite```
 
@@ -21,9 +25,9 @@ Since the macos update to Sequoia 15.2 this docker command was causing a sigterm
 
 ```docker run --rm -e JAVA_TOOL_OPTIONS="-XX:UseSVE=0" -p 8080:8080 -v ./:/usr/local/structurizr structurizr/lite```
 
-This actually runs the container pointing at the files in the directory you're running from.
+### Windows
 
-This will allow you to access the live view of the model in your local browser by navigating to http://localhost:8080
+```docker run -it --rm -p 8080:8080 -v %cd%:/usr/local/structurizr structurizr/lite```
 
 ## Making model changes
 
