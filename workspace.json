@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-01-16T09:51:18Z",
+  "lastModifiedDate" : "2025-01-16T10:00:50Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -880,7 +880,7 @@
   "views" : {
     "configuration" : {
       "branding" : { },
-      "lastSavedView" : "CohortManager",
+      "lastSavedView" : "ParticipantManager",
       "metadataSymbols" : "SquareBrackets",
       "styles" : {
         "elements" : [ {
@@ -1096,7 +1096,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 845
+        "width" : 858
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -1114,7 +1114,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 845
+        "width" : 858
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
@@ -1132,7 +1132,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 845
+        "width" : 858
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
@@ -1150,7 +1150,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 845
+        "width" : 858
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CohortManager",
@@ -1158,13 +1158,17 @@
       "softwareSystemId" : "27"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 858
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CommunicationsManager",
@@ -1236,17 +1240,13 @@
       "softwareSystemId" : "36"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ScreeningEventManager",
