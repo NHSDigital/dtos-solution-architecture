@@ -5,7 +5,7 @@ on:
 
 jobs:
   generate-diagrams:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
       # added or changed files to the repository.
@@ -46,7 +46,7 @@ jobs:
       # Step 6: Test Structurizr Lite is accessible
       - name: Test Structurizr Lite accessibility
         run: |
-          curl -I http://localhost:8080
+          curl -I http://localhost:8080/workspace/diagrams
 
       # Step 7: Verify workspace.dsl exists in container
       - name: Check workspace.dsl in Structurizr container
