@@ -52,7 +52,11 @@ jobs:
       - name: Check workspace.dsl in Structurizr container
         run: |
           docker exec structurizr-github-action ls /usr/local/structurizr
-          
+      
+      - name: Turn off apparmor
+        run : |
+            echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+      
       # - name: Create AppArmor Profile
       #   run: |
       #     sudo mkdir -p /etc/apparmor.d/chrome
@@ -68,10 +72,10 @@ jobs:
       #     echo "}" | sudo tee -a /etc/apparmor.d/chrome/chrome
 
       # Step 3: Restart AppArmor
-      - name: Restart AppArmor
-        run: |
-          sudo systemctl restart apparmor
-          sudo apparmor_status
+      # - name: Restart AppArmor
+      #   run: |
+      #     sudo systemctl restart apparmor
+      #     sudo apparmor_status
 
       # Step 8: Run Puppeteer script
       - name: Export diagrams
