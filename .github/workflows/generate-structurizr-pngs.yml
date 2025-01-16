@@ -72,10 +72,6 @@ jobs:
         run: |
           sudo systemctl restart apparmor
           sudo apparmor_status
-          
-      # Step 4: Verify the File (Optional)
-      - name: Verify File Exists
-        run: ls -l /etc/apparmor.d/chrome/
 
       # Step 8: Run Puppeteer script
       - name: Export diagrams
