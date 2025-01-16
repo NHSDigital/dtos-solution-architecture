@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-01-10T11:57:53Z",
+  "lastModifiedDate" : "2025-01-16T09:04:35Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -1096,7 +1096,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -1114,7 +1114,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 842
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
@@ -1132,7 +1132,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
@@ -1150,7 +1150,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CohortManager",
@@ -1168,7 +1168,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CommunicationsManager",
@@ -1186,7 +1186,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ParticipantSupport",
@@ -1265,7 +1265,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ScreeningEventManager",
