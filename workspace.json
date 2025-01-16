@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-01-10T11:57:53Z",
+  "lastModifiedDate" : "2025-01-16T08:58:33Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -880,7 +880,7 @@
   "views" : {
     "configuration" : {
       "branding" : { },
-      "lastSavedView" : "ScreeningEventManager",
+      "lastSavedView" : "ParticipantManager",
       "metadataSymbols" : "SquareBrackets",
       "styles" : {
         "elements" : [ {
@@ -1096,7 +1096,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -1114,7 +1114,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 842
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
@@ -1132,7 +1132,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
@@ -1150,7 +1150,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CohortManager",
@@ -1168,7 +1168,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CommunicationsManager",
@@ -1176,17 +1176,13 @@
       "softwareSystemId" : "28"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ParticipantSupport",
@@ -1194,7 +1190,7 @@
       "softwareSystemId" : "35"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1202,47 +1198,36 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 2317,
-        "width" : 2390
-      },
       "elements" : [ {
         "id" : "27",
-        "x" : 219,
-        "y" : 165
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "37",
-        "x" : 969,
-        "y" : 1274
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "38",
-        "x" : 219,
-        "y" : 974
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "39",
-        "x" : 969,
-        "y" : 674
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "40",
-        "x" : 1719,
-        "y" : 674
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "45",
-        "x" : 219,
-        "y" : 1782
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "PathwayCoordinator",
       "order" : 12,
       "relationships" : [ {
-        "id" : "110",
-        "vertices" : [ {
-          "x" : 669,
-          "y" : 494
-        }, {
-          "x" : 969,
-          "y" : 1124
-        } ]
+        "id" : "110"
       }, {
         "id" : "111"
       }, {
@@ -1265,7 +1250,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 832
+        "width" : 845
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ScreeningEventManager",
