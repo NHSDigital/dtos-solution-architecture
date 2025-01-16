@@ -46,13 +46,37 @@ jobs:
       # Step 6: Test Structurizr Lite is accessible
       - name: Test Structurizr Lite accessibility
         run: |
-          curl -I http://localhost:8080
+          curl -I http://localhost:8080/workspace/diagrams
 
       # Step 7: Verify workspace.dsl exists in container
       - name: Check workspace.dsl in Structurizr container
         run: |
           docker exec structurizr-github-action ls /usr/local/structurizr
           
+      # - name: Create AppArmor Profile
+      #   run: |
+      #     sudo mkdir -p /etc/apparmor.d/chrome
+      #     echo "abi <abi/4.0>," | sudo tee /etc/apparmor.d/chrome/chrome
+      #     echo "" | sudo tee -a /etc/apparmor.d/chrome/chrome
+      #     echo "include <tunables/global>" | sudo tee -a /etc/apparmor.d/chrome/chrome
+      #     echo "" | sudo tee -a /etc/apparmor.d/chrome/chrome
+      #     echo "/opt/google/chrome/chrome flags=(unconfined) {" | sudo tee -a /etc/apparmor.d/chrome/chrome
+      #     echo "  userns," | sudo tee -a /etc/apparmor.d/chrome/chrome
+      #     echo "" | sudo tee -a /etc/apparmor.d/chrome/chrome
+      #     echo "  # Site-specific additions and overrides. See local/README for details." | sudo tee -a /etc/apparmor.d/chrome/chrome
+      #     echo "  include if exists <local/chrome>" | sudo tee -a /etc/apparmor.d/chrome/chrome
+      #     echo "}" | sudo tee -a /etc/apparmor.d/chrome/chrome
+
+      # Step 3: Restart AppArmor
+      - name: Restart AppArmor
+        run: |
+          sudo systemctl restart apparmor
+          sudo apparmor_status
+          
+      # Step 4: Verify the File (Optional)
+      - name: Verify File Exists
+        run: ls -l /etc/apparmor.d/chrome/
+
       # Step 8: Run Puppeteer script
       - name: Export diagrams
         run: |
