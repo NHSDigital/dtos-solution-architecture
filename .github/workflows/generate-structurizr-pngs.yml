@@ -53,29 +53,10 @@ jobs:
         run: |
           docker exec structurizr-github-action ls /usr/local/structurizr
       
-      # - name: Turn off apparmor
-      #   run : |
-      #       echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
-      
-      - name: Create AppArmor Profile
+      - name: Turn off apparmor
         run : |
-          export CHROMIUM_BUILD_PATH=/@{HOME}/chromium/src/out/**/chrome
-          cat | sudo tee /etc/apparmor.d/chrome-dev-builds <<EOF
-          abi <abi/4.0>,
-          include <tunables/global>
-
-          profile chrome $CHROMIUM_BUILD_PATH flags=(unconfined) {
-          userns,
-          include if exists <local/chrome>
-          }
-          EOF
-          sudo service apparmor reload  
-      # Step 3: Restart AppArmor
-      # - name: Restart AppArmor
-      #   run: |
-      #     sudo systemctl restart apparmor
-      #     sudo apparmor_status
-
+            echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+      
       # Step 8: Run Puppeteer script
       - name: Export diagrams
         run: |
