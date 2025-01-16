@@ -4,7 +4,11 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
+<<<<<<< HEAD
   "lastModifiedDate" : "2025-01-16T10:37:04Z",
+=======
+  "lastModifiedDate" : "2025-01-16T09:04:35Z",
+>>>>>>> 397636d3d13e24eaa5a313f2eb0c67178efd42e7
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -1096,7 +1100,11 @@
       },
       "dimensions" : {
         "height" : 400,
+<<<<<<< HEAD
         "width" : 858
+=======
+        "width" : 845
+>>>>>>> 397636d3d13e24eaa5a313f2eb0c67178efd42e7
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -1114,7 +1122,11 @@
       },
       "dimensions" : {
         "height" : 400,
+<<<<<<< HEAD
         "width" : 858
+=======
+        "width" : 845
+>>>>>>> 397636d3d13e24eaa5a313f2eb0c67178efd42e7
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
@@ -1132,7 +1144,11 @@
       },
       "dimensions" : {
         "height" : 400,
+<<<<<<< HEAD
         "width" : 858
+=======
+        "width" : 845
+>>>>>>> 397636d3d13e24eaa5a313f2eb0c67178efd42e7
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
@@ -1150,7 +1166,11 @@
       },
       "dimensions" : {
         "height" : 400,
+<<<<<<< HEAD
         "width" : 858
+=======
+        "width" : 845
+>>>>>>> 397636d3d13e24eaa5a313f2eb0c67178efd42e7
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CohortManager",
@@ -1168,7 +1188,11 @@
       },
       "dimensions" : {
         "height" : 400,
+<<<<<<< HEAD
         "width" : 858
+=======
+        "width" : 845
+>>>>>>> 397636d3d13e24eaa5a313f2eb0c67178efd42e7
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CommunicationsManager",
@@ -1184,6 +1208,13 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+<<<<<<< HEAD
+=======
+      "dimensions" : {
+        "height" : 400,
+        "width" : 845
+      },
+>>>>>>> 397636d3d13e24eaa5a313f2eb0c67178efd42e7
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ParticipantSupport",
       "order" : 11,
@@ -1248,6 +1279,13 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+<<<<<<< HEAD
+=======
+      "dimensions" : {
+        "height" : 400,
+        "width" : 845
+      },
+>>>>>>> 397636d3d13e24eaa5a313f2eb0c67178efd42e7
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ScreeningEventManager",
       "order" : 13,
