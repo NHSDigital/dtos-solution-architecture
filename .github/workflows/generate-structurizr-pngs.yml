@@ -57,20 +57,19 @@ jobs:
         run : |
             echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       
-      # - name: Create AppArmor Profile
-      #   run: |
-      #     sudo mkdir -p /etc/apparmor.d/chrome
-      #     echo "abi <abi/4.0>," | sudo tee /etc/apparmor.d/chrome/chrome
-      #     echo "" | sudo tee -a /etc/apparmor.d/chrome/chrome
-      #     echo "include <tunables/global>" | sudo tee -a /etc/apparmor.d/chrome/chrome
-      #     echo "" | sudo tee -a /etc/apparmor.d/chrome/chrome
-      #     echo "/opt/google/chrome/chrome flags=(unconfined) {" | sudo tee -a /etc/apparmor.d/chrome/chrome
-      #     echo "  userns," | sudo tee -a /etc/apparmor.d/chrome/chrome
-      #     echo "" | sudo tee -a /etc/apparmor.d/chrome/chrome
-      #     echo "  # Site-specific additions and overrides. See local/README for details." | sudo tee -a /etc/apparmor.d/chrome/chrome
-      #     echo "  include if exists <local/chrome>" | sudo tee -a /etc/apparmor.d/chrome/chrome
-      #     echo "}" | sudo tee -a /etc/apparmor.d/chrome/chrome
+      - name: Create AppArmor Profile
+        run : |
+          export CHROMIUM_BUILD_PATH=/@{HOME}/chromium/src/out/**/chrome
+          cat | sudo tee /etc/apparmor.d/chrome-dev-builds <<EOF
+          abi <abi/4.0>,
+          include <tunables/global>
 
+          profile chrome $CHROMIUM_BUILD_PATH flags=(unconfined) {
+          userns,
+          include if exists <local/chrome>
+          }
+          EOF
+          sudo service apparmor reload  
       # Step 3: Restart AppArmor
       # - name: Restart AppArmor
       #   run: |
