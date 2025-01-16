@@ -53,9 +53,9 @@ jobs:
         run: |
           docker exec structurizr-github-action ls /usr/local/structurizr
       
-      - name: Turn off apparmor
-        run : |
-            echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+      # - name: Turn off apparmor
+      #   run : |
+      #       echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       
       - name: Create AppArmor Profile
         run : |
