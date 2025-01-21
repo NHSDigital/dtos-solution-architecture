@@ -55,7 +55,12 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_PathwayManager "Executes pathway using"
         pathwayCoordinator_PathwayManager -> pathwayCoordinator_PathwaySteps "Invokes pathway steps using"
 
-        screeningEventManager = softwareSystem "Screening Event Manager" "Service for coordinating and capturing the clinical investigation processes"
+        screeningEventManager = softwareSystem "Screening Event Manager" "Service for coordinating and capturing the clinical investigation processes" {
+            sem_internalWebapp = container "Staff Facing SEM Web Application" "Internal facing web application for staff to manage SEM clinical information" "Web App" 
+            sem_database = container "SEM datastore" "System of record datastore for screening event clinical information" "Database" 
+            sem_internalOrchestrationWorkflowApp = container "SEM Orchestration Workflow" "Server App"
+        }
+        localTrustSystem = softwareSystem "Local Trust System" "Local Trust System"
         serviceLayer = softwareSystem "Service Layer" "Service integration layer used to transition from legacy to the future platform"
 
         cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
@@ -93,7 +98,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         st -> screeningEventManager "Manages clinical investigation using"
         st -> appointmentBooker "Manages participant appointments using"
-        st -> participantManager "Manages participant's episode u qsing"
+        stManageEpisode = st -> participantManager "Manages participant's episode using"
         st -> participantSupport "Manages participant queries using"
         
         s -> pathwayCoordinator "Manages Pathway definitions using"
@@ -137,6 +142,13 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         # Pathway Coordinator
         cohortManager -> pathwayCoordinator_ParticipantEventsQueue "Published New Eligible Participant Event using"
         serviceLayer -> pathwayCoordinator_ParticipantEventsQueue "Publishes participant level event to"
+
+        # Screening Event Manager
+        st -> sem_internalWebapp "Manages SEM clinical information using"
+        sem_internalWebapp -> sem_database "Reads/Writes data from/to"
+        sem_internalOrchestrationWorkflowApp -> sem_database "Reads/Writes data from/to"
+        sem_internalOrchestrationWorkflowApp -> participantManager "Reads data from"
+        sem_internalOrchestrationWorkflowApp -> localTrustSystem "Communicates with"
 
     }
 
@@ -191,6 +203,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         }
         container screeningEventManager ScreeningEventManager {
             include *
+            exclude stManageEpisode
             autoLayout lr
         }
         container participantManager ParticipantManager {
