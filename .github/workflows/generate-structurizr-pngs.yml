@@ -46,13 +46,17 @@ jobs:
       # Step 6: Test Structurizr Lite is accessible
       - name: Test Structurizr Lite accessibility
         run: |
-          curl -I http://localhost:8080
+          curl -I http://localhost:8080/workspace/diagrams
 
       # Step 7: Verify workspace.dsl exists in container
       - name: Check workspace.dsl in Structurizr container
         run: |
           docker exec structurizr-github-action ls /usr/local/structurizr
-          
+      
+      - name: Turn off apparmor
+        run : |
+            echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+      
       # Step 8: Run Puppeteer script
       - name: Export diagrams
         run: |
