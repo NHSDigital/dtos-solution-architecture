@@ -50,6 +50,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             pathwayCoordinator_PathwayManager = container "Pathway Manager" "Based on the triggering event and the pathway, determines the next action" ".net Class"
             pathwayCoordinator_PathwaySteps = container "Pathway Steps" "Collection of discrete pathway steps invoked by a pathway" ".net Class"
         }
+        localTrustSystem = softwareSystem "Local Trust System" "Local Trust System" "external"
 
         pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_ParticipantEventsQueue "Subscribes to messages from"
         pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_PathwayManager "Executes pathway using"
@@ -60,7 +61,6 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             sem_database = container "SEM datastore" "System of record datastore for screening event clinical information" "Database" "Database"
             sem_internalOrchestrationWorkflowApp = container "SEM Orchestration Workflow" "Server App"
         }
-        localTrustSystem = softwareSystem "Local Trust System" "Local Trust System" "external"
         serviceLayer = softwareSystem "Service Layer" "Service integration layer used to transition from legacy to the future platform"
 
         cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
@@ -89,6 +89,8 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         screeningEventManager -> biandDataAnalysis "Publishes data to"
         participantManager -> biandDataAnalysis "Publishes data to"
 
+        serviceLayer -> localTrustSystem "Communicates with"
+
 
         u -> participantManager "Views screening information using"
         u -> appointmentBooker "Manages appointment using"
@@ -98,7 +100,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         st -> screeningEventManager "Manages clinical investigation using"
         st -> appointmentBooker "Manages participant appointments using"
-        stManageEpisode = st -> participantManager "Manages participant's episode using"
+        st -> participantManager "Manages participant's episode using"
         st -> participantSupport "Manages participant queries using"
         
         s -> pathwayCoordinator "Manages Pathway definitions using"
@@ -136,19 +138,22 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         participantManager_externalWebApp -> participantManager_API "Retrieves data using"
         participantManager_internalWebapp -> participantManager_API "Retrieves data using"
         participantManager_API -> participantManager_database "Accesses data using"
-        s -> participantManager_internalWebapp "Interacts with participant screening history using"
-        s -> nhsIdentity "Authenticates using"
+        st -> participantManager_internalWebapp "Interacts with participant screening history using"
 
         # Pathway Coordinator
         cohortManager -> pathwayCoordinator_ParticipantEventsQueue "Published New Eligible Participant Event using"
-        serviceLayer -> pathwayCoordinator_ParticipantEventsQueue "Publishes participant level event to"
+        SLtoPC = serviceLayer -> pathwayCoordinator_ParticipantEventsQueue "Publishes participant level event to"
 
         # Screening Event Manager
         st -> sem_internalWebapp "Manages SEM clinical information using"
+        st -> nhsIdentity "Authenticates using"
         sem_internalWebapp -> sem_database "Reads/Writes data from/to" 
         sem_internalOrchestrationWorkflowApp -> sem_database "Reads/Writes data from/to"
-        sem_internalOrchestrationWorkflowApp -> participantManager "Reads data from"
-        sem_internalOrchestrationWorkflowApp -> localTrustSystem "Communicates with"
+        pathwayCoordinator -> sem_internalOrchestrationWorkflowApp "Executes clinical investigation using"
+        sem_internalOrchestrationWorkflowApp -> serviceLayer "Communicates with"
+        nhsIdentity -> sem_internalWebapp "Provides national authentication & authorisation services to"
+
+        # Service Layer
 
     }
 
@@ -203,8 +208,8 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         }
         container screeningEventManager ScreeningEventManager {
             include *
-            exclude stManageEpisode
             autoLayout lr
+            exclude SLtoPC
         }
         container participantManager ParticipantManager {
             include *
