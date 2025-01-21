@@ -91,7 +91,6 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         serviceLayer -> localTrustSystem "Communicates with"
 
-
         u -> participantManager "Views screening information using"
         u -> appointmentBooker "Manages appointment using"
         u -> campaignManager "Interacts with campaigns using"
