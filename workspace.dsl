@@ -56,11 +56,11 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         pathwayCoordinator_PathwayManager -> pathwayCoordinator_PathwaySteps "Invokes pathway steps using"
 
         screeningEventManager = softwareSystem "Screening Event Manager" "Service for coordinating and capturing the clinical investigation processes" {
-            sem_internalWebapp = container "Staff Facing SEM Web Application" "Internal facing web application for staff to manage SEM clinical information" "Web App" 
-            sem_database = container "SEM datastore" "System of record datastore for screening event clinical information" "Database" 
+            sem_internalWebapp = container "Staff Facing SEM Web Application" "Internal facing web application for staff to manage SEM clinical information" "Web App" "Web Browser"
+            sem_database = container "SEM datastore" "System of record datastore for screening event clinical information" "Database" "Database"
             sem_internalOrchestrationWorkflowApp = container "SEM Orchestration Workflow" "Server App"
         }
-        localTrustSystem = softwareSystem "Local Trust System" "Local Trust System"
+        localTrustSystem = softwareSystem "Local Trust System" "Local Trust System" "external"
         serviceLayer = softwareSystem "Service Layer" "Service integration layer used to transition from legacy to the future platform"
 
         cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
@@ -145,7 +145,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         # Screening Event Manager
         st -> sem_internalWebapp "Manages SEM clinical information using"
-        sem_internalWebapp -> sem_database "Reads/Writes data from/to"
+        sem_internalWebapp -> sem_database "Reads/Writes data from/to" 
         sem_internalOrchestrationWorkflowApp -> sem_database "Reads/Writes data from/to"
         sem_internalOrchestrationWorkflowApp -> participantManager "Reads data from"
         sem_internalOrchestrationWorkflowApp -> localTrustSystem "Communicates with"
