@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-01-21T16:54:12Z",
+  "lastModifiedDate" : "2025-01-22T10:54:45Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -974,7 +974,7 @@
   "views" : {
     "configuration" : {
       "branding" : { },
-      "lastSavedView" : "PathwayCoordinator",
+      "lastSavedView" : "ParticipantManager",
       "metadataSymbols" : "SquareBrackets",
       "styles" : {
         "elements" : [ {
@@ -1012,7 +1012,7 @@
     },
     "containerViews" : [ {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1020,18 +1020,14 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 811,
-        "width" : 1620
-      },
       "elements" : [ {
         "id" : "10",
-        "x" : 219,
-        "y" : 185
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "16",
-        "x" : 969,
-        "y" : 185
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "AppointmentAllocator",
@@ -1042,7 +1038,7 @@
       "softwareSystemId" : "9"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1050,34 +1046,30 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 1500,
-        "width" : 3070
-      },
       "elements" : [ {
         "id" : "1",
-        "x" : 200,
-        "y" : 165
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "3",
-        "x" : 200,
-        "y" : 865
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "12",
-        "x" : 900,
-        "y" : 265
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "13",
-        "x" : 900,
-        "y" : 865
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "14",
-        "x" : 1650,
-        "y" : 565
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "15",
-        "x" : 2400,
-        "y" : 565
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "AppointmentBooker",
@@ -1096,7 +1088,7 @@
       "softwareSystemId" : "11"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1104,30 +1096,26 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 1828,
-        "width" : 2320
-      },
       "elements" : [ {
         "id" : "4",
-        "x" : 199,
-        "y" : 389
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "17",
-        "x" : 899,
-        "y" : 439
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "18",
-        "x" : 1649,
-        "y" : 185
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "19",
-        "x" : 1649,
-        "y" : 785
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "20",
-        "x" : 899,
-        "y" : 1293
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "BIAndDataAnalysis",
@@ -1144,7 +1132,7 @@
       "softwareSystemId" : "16"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1152,22 +1140,18 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 1320,
-        "width" : 1640
-      },
       "elements" : [ {
         "id" : "16",
-        "x" : 970,
-        "y" : 785
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "21",
-        "x" : 220,
-        "y" : 185
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "22",
-        "x" : 970,
-        "y" : 185
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "BusinessAudit",
@@ -1180,17 +1164,13 @@
       "softwareSystemId" : "20"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -1198,17 +1178,13 @@
       "softwareSystemId" : "23"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 842
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
@@ -1216,17 +1192,13 @@
       "softwareSystemId" : "24"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
@@ -1234,17 +1206,13 @@
       "softwareSystemId" : "25"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CohortManager",
@@ -1252,17 +1220,13 @@
       "softwareSystemId" : "27"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CommunicationsManager",
@@ -1270,17 +1234,13 @@
       "softwareSystemId" : "28"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ParticipantSupport",
@@ -1407,50 +1367,49 @@
       "softwareSystemId" : "45"
     }, {
       "dimensions" : {
-        "height" : 1748,
-        "width" : 2480
+        "height" : 2465,
+        "width" : 2690
       },
       "elements" : [ {
         "id" : "1",
-        "x" : 0,
-        "y" : 0
+        "x" : 125,
+        "y" : 945
       }, {
         "id" : "2",
-        "x" : 0,
-        "y" : 0
+        "x" : 1580,
+        "y" : 370
       }, {
         "id" : "3",
-        "x" : 0,
-        "y" : 0
+        "x" : 1015,
+        "y" : 1965
       }, {
         "id" : "8",
-        "x" : 0,
-        "y" : 0
+        "x" : 515,
+        "y" : 455
       }, {
         "id" : "30",
-        "x" : 0,
-        "y" : 0
+        "x" : 770,
+        "y" : 1465
       }, {
         "id" : "31",
-        "x" : 0,
-        "y" : 0
+        "x" : 2220,
+        "y" : 1465
       }, {
         "id" : "32",
-        "x" : 0,
-        "y" : 0
+        "x" : 780,
+        "y" : 1110
       }, {
         "id" : "33",
-        "x" : 0,
-        "y" : 0
+        "x" : 1565,
+        "y" : 1105
       }, {
         "id" : "34",
-        "x" : 0,
-        "y" : 0
+        "x" : 1565,
+        "y" : 1480
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ParticipantManager",
       "order" : 14,
-      "paperSize" : "A5_Landscape",
       "relationships" : [ {
         "id" : "102"
       }, {
@@ -1489,120 +1448,131 @@
     "systemLandscapeViews" : [ {
       "description" : "Overall system landscape",
       "dimensions" : {
-        "height" : 1748,
-        "width" : 2480
+        "height" : 5816,
+        "width" : 8154
       },
       "elements" : [ {
         "id" : "1",
-        "x" : 0,
-        "y" : 0
+        "x" : 4392,
+        "y" : 908
       }, {
         "id" : "2",
-        "x" : 0,
-        "y" : 0
+        "x" : 6342,
+        "y" : 1608
       }, {
         "id" : "3",
-        "x" : 0,
-        "y" : 0
+        "x" : 4425,
+        "y" : 1608
       }, {
         "id" : "4",
-        "x" : 0,
-        "y" : 0
+        "x" : 1662,
+        "y" : 208
       }, {
         "id" : "5",
-        "x" : 0,
-        "y" : 0
+        "x" : 3050,
+        "y" : 4108
       }, {
         "id" : "6",
-        "x" : 0,
-        "y" : 0
+        "x" : 3675,
+        "y" : 1658
       }, {
         "id" : "7",
-        "x" : 0,
-        "y" : 0
+        "x" : 4975,
+        "y" : 2908
       }, {
         "id" : "8",
-        "x" : 0,
-        "y" : 0
+        "x" : 7042,
+        "y" : 1658
       }, {
         "id" : "9",
-        "x" : 0,
-        "y" : 0
+        "x" : 467,
+        "y" : 3508
       }, {
         "id" : "11",
-        "x" : 0,
-        "y" : 0
+        "x" : 2300,
+        "y" : 4108
       }, {
         "id" : "16",
-        "x" : 0,
-        "y" : 0
+        "x" : 4479,
+        "y" : 5308
       }, {
         "id" : "20",
-        "x" : 0,
-        "y" : 0
+        "x" : 5158,
+        "y" : 4708
       }, {
         "id" : "23",
-        "x" : 0,
-        "y" : 0
+        "x" : 2317,
+        "y" : 1658
       }, {
         "id" : "24",
-        "x" : 0,
-        "y" : 0
+        "x" : 208,
+        "y" : 1658
       }, {
         "id" : "25",
-        "x" : 0,
-        "y" : 0
+        "x" : 942,
+        "y" : 958
       }, {
         "id" : "26",
-        "x" : 0,
-        "y" : 0
+        "x" : 958,
+        "y" : 1658
       }, {
         "id" : "27",
-        "x" : 0,
-        "y" : 0
+        "x" : 958,
+        "y" : 2308
       }, {
         "id" : "28",
-        "x" : 0,
-        "y" : 0
+        "x" : 3650,
+        "y" : 3508
       }, {
         "id" : "29",
-        "x" : 0,
-        "y" : 0
+        "x" : 6317,
+        "y" : 2308
       }, {
         "id" : "35",
-        "x" : 0,
-        "y" : 0
+        "x" : 5567,
+        "y" : 2308
       }, {
         "id" : "36",
-        "x" : 0,
-        "y" : 0
+        "x" : 3600,
+        "y" : 2908
       }, {
         "id" : "41",
-        "x" : 0,
-        "y" : 0
+        "x" : 3800,
+        "y" : 4708
       }, {
         "id" : "45",
-        "x" : 0,
-        "y" : 0
+        "x" : 4975,
+        "y" : 3490
       }, {
         "id" : "49",
-        "x" : 0,
-        "y" : 0
+        "x" : 3800,
+        "y" : 4108
       } ],
       "enterpriseBoundaryVisible" : true,
       "key" : "dtosSystemContext",
       "order" : 1,
-      "paperSize" : "A5_Landscape",
+      "paperSize" : "A1_Landscape",
       "relationships" : [ {
         "id" : "101"
       }, {
-        "id" : "102"
+        "id" : "102",
+        "vertices" : [ {
+          "x" : 6892,
+          "y" : 1608
+        } ]
       }, {
         "id" : "104"
       }, {
         "id" : "108"
       }, {
-        "id" : "115"
+        "id" : "115",
+        "vertices" : [ {
+          "x" : 4250,
+          "y" : 3808
+        }, {
+          "x" : 4250,
+          "y" : 3508
+        } ]
       }, {
         "id" : "117"
       }, {
@@ -1612,30 +1582,41 @@
       }, {
         "id" : "50"
       }, {
-        "id" : "51"
+        "id" : "51",
+        "vertices" : [ {
+          "x" : 1633,
+          "y" : 2608
+        } ]
       }, {
         "id" : "52",
         "vertices" : [ {
-          "x" : 225,
-          "y" : 300
+          "x" : 6017,
+          "y" : 2608
         } ]
       }, {
-        "id" : "53",
-        "vertices" : [ {
-          "x" : 225,
-          "y" : 0
-        } ]
+        "id" : "53"
       }, {
         "id" : "54"
       }, {
-        "id" : "55"
+        "id" : "55",
+        "vertices" : [ {
+          "x" : 808,
+          "y" : 2608
+        }, {
+          "x" : 1750,
+          "y" : 3808
+        } ]
       }, {
-        "id" : "56"
+        "id" : "56",
+        "vertices" : [ {
+          "x" : 1142,
+          "y" : 3808
+        } ]
       }, {
         "id" : "57",
         "vertices" : [ {
-          "x" : 225,
-          "y" : 300
+          "x" : 2996,
+          "y" : 5008
         } ]
       }, {
         "id" : "58"
@@ -1646,69 +1627,149 @@
       }, {
         "id" : "61",
         "vertices" : [ {
-          "x" : 225,
-          "y" : 300
+          "x" : 4470,
+          "y" : 3495
         } ]
       }, {
         "id" : "62",
         "vertices" : [ {
-          "x" : 225,
-          "y" : 0
+          "x" : 4587,
+          "y" : 3220
         } ]
       }, {
         "id" : "63"
       }, {
         "id" : "64"
       }, {
-        "id" : "65"
+        "id" : "65",
+        "vertices" : [ {
+          "x" : 5783,
+          "y" : 4408
+        } ]
       }, {
         "id" : "66"
       }, {
-        "id" : "67"
+        "id" : "67",
+        "vertices" : [ {
+          "x" : 2900,
+          "y" : 4408
+        } ]
       }, {
-        "id" : "68"
+        "id" : "68",
+        "vertices" : [ {
+          "x" : 5537,
+          "y" : 4408
+        } ]
       }, {
         "id" : "69"
       }, {
-        "id" : "70"
+        "id" : "70",
+        "vertices" : [ {
+          "x" : 3650,
+          "y" : 5008
+        } ]
       }, {
         "id" : "71",
         "vertices" : [ {
-          "x" : 225,
-          "y" : 0
+          "x" : 3296,
+          "y" : 5008
         } ]
       }, {
         "id" : "72"
       }, {
-        "id" : "73"
+        "id" : "73",
+        "vertices" : [ {
+          "x" : 7137,
+          "y" : 3654
+        }, {
+          "x" : 7137,
+          "y" : 4262
+        }, {
+          "x" : 5758,
+          "y" : 5008
+        } ]
       }, {
         "id" : "74"
       }, {
-        "id" : "75"
+        "id" : "75",
+        "vertices" : [ {
+          "x" : 5437,
+          "y" : 1608
+        } ]
       }, {
-        "id" : "76"
+        "id" : "76",
+        "vertices" : [ {
+          "x" : 3525,
+          "y" : 1608
+        }, {
+          "x" : 2696,
+          "y" : 3508
+        } ]
       }, {
-        "id" : "77"
+        "id" : "77",
+        "vertices" : [ {
+          "x" : 2992,
+          "y" : 1608
+        } ]
       }, {
         "id" : "78"
       }, {
-        "id" : "79"
+        "id" : "79",
+        "vertices" : [ {
+          "x" : 4825,
+          "y" : 3208
+        } ]
       }, {
-        "id" : "80"
+        "id" : "80",
+        "vertices" : [ {
+          "x" : 3450,
+          "y" : 2908
+        }, {
+          "x" : 2942,
+          "y" : 3508
+        } ]
       }, {
-        "id" : "81"
+        "id" : "81",
+        "vertices" : [ {
+          "x" : 6167,
+          "y" : 2308
+        } ]
       }, {
         "id" : "82"
       }, {
-        "id" : "83"
+        "id" : "83",
+        "vertices" : [ {
+          "x" : 2167,
+          "y" : 2008
+        } ]
       }, {
         "id" : "84"
       }, {
-        "id" : "85"
+        "id" : "85",
+        "vertices" : [ {
+          "x" : 4942,
+          "y" : 908
+        }, {
+          "x" : 7642,
+          "y" : 1608
+        }, {
+          "x" : 7946,
+          "y" : 1804
+        }, {
+          "x" : 7946,
+          "y" : 4262
+        }, {
+          "x" : 6250,
+          "y" : 5008
+        } ]
       }, {
         "id" : "86"
       }, {
-        "id" : "87"
+        "id" : "87",
+        "vertices" : [ {
+          "x" : 792,
+          "y" : 908
+        } ]
       } ]
     } ]
   }
