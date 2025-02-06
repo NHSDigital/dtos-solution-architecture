@@ -36,32 +36,54 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         cohortingAsAService = softwareSystem "Cohorting as a Service" "Service which produces a list of eligible participants based on a cohort definition"
         cohortManager = softwareSystem "Cohort Manager" "Service used for managing eligible participants in lieu of high quality data"
         communicationsManager = softwareSystem "Communications Manager" "Service for centralising all communication from screening programmes to the participant"
+        
         participantManager = softwareSystem "Participant Manager" "Service for managing a participant's episodes and encounters" {     
-            participantManager_internalWebapp = container "Staff Facing Web Application" "Internal facing web application for staff to manage participant episode information" "Web App" "Web Browser"
-            participantManager_database = container "Participant Data Store" "System of record datastore for Participants and Episodes" "Database" "Database"
-            participantManager_externalWebApp = container "Participant Facing Web Application" "External facing web interface for participants to engage with the screening service" "Web App" "Web Browser"
-            participantManager_noAuthWebApp = container "Anonymous Web Application" "External facing web interface that requires minimal authentication to provide access to some screening services" "Web App" "Web Browser"
-            participantManager_API = container "Participant API"
+            participantManager_internalWebapp = container "Staff Facing Web Application" "Internal facing web application for staff to manage participant episode information" "Nextjs Web App" "Web Browser"
+            participantManager_database = container "Participant Data Store" "System of record datastore for Participants and Episodes" "Azure SQL Database" "Database"
+            participantManager_externalWebApp = container "Participant Facing Web Application" "External facing web interface for participants to engage with the screening service" "Nextjs Web App" "Web Browser"
+            participantManager_noAuthWebApp = container "Anonymous Web Application" "External facing web interface that requires minimal authentication to provide access to some screening services" "Nextjs Web App" "Web Browser"
+            participantManager_API = container "Participant API" "CRUD API used to manage the underlying data store" ".net Azure Function"{
+                participantManager_API_Participant = component "Participant Function" "Azure function for managing participant" ".net Azure Function"
+                participantManager_API_Episode = component "Episode Function" "Azure function for managing episode" ".net Azure Function"
+                participantManager_API_Eligibility = component "Eligibility Function" "Azure function for managing eligibility" ".net Azure Function"
+                participantManager_API_Encounter = component "Encounter Function" "Azure function for managing encounter" ".net Azure Function"
+
+            }
+            participantManager_ExperienceAPI = container "Participant Experience API" "Experience API used by the web front ends to present data" ".net Azure Function"
         }
+
         participantSupport = softwareSystem "Participant Support" "Service for managing inbound help requests from participants"
         pathwayCoordinator = softwareSystem "Pathway Coordinator" "Service that implements a pathway definition"{
-            pathwayCoordinator_ParticipantEventsQueue = container "Participants Events Queue" "Main queue where participant related events are received" "Servicebus" "Queue"
-            pathwayCoordinator_ParticipantEventHandler = container "Participant Event Handler" "Function responsible to acting on Participant Events" "Azure Function"
-            pathwayCoordinator_PathwayManager = container "Pathway Manager" "Based on the triggering event and the pathway, determines the next action" ".net Class"
-            pathwayCoordinator_PathwaySteps = container "Pathway Steps" "Collection of discrete pathway steps invoked by a pathway" ".net Class"
+            pathwayManager_database = container "Pathway Data Store" "System of record datastore for Screening Pathways" "Azure SQL Database" "Database"
+            pathwayManager_API = container "Pathway Manager API" "CRUD API used to manage the underlying data store" ".net Azure Function"
+            pathwayManager_internalWebapp = container "Pathway Web Application" "Internal facing web application for staff to manage pathway definitions" "Nextjs Web App" "Web Browser"
+            contextManager_database = container "Pathway Context Data Store" "Transient data store used ot support the pathway progression" "Azure Cosmos Database" "Database"
+            contextManager_API = container "Pathway Context API" "CRUD API used to manage the underlying data store" ".net Azure Function"
+            contextManager_internalWebapp = container "Context Web Application" "Internal facing web application for staff view current pathway statuses" "Nextjs Web App" "Web Browser"
+            pathwayCoordinator_API = container "Pathway Coordinator API" "Used as a synchronous mechanism for validating the data payload, before processing" ".net Azure Function"
+
+            pathwayCoordinator_ParticipantEventsQueue = container "Participants Events Queue" "Main queue where participant related events are received" "Eventgrid" "Queue"
+            pathwayCoordinator_ProductEventsQueue = container "Product Events Queue" "Queue used by the Pathway Coordinator to communicate with Products" "Eventgrid" "Queue" 
+            pathwayCoordinator_ParticipantEventHandler = container "Participant Event Handler" "Function responsible to acting on Participant Events" ".net Azure Function"
+            contextManager_ParticipantEventHandler = container "Context Event Handler" "Function responsible for tracking the context of the Participant" ".net Azure Function"
+             
         }
         localTrustSystem = softwareSystem "Local Trust System" "Local Trust System" "external"
-
-        pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_ParticipantEventsQueue "Subscribes to messages from"
-        pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_PathwayManager "Executes pathway using"
-        pathwayCoordinator_PathwayManager -> pathwayCoordinator_PathwaySteps "Invokes pathway steps using"
 
         screeningEventManager = softwareSystem "Screening Event Manager" "Service for coordinating and capturing the clinical investigation processes" {
             sem_internalWebapp = container "Staff Facing SEM Web Application" "Internal facing web application for staff to manage SEM clinical information" "Web App" "Web Browser"
             sem_database = container "SEM datastore" "System of record datastore for screening event clinical information" "Database" "Database"
             sem_internalOrchestrationWorkflowApp = container "SEM Orchestration Workflow" "Server App"
         }
-        serviceLayer = softwareSystem "Service Layer" "Service integration layer used to transition from legacy to the future platform"
+        serviceLayer = softwareSystem "Service Layer" "Service integration layer used to transition from legacy to the future platform"{
+            serviceLayer_API = container "Service Layer API" "External API for external systems to interface with NSP" ".net Azure Function"
+            serviceLayer_MeshMailbox = container "Service Layer Mesh Mailbox" "External mesh mailbox to ingest data" "Mesh Mailbox"
+            serviceLayer_ProcessingQueue = container "Service Layer Processing Queue" "Asynchronous queue for processing inbound data items" "Eventgrid"
+            serviceLayer_DataProcessor = container "Service Layer Data Processor" "Multiple data processors that convert data into NSP Events" ".net Azure Function"
+            
+        }
+
+        NBSS = softwareSystem "National Breast Screening Service" "External Service used for managing breast screening" "external"
 
         cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
         cohortManager -> pathwayCoordinator "Notifies of new eligible participant using"
@@ -129,31 +151,61 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         # Participant manager
         u -> nhsLogin "Authenticates using"
+        nhsLogin -> participantManager_externalWebApp "Logs on via"
+        participantManager_ExperienceAPI -> nhsLogin "Protects API using"
         u -> nhsApp "Accesses secure NHS services using"
         nhsApp -> participantManager_externalWebApp "Interacts with screening service using"
         u -> participantManager_externalWebApp "Interacts with screening service using"
-        participantManager_externalWebApp -> participantManager_noAuthWebApp "Accesses low security area using"
         u1 -> participantManager_noAuthWebApp "Access low security information using"
-        participantManager_externalWebApp -> participantManager_API "Retrieves data using"
-        participantManager_internalWebapp -> participantManager_API "Retrieves data using"
+
+        participantManager_externalWebApp -> participantManager_ExperienceAPI "Retrieves data using"
+        participantManager_internalWebapp -> participantManager_ExperienceAPI "Retrieves data using"
+
+        participantManager_ExperienceAPI -> participantManager_API "Access data using"
         participantManager_API -> participantManager_database "Accesses data using"
+        participantManager_noAuthWebApp -> participantManager_ExperienceAPI "Accesses data using"
+        
         st -> participantManager_internalWebapp "Interacts with participant screening history using"
+        nhsIdentity -> participantManager_internalWebapp "Logs on via"
+        participantManager_ExperienceAPI -> nhsIdentity "Protects API using"
+
 
         # Pathway Coordinator
-        cohortManager -> pathwayCoordinator_ParticipantEventsQueue "Published New Eligible Participant Event using"
-        SLtoPC = serviceLayer -> pathwayCoordinator_ParticipantEventsQueue "Publishes participant level event to"
+        cohortManager -> pathwayCoordinator_API "Published New Eligible Participant Event using"
+        SLtoPC = serviceLayer -> pathwayCoordinator_API "Publishes participant level event to"
+        pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_ParticipantEventsQueue "Subscribes to messages from"
+        pathwayCoordinator_ParticipantEventHandler -> pathwayManager_API "Accesses pathway definition using"
+        pathwayCoordinator_ParticipantEventHandler -> pathwayCoordinator_ProductEventsQueue "Communicates with the products using"
+        contextManager_ParticipantEventHandler -> pathwayCoordinator_ParticipantEventsQueue "Subscribes to messages from"
+        contextManager_ParticipantEventHandler -> contextManager_API "Updates data using"
+        pathwayManager_API -> pathwayManager_database "Accesses data from"
+        contextManager_API -> contextManager_database "Accesses data from"
+        contextManager_internalWebapp -> contextManager_API "Displays data using"
+        pathwayManager_internalWebapp -> pathwayManager_API "Displays data using"
+        st -> pathwayManager_internalWebapp "Interacts with participant screening history using"
+        nhsIdentity -> pathwayManager_internalWebapp "Logs on via"
+        pathwayManager_API -> nhsIdentity "Protects API using"
+        st -> contextManager_internalWebapp "Interacts with participant screening history using"
+        nhsIdentity -> contextManager_internalWebapp "Logs on via"
+        contextManager_API -> nhsIdentity "Protects API using"
+        pathwayCoordinator_API -> pathwayManager_API "Retrieves schema information using"
+        pathwayCoordinator_API -> pathwayCoordinator_ParticipantEventsQueue "Adds validated messages to"
 
         # Screening Event Manager
         st -> sem_internalWebapp "Manages SEM clinical information using"
         st -> nhsIdentity "Authenticates using"
         sem_internalWebapp -> sem_database "Reads/Writes data from/to" 
         sem_internalOrchestrationWorkflowApp -> sem_database "Reads/Writes data from/to"
-        pathwayCoordinator -> sem_internalOrchestrationWorkflowApp "Executes clinical investigation using"
+        pathwayCoordinator_ProductEventsQueue -> sem_internalOrchestrationWorkflowApp "Executes clinical investigation using"
         sem_internalOrchestrationWorkflowApp -> serviceLayer "Communicates with"
         nhsIdentity -> sem_internalWebapp "Provides national authentication & authorisation services to"
 
         # Service Layer
-
+        serviceLayer_API -> serviceLayer_ProcessingQueue "Adds messages for processing using"
+        serviceLayer_MeshMailbox -> serviceLayer_ProcessingQueue "Adds messages for processing using"
+        serviceLayer_DataProcessor -> serviceLayer_ProcessingQueue "Subscribes to queue"
+        serviceLayer_DataProcessor -> pathwayCoordinator_API "Emits events for processing using"
+        NBSS -> serviceLayer_MeshMailbox "Sends data via"
     }
 
     views {
@@ -203,7 +255,6 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         }
         container pathwayCoordinator PathwayCoordinator {
             include *
-            autoLayout lr
         }
         container screeningEventManager ScreeningEventManager {
             include *
@@ -216,9 +267,12 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         container serviceLayer ServiceLayer {
             include *
-            autoLayout lr
         }
         
+        component participantManager_API ParticipantManagerAPI { 
+            include *
+            autoLayout lr
+        }
         
         styles {
             element "Element" {
