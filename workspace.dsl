@@ -9,7 +9,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         nhsNotify = softwareSystem "NHS Notify" "NHS Wide service for providing communication to the Citizen" "external"
         nhsLogin = softwareSystem "NHS Login" "NHS Wide service for authenticating the Citizen" "external"
-        nhsIdentity = softwareSystem "NHS Identity" "NHS Wide service for authenticating Staff" "external"
+        nhsCIS2 = softwareSystem "Care Identity Service (CIS)" "NHS Wide service for authenticating Staff" "external"
         nhsApp = softwareSystem "NHS App" "National Mobile Application for NHS" "Mobile App" 
         appointmentAllocator = softwareSystem "Appointment Allocator" "Service that appropriately allocates a participant to a slot"{
             appointmentAllocator_apiApp = container "API Application"
@@ -39,7 +39,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         
         participantManager = softwareSystem "Participant Manager" "Service for managing a participant's episodes and encounters" {     
             participantManager_internalWebapp = container "Staff Facing Web Application" "Internal facing web application for staff to manage participant episode information" "Nextjs Web App" "Web Browser"
-            participantManager_database = container "Participant Data Store" "System of record datastore for Participants and Episodes" "Azure SQL Database" "Database"
+            participantManager_database = container "Participant Manager Data Store" "System of record datastore for Participants and Episodes" "Azure SQL Database" "Database"
             participantManager_externalWebApp = container "Participant Facing Web Application" "External facing web interface for participants to engage with the screening service" "Nextjs Web App" "Web Browser"
             participantManager_noAuthWebApp = container "Anonymous Web Application" "External facing web interface that requires minimal authentication to provide access to some screening services" "Nextjs Web App" "Web Browser"
             participantManager_API = container "Participant API" "CRUD API used to manage the underlying data store" ".net Azure Function"{
@@ -160,14 +160,15 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         participantManager_externalWebApp -> participantManager_ExperienceAPI "Retrieves data using"
         participantManager_internalWebapp -> participantManager_ExperienceAPI "Retrieves data using"
+        participantManager_noAuthWebApp -> participantManager_ExperienceAPI "Retrieves data using"
 
         participantManager_ExperienceAPI -> participantManager_API "Access data using"
         participantManager_API -> participantManager_database "Accesses data using"
-        participantManager_noAuthWebApp -> participantManager_ExperienceAPI "Accesses data using"
+
         
         st -> participantManager_internalWebapp "Interacts with participant screening history using"
-        nhsIdentity -> participantManager_internalWebapp "Logs on via"
-        participantManager_ExperienceAPI -> nhsIdentity "Protects API using"
+        nhsCIS2 -> participantManager_internalWebapp "Logs on via"
+        participantManager_ExperienceAPI -> nhsCIS2 "Protects API using"
 
 
         # Pathway Coordinator
@@ -183,22 +184,22 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         contextManager_internalWebapp -> contextManager_API "Displays data using"
         pathwayManager_internalWebapp -> pathwayManager_API "Displays data using"
         st -> pathwayManager_internalWebapp "Interacts with participant screening history using"
-        nhsIdentity -> pathwayManager_internalWebapp "Logs on via"
-        pathwayManager_API -> nhsIdentity "Protects API using"
+        nhsCIS2 -> pathwayManager_internalWebapp "Logs on via"
+        pathwayManager_API -> nhsCIS2 "Protects API using"
         st -> contextManager_internalWebapp "Interacts with participant screening history using"
-        nhsIdentity -> contextManager_internalWebapp "Logs on via"
-        contextManager_API -> nhsIdentity "Protects API using"
+        nhsCIS2 -> contextManager_internalWebapp "Logs on via"
+        contextManager_API -> nhsCIS2 "Protects API using"
         pathwayCoordinator_API -> pathwayManager_API "Retrieves schema information using"
         pathwayCoordinator_API -> pathwayCoordinator_ParticipantEventsQueue "Adds validated messages to"
 
         # Screening Event Manager
         st -> sem_internalWebapp "Manages SEM clinical information using"
-        st -> nhsIdentity "Authenticates using"
+        st -> nhsCIS2 "Authenticates using"
         sem_internalWebapp -> sem_database "Reads/Writes data from/to" 
         sem_internalOrchestrationWorkflowApp -> sem_database "Reads/Writes data from/to"
         pathwayCoordinator_ProductEventsQueue -> sem_internalOrchestrationWorkflowApp "Executes clinical investigation using"
         sem_internalOrchestrationWorkflowApp -> serviceLayer "Communicates with"
-        nhsIdentity -> sem_internalWebapp "Provides national authentication & authorisation services to"
+        nhsCIS2 -> sem_internalWebapp "Provides national authentication & authorisation services to"
 
         # Service Layer
         serviceLayer_API -> serviceLayer_ProcessingQueue "Adds messages for processing using"
