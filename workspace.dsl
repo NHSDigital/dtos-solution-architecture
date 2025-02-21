@@ -11,11 +11,13 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         nhsLogin = softwareSystem "NHS Login" "NHS Wide service for authenticating the Citizen" "external"
         nhsCIS2 = softwareSystem "Care Identity Service (CIS)" "NHS Wide service for authenticating Staff" "external"
         nhsApp = softwareSystem "NHS App" "National Mobile Application for NHS" "Mobile App" 
+        appointmentQueue = softwareSystem "Appointment Queue" "Service for pathway coordinator to receive appointments "
         appointmentAllocator = softwareSystem "Appointment Allocator" "Service that appropriately allocates a participant to a slot"{
             appointmentAllocator_apiApp = container "API Application"
+        
         }
         appointmentBooker = softwareSystem "Appointment Booker" "Service for both participant and staff to manage appointments"{
-            appointmentBooker_userWeb = container "Citizen facing web interface" "External facing web application to manage your booking" "Web App" "Web Browser"
+            appointmentBooker_userWeb = container "Participant facing web interface" "External facing web application to manage your booking" "Web App" "Web Browser"
             appointmentBooker_staffWeb = container "Staff facing web interface" "Internal facing web application use to manage appointment bookings and attendance" "Web App" "Web Browser"
             appointmentBooker_apiApp = container "API Layer" "API used to access underlying booking information" 
             appointmentBooker_db = container "Booking database" "Underlying booking data store" "Database" "Database"
@@ -26,8 +28,10 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             biandDataAnalysis_businessAudit = container "Read replica of audit database" "Copy of audit database for analytics purposes" "Database" "Database"
         }
         businessAudit = softwareSystem "Business Audit" "Service that provides immutable audit datastore used for analysis and non-repudiation"{
-            businessAudit_api = container "Audit api"
+            businessAudit_queue = container "Audit log queue"
+            businessAudit_api = container " Read Audit Data Api"
             businessAudit_db = container "Audit datastore" "Immutable audit data store containing all audit information" "Database" "Database" 
+            businessAudit_UserInterface = container "Audit User Interface" "Search and Display participants sequence of event"
         }
 
         campaignManager = softwareSystem "Campaign Manager" "Service for launching and monitoring campaigns to improve uptake"
@@ -35,8 +39,16 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         capacityManager = softwareSystem "Capacity Manager" "Service to centralise the overall system capacity"
         cohortingAsAService = softwareSystem "Cohorting as a Service" "Service which produces a list of eligible participants based on a cohort definition"
         cohortManager = softwareSystem "Cohort Manager" "Service used for managing eligible participants in lieu of high quality data"
-        communicationsManager = softwareSystem "Communications Manager" "Service for centralising all communication from screening programmes to the participant"
+        communicationsManager = softwareSystem "Communications Manager" "Service for centralising all communication from screening programmes to the participant"{
+            communicationsManager_eventAPI = container "Communication Manager API" "Receive Comms events from various products"
+            communicationManager_EventHandler = container "Communication Manager Event Handler" "Categorise communication events"
+            communicationManager_Extpayloadprocessor = container "External Payload Processor""Create payload for external system, nhsNotify"
+            communicationManager_DBStore = container "DBStore communications" "Store all communication event send to Notify" "AzureSqlDatabase" "Database"
+            communicationManager_BusinessLogic = container "Business Logic" "Logic to create payload "
+            communicationManager_NotifyAPI = container "External API" "Send payload to Notify"
+        }
         
+
         participantManager = softwareSystem "Participant Manager" "Service for managing a participant's episodes and encounters" {     
             participantManager_internalWebapp = container "Staff Facing Web Application" "Internal facing web application for staff to manage participant episode information" "Nextjs Web App" "Web Browser"
             participantManager_database = container "Participant Manager Data Store" "System of record datastore for Participants and Episodes" "Azure SQL Database" "Database"
@@ -88,13 +100,11 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
         cohortManager -> pathwayCoordinator "Notifies of new eligible participant using"
         participantManager -> pathwayCoordinator "Notifies of participant ready for screening using"
-        pathwayCoordinator -> participantManager "Manages participant's episode using"
+        pathwayCoordinator -> participantManager "Manages participant's episode (appointments, closed episodes) using"
         pathwayCoordinator -> appointmentAllocator "Gets slot for participant using"
         capacityAndDemandPlanner -> appointmentBooker "Creates unresourced slots using"
         appointmentAllocator -> appointmentBooker "Gets available slots using"
-        appointmentAllocator -> biandDataAnalysis "Retrieves participants usage patterns"
-        pathwayCoordinator -> appointmentBooker "Allocates appointment to Participant"        
-        pathwayCoordinator -> communicationsManager "Sends invitations to participant using"
+        appointmentAllocator -> biandDataAnalysis "Retrieves participants usage patterns"      
         communicationsManager -> nhsNotify "Communicates with the participant using"
         pathwayCoordinator -> screeningEventManager "Executes clinical investigation using"
         screeningEventManager -> pathwayCoordinator "Notification of clinical outcome using"
@@ -112,6 +122,16 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         participantManager -> biandDataAnalysis "Publishes data to"
 
         serviceLayer -> localTrustSystem "Communicates with"
+
+        NBSS -> ServiceLayer "Sends appointment event"
+        ServiceLayer -> AppointmentBooker "Send processed appointment events"
+        AppointmentBooker -> appointmentQueue "Sends booked appointment for invitation"
+        appointmentQueue -> PathwayCoordinator "Publishes appointment"
+        pathwayCoordinator_ProductEventsQueue -> CommunicationsManager "Send appointment with pathway definition"
+        nhsNotify -> CommunicationsManager "Sends back invitation status"
+        CommunicationsManager -> PathwayCoordinator "Sends back invitation status payload"
+        PathwayCoordinator -> ParticipantManager "Update episodes with appointment statuses"
+        PathwayCoordinator -> AppointmentBooker "Update appointment invitation status"
 
         u -> participantManager "Views screening information using"
         u -> appointmentBooker "Manages appointment using"
@@ -146,8 +166,12 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         biandDataAnalysis_analytics -> biandDataAnalysis_businessAudit "Reads data from"
 
         # Business Audit
-        businessAudit_api -> businessAudit_db "Writes audit data using"
-        businessAudit_api -> biandDataAnalysis_businessAudit "Streams events to"
+         businessAudit_queue -> businessAudit_db "Writes audit data "
+         businessAudit_api -> businessAudit_db "Reads audit data"
+         businessAudit_api -> businessAudit_UserInterface  "Send participant audit log data "
+         cohortManager -> businessAudit_queue "Writes eligibility changes, demographic and transformation changes"
+         CommunicationsManager -> businessAudit_queue "Writes appointment invitation statuses"
+         AppointmentBooker -> businessAudit_queue "Write appointment booking log"
 
         # Participant manager
         u -> nhsLogin "Authenticates using"
@@ -207,12 +231,33 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         serviceLayer_DataProcessor -> serviceLayer_ProcessingQueue "Subscribes to queue"
         serviceLayer_DataProcessor -> pathwayCoordinator_API "Emits events for processing using"
         NBSS -> serviceLayer_MeshMailbox "Sends data via"
+
+        # Communication Manager
+        pathwayCoordinator_ProductEventsQueue -> communicationsManager_eventAPI "Send participant comms event with pathway definition"
+        communicationsManager_eventAPI -> communicationManager_EventHandler "Send communication event"
+        communicationManager_EventHandler -> communicationManager_BusinessLogic "Get Business Logic"
+        communicationManager_EventHandler -> communicationManager_Extpayloadprocessor "Send events to process"
+        communicationManager_Extpayloadprocessor -> communicationManager_DBStore "Store payload"
+        communicationManager_NotifyAPI -> communicationManager_DBStore "Get the payload "
+        communicationManager_NotifyAPI -> nhsNotify "Send Payload"
+
     }
 
     views {
 
         systemLandscape dtosSystemContext "Overall system landscape"{
             include *
+        }
+        systemLandscape dtosSystemAppointmentBookContext "Appointment Data Processing Context Diagram"{
+            include NBSS
+            include serviceLayer
+            include appointmentBooker
+            include pathwayCoordinator
+            include participantManager
+            include communicationsManager
+            include nhsNotify
+            include appointmentQueue
+            
         }
         container appointmentAllocator AppointmentAllocator {
             include *
@@ -274,7 +319,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             include *
             autoLayout lr
         }
-        
+
         styles {
             element "Element" {
                 color #ffffff
