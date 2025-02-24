@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-02-24T08:10:02Z",
+  "lastModifiedDate" : "2025-02-24T08:17:28Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -1625,19 +1625,19 @@
       },
       "elements" : [ {
         "id" : "44",
-        "x" : 304,
+        "x" : 303,
         "y" : 185
       }, {
         "id" : "45",
-        "x" : 304,
+        "x" : 303,
         "y" : 785
       }, {
         "id" : "46",
-        "x" : 304,
+        "x" : 303,
         "y" : 1385
       }, {
         "id" : "47",
-        "x" : 304,
+        "x" : 303,
         "y" : 1985
       } ],
       "externalContainerBoundariesVisible" : false,
@@ -1646,7 +1646,7 @@
     } ],
     "configuration" : {
       "branding" : { },
-      "lastSavedView" : "ParticipantManager",
+      "lastSavedView" : "PathwayCoordinator",
       "metadataSymbols" : "SquareBrackets",
       "styles" : {
         "elements" : [ {
@@ -1698,11 +1698,11 @@
       },
       "elements" : [ {
         "id" : "11",
-        "x" : 220,
+        "x" : 219,
         "y" : 185
       }, {
         "id" : "17",
-        "x" : 970,
+        "x" : 969,
         "y" : 185
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
@@ -1782,19 +1782,19 @@
       },
       "elements" : [ {
         "id" : "4",
-        "x" : 199,
+        "x" : 200,
         "y" : 435
       }, {
         "id" : "18",
-        "x" : 899,
+        "x" : 900,
         "y" : 485
       }, {
         "id" : "19",
-        "x" : 1649,
+        "x" : 1650,
         "y" : 785
       }, {
         "id" : "20",
-        "x" : 1649,
+        "x" : 1650,
         "y" : 185
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
@@ -1870,13 +1870,17 @@
       "softwareSystemId" : "21"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -1884,13 +1888,17 @@
       "softwareSystemId" : "26"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 842
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
@@ -1898,13 +1906,17 @@
       "softwareSystemId" : "27"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
@@ -1912,13 +1924,17 @@
       "softwareSystemId" : "28"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CohortManager",
@@ -1926,7 +1942,7 @@
       "softwareSystemId" : "30"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1934,38 +1950,42 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 2428,
+        "width" : 3870
+      },
       "elements" : [ {
         "id" : "5",
-        "x" : 0,
-        "y" : 0
+        "x" : 3200,
+        "y" : 1893
       }, {
         "id" : "32",
-        "x" : 0,
-        "y" : 0
+        "x" : 950,
+        "y" : 485
       }, {
         "id" : "33",
-        "x" : 0,
-        "y" : 0
+        "x" : 1700,
+        "y" : 485
       }, {
         "id" : "34",
-        "x" : 0,
-        "y" : 0
+        "x" : 2450,
+        "y" : 785
       }, {
         "id" : "35",
-        "x" : 0,
-        "y" : 0
+        "x" : 3200,
+        "y" : 1039
       }, {
         "id" : "36",
-        "x" : 0,
-        "y" : 0
+        "x" : 2450,
+        "y" : 185
       }, {
         "id" : "37",
-        "x" : 0,
-        "y" : 0
+        "x" : 2450,
+        "y" : 1385
       }, {
         "id" : "51",
-        "x" : 0,
-        "y" : 0
+        "x" : 200,
+        "y" : 485
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CommunicationsManager",
@@ -1998,7 +2018,7 @@
       },
       "dimensions" : {
         "height" : 400,
-        "width" : 686
+        "width" : 832
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ParticipantSupport",
@@ -2167,7 +2187,7 @@
       "softwareSystemId" : "51"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2175,72 +2195,46 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 1992,
-        "width" : 3820
-      },
       "elements" : [ {
         "id" : "3",
-        "x" : 200,
-        "y" : 298
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "7",
-        "x" : 900,
-        "y" : 348
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "51",
-        "x" : 1650,
-        "y" : 952
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "65",
-        "x" : 2400,
-        "y" : 348
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "66",
-        "x" : 3150,
-        "y" : 602
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "67",
-        "x" : 2400,
-        "y" : 948
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "68",
-        "x" : 3150,
-        "y" : 1457
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ScreeningEventManager",
       "order" : 14,
       "relationships" : [ {
-        "id" : "172",
-        "vertices" : [ {
-          "x" : 900,
-          "y" : 798
-        } ]
+        "id" : "172"
       }, {
-        "id" : "174",
-        "vertices" : [ {
-          "x" : 1405,
-          "y" : 916
-        } ]
+        "id" : "174"
       }, {
-        "id" : "176",
-        "vertices" : [ {
-          "x" : 1594,
-          "y" : 683
-        } ]
+        "id" : "176"
       }, {
-        "id" : "185",
-        "vertices" : [ {
-          "x" : 900,
-          "y" : 198
-        }, {
-          "x" : 1350,
-          "y" : 198
-        }, {
-          "x" : 2100,
-          "y" : 269
-        } ]
+        "id" : "185"
       }, {
         "id" : "186"
       }, {
