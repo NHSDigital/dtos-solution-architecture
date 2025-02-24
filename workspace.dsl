@@ -62,6 +62,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
             }
             participantManager_ExperienceAPI = container "Participant Experience API" "Experience API used by the web front ends to present data" ".net Azure Function"
+            participantManager_ProductEventHandler = container "Participant Manager Product Event Handler" "Product events handler for Participant Manager" ".net Azure Function"
         }
 
         participantSupport = softwareSystem "Participant Support" "Service for managing inbound help requests from participants"
@@ -186,8 +187,11 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         participantManager_internalWebapp -> participantManager_ExperienceAPI "Retrieves data using"
         participantManager_noAuthWebApp -> participantManager_ExperienceAPI "Retrieves data using"
 
-        participantManager_ExperienceAPI -> participantManager_API "Access data using"
+        participantManager_ExperienceAPI -> participantManager_API "Accesses data using"
         participantManager_API -> participantManager_database "Accesses data using"
+        participantManager_ProductEventHandler -> participantManager_API "Accesses data using"
+
+
 
         
         st -> participantManager_internalWebapp "Interacts with participant screening history using"
@@ -215,6 +219,9 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         contextManager_API -> nhsCIS2 "Protects API using"
         pathwayCoordinator_API -> pathwayManager_API "Retrieves schema information using"
         pathwayCoordinator_API -> pathwayCoordinator_ParticipantEventsQueue "Adds validated messages to"
+        pathwayCoordinator_ProductEventsQueue -> participantManager_ProductEventHandler "Publishes messages to"
+
+
 
         # Screening Event Manager
         st -> sem_internalWebapp "Manages SEM clinical information using"
