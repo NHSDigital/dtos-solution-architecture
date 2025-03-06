@@ -21,6 +21,8 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             appointmentBooker_staffWeb = container "Staff facing web interface" "Internal facing web application use to manage appointment bookings and attendance" "Web App" "Web Browser"
             appointmentBooker_apiApp = container "API Layer" "API used to access underlying booking information" 
             appointmentBooker_db = container "Booking database" "Underlying booking data store" "Database" "Database"
+            appointmentBooker_ProductEventHandler = container "Appointment Booker Product Event Handler" "Product events handler for Appointment Booker" ".net Azure Function"
+            appointmentBooker_ProductEventQueue = container "Appointment Booker Event Queue" "Inbound event queue for Appointment Booker" "Event Grid Topic" "Queue"
         }
         biandDataAnalysis = softwareSystem "BI and Data Analysis" "Service for analysing Screening data"{
             biandDataAnalysis_analytics = container "Web interface for running queries" "Web portal used to access analysis and queries" "Web App" "Web Browser"
@@ -97,6 +99,10 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         }
 
         NBSS = softwareSystem "National Breast Screening Service" "External Service used for managing breast screening" "external"
+        CSMS = softwareSystem "Cervical Screening Management System" "External Service used for managing cervical screening" "external"
+        Bowel = softwareSystem "Bowel Screening System" "External Service used for managing bowel screening" "external"
+        DES = softwareSystem "Diabetic Eye Screening" "External Service used for managing diabetic eye screening" "external"
+        AAA = softwareSystem "Abdominal aortic aneurysm" "External Service used for managing AAA screening" "external"
 
         cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
         cohortManager -> pathwayCoordinator "Notifies of new eligible participant using"
@@ -124,7 +130,14 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         serviceLayer -> localTrustSystem "Communicates with"
 
-        NBSS -> ServiceLayer "Sends appointment event"
+        NBSS -> ServiceLayer "Sends breast screening data to"
+        CSMS -> ServiceLayer "Sends cervical screening data to"
+        Bowel -> ServiceLayer "Sends bowel screening data to"
+        DES -> ServiceLayer "Sends DES screening data to"
+        AAA -> ServiceLayer "Sends AAA screening data to"
+
+        BusinessAudit -> PathwayCoordinator "Subscribes to events from"
+
         ServiceLayer -> AppointmentBooker "Send processed appointment events"
         AppointmentBooker -> appointmentQueue "Sends booked appointment for invitation"
         appointmentQueue -> PathwayCoordinator "Publishes appointment"
@@ -220,7 +233,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         pathwayCoordinator_API -> pathwayManager_API "Retrieves schema information using"
         pathwayCoordinator_API -> pathwayCoordinator_ParticipantEventsQueue "Adds validated messages to"
         pathwayCoordinator_ProductEventsQueue -> participantManager_ProductEventHandler "Publishes messages to"
-
+        
 
 
         # Screening Event Manager
@@ -255,6 +268,18 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         systemLandscape dtosSystemContext "Overall system landscape"{
             include *
         }
+
+        systemLandscape dtos5thTeamContext "Core focus of the 5th team"{
+            include NBSS
+            include CSMS
+            include DES
+            include AAA
+            include Bowel
+            include serviceLayer
+            include pathwayCoordinator
+            include businessAudit
+        }
+
         systemLandscape dtosSystemAppointmentBookContext "Appointment Data Processing Context Diagram"{
             include NBSS
             include serviceLayer
