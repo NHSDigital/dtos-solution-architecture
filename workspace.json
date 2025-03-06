@@ -3,7 +3,8 @@
   "description" : "High level context diagram for all products within Digital Transformation of Screening",
   "documentation" : { },
   "id" : 1,
-  "lastModifiedDate" : "2025-03-01T09:17:36Z",
+  "lastModifiedAgent" : "structurizr-ui",
+  "lastModifiedDate" : "2025-03-06T08:16:44Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -1703,7 +1704,7 @@
   "views" : {
     "componentViews" : [ {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1712,22 +1713,26 @@
         "vertices" : false
       },
       "containerId" : "45",
+      "dimensions" : {
+        "height" : 2611,
+        "width" : 1058
+      },
       "elements" : [ {
         "id" : "46",
-        "x" : 0,
-        "y" : 0
+        "x" : 303,
+        "y" : 185
       }, {
         "id" : "47",
-        "x" : 0,
-        "y" : 0
+        "x" : 303,
+        "y" : 785
       }, {
         "id" : "48",
-        "x" : 0,
-        "y" : 0
+        "x" : 303,
+        "y" : 1385
       }, {
         "id" : "49",
-        "x" : 0,
-        "y" : 0
+        "x" : 303,
+        "y" : 1985
       } ],
       "externalContainerBoundariesVisible" : false,
       "key" : "ParticipantManagerAPI",
@@ -1735,7 +1740,8 @@
     } ],
     "configuration" : {
       "branding" : { },
-      "lastSavedView" : "ParticipantManager",
+      "lastSavedView" : "PathwayCoordinator",
+      "metadataSymbols" : "SquareBrackets",
       "styles" : {
         "elements" : [ {
           "color" : "#ffffff",
@@ -1772,7 +1778,7 @@
     },
     "containerViews" : [ {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1780,14 +1786,18 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 811,
+        "width" : 1620
+      },
       "elements" : [ {
         "id" : "11",
-        "x" : 0,
-        "y" : 0
+        "x" : 219,
+        "y" : 185
       }, {
         "id" : "19",
-        "x" : 0,
-        "y" : 0
+        "x" : 969,
+        "y" : 185
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "AppointmentAllocator",
@@ -1798,7 +1808,7 @@
       "softwareSystemId" : "10"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1806,38 +1816,42 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 2691,
+        "width" : 3070
+      },
       "elements" : [ {
         "id" : "1",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 165
       }, {
         "id" : "3",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 865
       }, {
         "id" : "13",
-        "x" : 0,
-        "y" : 0
+        "x" : 899,
+        "y" : 265
       }, {
         "id" : "14",
-        "x" : 0,
-        "y" : 0
+        "x" : 899,
+        "y" : 865
       }, {
         "id" : "15",
-        "x" : 0,
-        "y" : 0
+        "x" : 1649,
+        "y" : 565
       }, {
         "id" : "16",
-        "x" : 0,
-        "y" : 0
+        "x" : 2399,
+        "y" : 565
       }, {
         "id" : "17",
-        "x" : 0,
-        "y" : 0
+        "x" : 899,
+        "y" : 1465
       }, {
         "id" : "18",
-        "x" : 0,
-        "y" : 0
+        "x" : 899,
+        "y" : 2065
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "AppointmentBooker",
@@ -1856,7 +1870,7 @@
       "softwareSystemId" : "12"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1864,22 +1878,26 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 1411,
+        "width" : 2320
+      },
       "elements" : [ {
         "id" : "4",
-        "x" : 0,
-        "y" : 0
+        "x" : 200,
+        "y" : 435
       }, {
         "id" : "20",
-        "x" : 0,
-        "y" : 0
+        "x" : 900,
+        "y" : 485
       }, {
         "id" : "21",
-        "x" : 0,
-        "y" : 0
+        "x" : 1650,
+        "y" : 785
       }, {
         "id" : "22",
-        "x" : 0,
-        "y" : 0
+        "x" : 1650,
+        "y" : 185
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "BIAndDataAnalysis",
@@ -1894,7 +1912,7 @@
       "softwareSystemId" : "19"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -1902,34 +1920,38 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 1991,
+        "width" : 2370
+      },
       "elements" : [ {
         "id" : "12",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 165
       }, {
         "id" : "24",
-        "x" : 0,
-        "y" : 0
+        "x" : 949,
+        "y" : 765
       }, {
         "id" : "25",
-        "x" : 0,
-        "y" : 0
+        "x" : 949,
+        "y" : 1365
       }, {
         "id" : "26",
-        "x" : 0,
-        "y" : 0
+        "x" : 1699,
+        "y" : 765
       }, {
         "id" : "27",
-        "x" : 0,
-        "y" : 0
+        "x" : 1699,
+        "y" : 1365
       }, {
         "id" : "32",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 765
       }, {
         "id" : "33",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 1365
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "BusinessAudit",
@@ -1950,13 +1972,17 @@
       "softwareSystemId" : "23"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 805
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -1964,13 +1990,17 @@
       "softwareSystemId" : "28"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 842
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
@@ -1978,13 +2008,17 @@
       "softwareSystemId" : "29"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 805
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
@@ -1992,13 +2026,17 @@
       "softwareSystemId" : "30"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 805
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CohortManager",
@@ -2006,7 +2044,7 @@
       "softwareSystemId" : "32"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2014,38 +2052,42 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 2428,
+        "width" : 3870
+      },
       "elements" : [ {
         "id" : "5",
-        "x" : 0,
-        "y" : 0
+        "x" : 3200,
+        "y" : 1893
       }, {
         "id" : "34",
-        "x" : 0,
-        "y" : 0
+        "x" : 950,
+        "y" : 485
       }, {
         "id" : "35",
-        "x" : 0,
-        "y" : 0
+        "x" : 1700,
+        "y" : 485
       }, {
         "id" : "36",
-        "x" : 0,
-        "y" : 0
+        "x" : 2450,
+        "y" : 785
       }, {
         "id" : "37",
-        "x" : 0,
-        "y" : 0
+        "x" : 3200,
+        "y" : 1039
       }, {
         "id" : "38",
-        "x" : 0,
-        "y" : 0
+        "x" : 2450,
+        "y" : 185
       }, {
         "id" : "39",
-        "x" : 0,
-        "y" : 0
+        "x" : 2450,
+        "y" : 1385
       }, {
         "id" : "53",
-        "x" : 0,
-        "y" : 0
+        "x" : 200,
+        "y" : 485
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CommunicationsManager",
@@ -2068,13 +2110,17 @@
       "softwareSystemId" : "33"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 805
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "ParticipantSupport",
