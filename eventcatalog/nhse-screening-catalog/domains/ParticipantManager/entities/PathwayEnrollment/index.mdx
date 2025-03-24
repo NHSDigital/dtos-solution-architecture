@@ -1,0 +1,78 @@
+---
+# id of your entity, used for slugs and references in EventCatalog.
+id: PathwayEnrollment
+
+# Display name of the Entity, rendered in EventCatalog
+name: Pathway Enrollment
+
+# Version of the Entity
+version: 0.0.1
+
+# Short summary of your Entity
+summary: |
+  Represents the relationship between a Participant and a Pathway, tracking their enrollment status and history.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Entity
+    backgroundColor: blue
+    textColor: white
+---
+
+## Overview
+
+The PathwayEnrollment entity represents the relationship between a Participant and a Pathway. It tracks the participant's enrollment status, history, and opt-out information for a specific screening pathway.
+
+## Properties
+
+### Identity
+
+- Composite key:
+  - Participant ID (NHS Number)
+  - Pathway ID
+
+### Status Information
+
+- Enrollment status (active, suspended, withdrawn)
+- Enrollment date
+- Last screening date
+- Opt-out status and date
+
+## Invariants
+
+1. Cannot have multiple active enrollments for same participant and pathway
+2. Must be associated with a valid participant and pathway
+3. Cannot be enrolled if participant is deceased
+4. Enrollment dates must be valid and sequential
+
+## Relationships
+
+### Many-to-One
+
+- Participant
+- Pathway
+
+### One-to-Many
+
+- Episodes
+
+## Related Events
+
+### Consumes
+
+- CreateEnrolment
+- DeleteEnrolment
+
+### Produces
+
+- EnrolmentCreated
+- EnrolmentDeleted
+
+## Business Rules
+
+1. A participant can only have one active enrollment per pathway
+2. Enrollment status transitions must follow the defined workflow
+3. Opt-out status must be tracked and respected
+4. Last screening date must be updated when new episodes are created
+
+<NodeGraph />{" "}

@@ -1,0 +1,75 @@
+---
+# id of your entities index, used for slugs and references in EventCatalog.
+id: ParticipantManagerEntities
+
+# Display name of the Entities Index, rendered in EventCatalog
+name: Participant Manager Entities
+
+# Version of the Entities Index
+version: 0.0.1
+
+# Short summary of your Entities Index
+summary: |
+  Overview of all entities within the Participant Manager domain and their relationships.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Domain Entities
+    backgroundColor: purple
+    textColor: white
+---
+
+## Overview
+
+This section documents all entities within the Participant Manager domain, their relationships, and how they interact with each other.
+
+## Domain Entities
+
+### Core Entities
+
+1. [Participant](./Participant) - The aggregate root representing a person in the screening system
+2. [PathwayEnrollment](./PathwayEnrollment) - Represents the relationship between a Participant and a Pathway
+3. [Episode](./Episode) - Represents a period of screening activity
+
+### Reference Entities
+
+1. [Pathway](./Pathway) - Represents a screening program with its rules and settings
+
+## Entity Relationships
+
+```
+Participant (Aggregate Root)
+  ├── PathwayEnrollment (Entity)
+  │     └── Pathway (Reference)
+  └── Episode (Entity)
+        └── Pathway (Reference)
+```
+
+## Aggregate Boundaries
+
+### Participant Aggregate
+
+- Root: Participant
+- Entities: PathwayEnrollment, Episode
+- Reference: Pathway
+
+## Event Interactions
+
+Each entity participates in specific domain events:
+
+### Participant
+
+- Consumes: CreateEnrolment, DeleteEnrolment, CloseEpisode
+- Produces: EnrolmentCreated, EnrolmentDeleted, EpisodeOpened
+
+### PathwayEnrollment
+
+- Consumes: CreateEnrolment, DeleteEnrolment
+- Produces: EnrolmentCreated, EnrolmentDeleted
+
+### Episode
+
+- Consumes: CloseEpisode
+- Produces: EpisodeOpened
+
+<NodeGraph />{" "}
