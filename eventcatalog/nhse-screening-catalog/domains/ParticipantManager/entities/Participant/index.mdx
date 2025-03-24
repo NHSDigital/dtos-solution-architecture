@@ -1,0 +1,87 @@
+---
+# id of your entity, used for slugs and references in EventCatalog.
+id: Participant
+
+# Display name of the Entity, rendered in EventCatalog
+name: Participant
+
+# Version of the Entity
+version: 0.0.1
+
+# Short summary of your Entity
+summary: |
+  Core entity representing a person in the screening system. Each participant has a unique NHS Number and associated demographic information.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Aggregate Root
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Participant entity is the core aggregate root of the Participant Manager domain. It represents a person who is eligible for or enrolled in one or more screening pathways.
+
+## Properties
+
+### Identity
+
+- NHS Number (unique identifier)
+
+### Demographics
+
+- Name
+- Date of Birth
+- Address
+- Contact Details
+
+### Status
+
+- Active/Deceased/Opted Out
+- Contact Preferences
+
+## Invariants
+
+1. Must have a valid NHS Number
+2. Cannot be enrolled in the same pathway multiple times simultaneously
+3. Cannot be enrolled if deceased
+4. Must have valid demographic information
+
+## Relationships
+
+### One-to-Many
+
+- PathwayEnrollments
+- Episodes
+
+## Related Events
+
+### Consumes
+
+- CreateEnrolment
+- DeleteEnrolment
+- CloseEpisode
+
+### Produces
+
+- EnrolmentCreated
+- EnrolmentDeleted
+- EpisodeOpened
+
+## Aggregate Boundary
+
+The Participant aggregate includes:
+
+- Participant (root)
+- PathwayEnrollments
+- Episodes
+
+## Business Rules
+
+1. A participant can only have one active enrollment per pathway
+2. A participant's status must be valid for enrollment
+3. All demographic information must be complete and valid
+4. Contact preferences must be respected for communications
+
+<NodeGraph />{" "}

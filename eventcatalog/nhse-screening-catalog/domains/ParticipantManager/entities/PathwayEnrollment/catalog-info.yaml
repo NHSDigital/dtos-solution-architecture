@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pathway-enrollment
+  description: Represents the relationship between a Participant and a Pathway
+  annotations:
+    github.com/project-slug: nhse-screening-catalog
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: entity
+  lifecycle: production
+  owner: nhse-screening
+  system: participant-manager
+  dependsOn: []
+  dependsOnResources: []
