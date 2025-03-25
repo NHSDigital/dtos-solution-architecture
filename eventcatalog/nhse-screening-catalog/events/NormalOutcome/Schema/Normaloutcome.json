@@ -1,0 +1,13 @@
+[
+{
+        "NHS_Number": "123456789",
+        "Date_of_birth":"12/05/1970",
+        "Episode_id":"1234",    
+       "Episode_end_code":"A",
+        "Screening_date":"12/05/1970",
+        "Reason_closed_code":"B",   
+        "Next_action_code":"C",
+        "Screening_End_Reason":"D",
+        "BSO_Phone_Number":"1234567"
+}
+]
