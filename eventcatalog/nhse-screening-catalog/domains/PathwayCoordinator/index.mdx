@@ -12,15 +12,51 @@ version: 0.0.1
 summary: |
   Domain that contains all Pathway related related information
 
+# Optional services. Groups services into this domain.
+services:
+    - id: PathwayCoordinator
+      version: 0.0.1
+
 # Optional badges, rendered to UI by EventCatalog
 badges:
   - content: New domain
     backgroundColor: blue
     textColor: blue
+
 ---
 
 ## Overview
 
-Domain that contains all services that are related to Pathway within National Screening Platform.
+Domain that contains all services that are related to managing the ingress and egress of data to and from the National Screening Platform.
 
+### Message Payloads 
+
+#### Send Invitation
+```
+
+"
+
+
+"
+```
+
+#### Close Participant's Episode
+
+```
+
+"
+
+
+"
+```
+
+#### Communicate Normal Outcome
+
+```
+
+"
+
+
+"
+```
 <NodeGraph />
