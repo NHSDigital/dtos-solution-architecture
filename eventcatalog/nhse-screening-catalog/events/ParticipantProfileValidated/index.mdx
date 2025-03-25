@@ -1,0 +1,36 @@
+---
+# id of your event, used for slugs and references in EventCatalog.
+id: ParticipantProfileValidated
+
+# Display name of the event, rendered in EventCatalog
+name: Participant Profile Validated
+
+# Version of the event
+version: 0.0.1
+
+# Short summary of your event
+summary: |
+  Event is published when participant profile is validated and there are no exceptions
+
+
+# Optional owners, references teams or users
+owners:
+  - dboyne
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New event
+    backgroundColor: blue
+    textColor: blue
+
+# The path to the schema for people to download. Relative to your command folder.
+# Resolved path for this would be /commands/InventoryAdjusted/schema.avro.
+schemaPath: 'schemaparticipantprofilevalidated.json'
+
+---
+
+## Overview
+
+Event is published when the inventory is out of stock.
+
+<NodeGraph />

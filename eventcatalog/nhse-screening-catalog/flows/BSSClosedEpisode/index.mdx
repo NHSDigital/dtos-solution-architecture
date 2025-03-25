@@ -1,0 +1,19 @@
+---
+id: "BSSClosedEpisode"
+name: "BS Select sends closed episodes for participants"
+version: "0.0.1"
+summary: "Flow for when particiants screening or assessment episodes are closed"
+steps:
+  - id: "BSSelectClosedEpisode"
+    title: "BS Select send closed episodes"
+    summary: "Participant closed episodes"
+    # define the actor for, in this case it's a user.
+    # What happens next? Define the next step  
+    next_step: 
+      id: "EpisodeClosed"
+      label: "Episode Close"
+
+---
+This flow documents what happens when a User Cancels Subscription in our system. 
+
+ <NodeGraph />
