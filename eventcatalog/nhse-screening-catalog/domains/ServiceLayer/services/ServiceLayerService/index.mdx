@@ -1,9 +1,9 @@
 ---
 # id of your service, used for slugs and references in EventCatalog.
-id: ServiceLayer
+id: ServiceLayerService
 
 # Display name of the Service, rendered in EventCatalog
-name: Service Layer
+name: Service Layer Service
 
 # Version of the Service
 version: 0.0.1
@@ -18,7 +18,9 @@ receives:
     version: 0.0.1
   - id : NBSSAppointmentBooked
     version : 0.0.1
- 
+  - id : AddEligibleParticipant
+    version : 0.0.1
+  
 
 
 # Optional messages this service sends and it's version
@@ -29,6 +31,9 @@ sends:
     version: 0.0.1
   - id : NormalOutcome
     version: 0.0.1
+  - id : ParticipantEligibleforPathway
+    version : 0.0.1
+ 
   
 # Optional badges, rendered to UI by EventCatalog
 badges:

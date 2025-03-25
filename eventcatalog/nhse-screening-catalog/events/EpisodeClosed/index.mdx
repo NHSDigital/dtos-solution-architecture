@@ -3,14 +3,15 @@
 id: EpisodeClosed
 
 # Display name of the event, rendered in EventCatalog
-name: Episode Closed
+name: NSP Closed Episode
 
 # Version of the event
 version: 0.0.1
 
+
 # Short summary of your event
 summary: |
-  Event that is published when service layer receives closed episodes from BS Select
+  Event published from service layer
 
 # Optional badges, rendered to UI by EventCatalog
 badges:
@@ -21,6 +22,9 @@ badges:
 
 ## Overview
 
-Event is published when the inventory is out of stock.
+Event is published by NSP service layer to Pathway Coordinator when participant closed episode is received from BS Select.
+
+
+<Schema file="/Schema/Episodeclose.json" />
 
 <NodeGraph />
