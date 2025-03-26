@@ -1,40 +1,27 @@
 ---
 # id of your service, used for slugs and references in EventCatalog.
-id: ServiceLayerService
+id: CommunicationManagerService
 
 # Display name of the Service, rendered in EventCatalog
-name: NSP Service Layer Service
+name: Communication Manager Service
 
 # Version of the Service
 version: 0.0.1
 
 # Short summary of your Service
 summary: |
- Receives closed episodes and booked appointments events from legacy systems
+ Receives participant communication commands and send communication event to Notify
 
 # Optional messages this service receives and it's version
 receives:
-  - id: BSSelectEpisodeClosed
+  - id: CommunicateNormalResult
     version: 0.0.1
-  - id : NBSSAppointmentBooked
+  - id : SendInvitation
     version : 0.0.1
-  - id : AddEligibleParticipant
-    version : 0.0.1
-  
 
 
 # Optional messages this service sends and it's version
-sends:
-  - id : AppointmentBooked
-    version : 0.0.1
-  - id: EpisodeClosed
-    version: 0.0.1
-  - id : NormalOutcome
-    version: 0.0.1
-  - id : ParticipantEligibleforPathway
-    version : 0.0.1
- 
-  
+
 # Optional badges, rendered to UI by EventCatalog
 badges:
   - content: New service

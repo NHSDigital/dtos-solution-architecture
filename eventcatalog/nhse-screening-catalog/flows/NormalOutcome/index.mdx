@@ -1,6 +1,6 @@
 ---
-id: "BSSClosedEpisode"
-name: "Participant Closed Episode"
+id: "NormalOutcome"
+name: "Communicate Normal Outcome"
 version: "0.0.1"
 summary: "Flow for when particiants screening or assessment episodes are closed"
 steps:
@@ -32,18 +32,18 @@ steps:
     summary: "Service Layer receives closed episodes"
     # This step is a message, include the message and version
     message:
-      id: "EpisodeClosed"
+      id: "NormalOutcome"
       version: "0.0.1"
     next_step: 
       id: "PathwayCoordinator"
-      label: "Publish closed episode to pathway coordinator"
+      label: "Publish normal outcome  to pathway coordinator"
 
   - id: "PathwayCoordinator"
-    title: "Pathway Coordinate receives closed episode event"
-    summary: "Participant closed episode events from service layer"
+    title: "Pathway Coordinate receives normal outcome event"
+    summary: "Normal Outcome events from service layer"
      # This step is a message, include the message and version
     message:
-      id: "CloseParticipantEpisode"
+      id: "CommunicateNormalResult"
       version: "0.0.1"
 
 ---
