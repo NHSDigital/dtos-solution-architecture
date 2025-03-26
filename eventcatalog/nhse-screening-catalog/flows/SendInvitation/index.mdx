@@ -1,0 +1,93 @@
+---
+id: "SendInvitation"
+name: "Communicate appointment booking to participant"
+version: "0.0.1"
+summary: "Flow for when screening or assessment appointment is booked"
+steps:
+  - id: "NBSSAppointmentBooked"
+    title: "NBSS generate appointment booked event"
+    summary: "Screening or assessment appointment"
+    # here we define the externalSystem.
+    externalSystem:
+     name: "NBSS"
+     summary: "Breast Screening System"
+    # What happens next? Define the next step  
+    next_step: 
+      id: "NBSSAppointment"
+      label: "Publishes appointment events"
+    
+  - id: "NBSSAppointment"
+    title: "NBSS Appointment"
+    summary: "Publish appointment booked events"
+    # This step is a message, include the message and version
+    message:
+      id: "NBSSAppointmentBooked"
+      version: "0.0.1"
+    next_step:
+      id : "NSPServiceLayer"
+      label: "Appointment Events push to NSP"
+  
+  - id: "NSPServiceLayer"
+    title: "Appointments"
+    summary: "Service Layer receives appointment events"
+    service :
+      id: "ServiceLayerService"
+      version : "0.0.1"
+    next_step: 
+      id: "NSPAppointmentBookedEvent"
+      label: "Generate appointment booking events"
+
+  - id: "NSPAppointmentBookedEvent"
+    title : "NSP Appointment Booked Event"
+    # This step is a message, include the message and version
+    message:
+      id: "AppointmentBooked"
+      version: "0.0.1"
+    # here we define the id and version of the service we want to use in the flow diagram
+    next_step: 
+      id: "PathwayCoordinatorService"
+      label: "Publish appointment book events to pathway coordinator"
+
+  - id : "PathwayCoordinatorService"
+    title : " Pathway Coordinator  Service"
+    summary : "Pathway Coordinator receives NSP Appointment Event"
+    service :
+      id: "PathwayCoordinator"
+      version : "0.0.1"
+    next_step: 
+      id: "PathwayCoordinator"
+      label: "Generate Send Invitation command"
+
+  - id: "PathwayCoordinator"
+    title: "Pathway Coordinate receives booked appointment event"
+    summary: "Booked appointment events from service layer"
+     # This step is a message, include the message and version
+    message:
+      id: "SendInvitation"
+      version: "0.0.1"
+    next_step: 
+      id: "CommunicationManager"
+      label: "Publish Send Invitation Command"
+   
+  - id : "CommunicationManager"
+    title: "Send Participant Communication"
+    summary: "Receives send invitation command"
+    service :
+      id: "CommunicationManagerService"
+      version : "0.0.1"
+    next_step: 
+      id: "Notify"
+      label: "Publish Send Invitation payload"
+
+  - id: "Notify"
+    title : "Notify"
+    summary : "Notify"
+    # here we define the externalSystem.
+    externalSystem:
+     name: "Notify"
+     summary: "National Notification System"
+
+---
+This flow documents what happens when a User Cancels Subscription in our system. 
+
+ <NodeGraph />
