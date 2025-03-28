@@ -189,7 +189,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         # Participant manager
         u -> nhsLogin "Authenticates using"
-        nhsLogin -> participantManager_externalWebApp "Logs on via"
+        participantManager_externalWebApp -> nhsLogin  "Protects using"
         participantManager_ExperienceAPI -> nhsLogin "Protects API using"
         u -> nhsApp "Accesses secure NHS services using"
         nhsApp -> participantManager_externalWebApp "Interacts with screening service using"
@@ -341,6 +341,12 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         }
         container participantManager ParticipantManager {
             include *
+        }
+
+        container participantManager ParticipantManager_Alpha {
+            include participantManager_API participantManager_database participantManager_ExperienceAPI participantManager_ProductEventHandler
+            include participantManager_externalWebApp u nhsLogin
+            
         }
 
         container serviceLayer ServiceLayer {
