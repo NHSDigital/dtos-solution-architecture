@@ -1,0 +1,59 @@
+---
+# id of your command, used for slugs and references in EventCatalog.
+id: CancelAppointment
+
+# Display name of the Command, rendered in EventCatalog
+name: Cancel Appointment
+
+# Version of the Command
+version: 0.0.1
+
+# Short summary of your Command
+summary: |
+  Command to cancel an existing appointment.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New command
+    backgroundColor: blue
+    textColor: blue
+---
+
+## Overview
+
+The CancelAppointment command is used to cancel an existing appointment, whether it was previously allocated or booked. This command is processed by either the AppointmentAllocator service (for allocated appointments) or the AppointmentBooker service (for booked appointments) to handle the cancellation process.
+
+## Command Properties
+
+### Required Properties
+
+- `participantId`: Unique identifier of the participant
+- `appointmentId`: Unique identifier of the appointment to cancel
+- `cancellationReason`: Reason for the cancellation
+- `cancellationSource`: Source of the cancellation request
+
+### Optional Properties
+
+- `reschedulingRequested`: Whether the participant has requested rescheduling
+- `notes`: Additional notes about the cancellation
+
+## Business Rules
+
+1. The appointment must exist and be in a valid state
+2. The cancellation must be authorised
+3. The cancellation reason must be valid
+4. If rescheduling is requested, appropriate follow-up actions must be initiated
+
+## Service Handling
+
+This command is handled by either:
+
+- The `AppointmentAllocator` service for allocated appointments
+- The `AppointmentBooker` service for booked appointments
+
+## Related Events
+
+- `AppointmentCancelled`: Event published when cancellation is successful
+- `CancellationFailed`: Event published when cancellation fails
+
+<Schema />

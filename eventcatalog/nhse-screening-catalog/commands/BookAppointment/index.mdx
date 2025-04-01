@@ -1,0 +1,58 @@
+---
+# id of your command, used for slugs and references in EventCatalog.
+id: BookAppointment
+
+# Display name of the Command, rendered in EventCatalog
+name: Book Appointment
+
+# Version of the Command
+version: 0.0.1
+
+# Short summary of your Command
+summary: |
+  Command to book an allocated appointment slot for a participant.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New command
+    backgroundColor: blue
+    textColor: blue
+---
+
+## Overview
+
+The BookAppointment command is used to book and confirm an allocated appointment slot for a participant. This command is processed by the AppointmentBooker service to finalise the appointment details and record the participant's confirmation.
+
+## Command Properties
+
+### Required Properties
+
+- `participantId`: Unique identifier of the participant
+- `appointmentId`: Unique identifier of the allocated appointment
+- `confirmationDetails`: Details about how the booking was confirmed
+- `contactPreferences`: How the participant wishes to be contacted
+
+### Optional Properties
+
+- `additionalNotes`: Additional information about the booking
+- `accessibilityRequirements`: List of accessibility requirements
+
+## Business Rules
+
+1. The appointment must be allocated and available
+2. The booking must be within valid booking timeframes
+3. The participant must have confirmed the appointment details
+4. Contact preferences must be valid and complete
+
+## Service Handling
+
+This command is handled by the `AppointmentBooker` service within the Appointment domain.
+
+## Related Events
+
+- `AppointmentBooked`: Event published when booking is successful
+- `BookingFailed`: Event published when booking fails
+
+<Schema />
+
+<NodeGraph />{" "}

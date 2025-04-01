@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AllocationFailed Event",
+  "description": "Event indicating that an attempt to allocate an appointment slot has failed",
+  "type": "object",
+  "required": [
+    "participantId",
+    "allocationAttemptTimestamp",
+    "failureReason",
+    "requestedDateTime",
+    "requestedLocationId",
+    "priority"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier of the participant"
+    },
+    "allocationAttemptTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the allocation attempt occurred"
+    },
+    "failureReason": {
+      "type": "string",
+      "enum": [
+        "NO_AVAILABLE_SLOTS",
+        "LOCATION_UNAVAILABLE",
+        "INVALID_REQUEST",
+        "SYSTEM_ERROR",
+        "VALIDATION_ERROR",
+        "OTHER"
+      ],
+      "description": "The reason for the allocation failure"
+    },
+    "requestedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The requested appointment date and time"
+    },
+    "requestedLocationId": {
+      "type": "string",
+      "description": "The requested screening location"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW"],
+      "description": "Priority level of the allocation request"
+    },
+    "alternativeSlotsAvailable": {
+      "type": "boolean",
+      "description": "Whether alternative slots were found"
+    },
+    "suggestedAlternativeSlots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "appointmentDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time of the alternative slot"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID of the alternative slot"
+          },
+          "locationName": {
+            "type": "string",
+            "description": "Name of the location for the alternative slot"
+          }
+        }
+      },
+      "description": "List of alternative slots that could be offered"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional information about the failure"
+    },
+    "retryEligible": {
+      "type": "boolean",
+      "description": "Whether the allocation can be retried"
+    },
+    "nextRetryTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the next retry can be attempted"
+    },
+    "participantDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the participant"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of birth of the participant"
+        },
+        "nhsNumber": {
+          "type": "string",
+          "description": "NHS number of the participant"
+        }
+      }
+    },
+    "requestedLocationDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the requested location"
+        },
+        "address": {
+          "type": "string",
+          "description": "Full address of the location"
+        },
+        "postcode": {
+          "type": "string",
+          "description": "Postcode of the location"
+        }
+      }
+    }
+  }
+}

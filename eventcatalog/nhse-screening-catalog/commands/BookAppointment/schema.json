@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BookAppointment Command",
+  "description": "Command to book an allocated appointment slot for a participant",
+  "type": "object",
+  "required": [
+    "participantId",
+    "appointmentId",
+    "confirmationDetails",
+    "contactPreferences"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier of the participant"
+    },
+    "appointmentId": {
+      "type": "string",
+      "description": "Unique identifier of the allocated appointment"
+    },
+    "confirmationDetails": {
+      "type": "object",
+      "required": [
+        "confirmedBy",
+        "confirmationMethod",
+        "confirmationTimestamp"
+      ],
+      "properties": {
+        "confirmedBy": {
+          "type": "string",
+          "description": "Identifier of who confirmed the booking"
+        },
+        "confirmationMethod": {
+          "type": "string",
+          "enum": ["ONLINE", "PHONE", "IN_PERSON", "POST"],
+          "description": "Method used to confirm the booking"
+        },
+        "confirmationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the booking was confirmed"
+        }
+      }
+    },
+    "contactPreferences": {
+      "type": "object",
+      "required": ["preferredMethod", "contactDetails"],
+      "properties": {
+        "preferredMethod": {
+          "type": "string",
+          "enum": ["SMS", "EMAIL", "PHONE", "POST"],
+          "description": "Preferred method of contact"
+        },
+        "contactDetails": {
+          "type": "string",
+          "description": "Contact details for the preferred method"
+        }
+      }
+    },
+    "additionalNotes": {
+      "type": "string",
+      "description": "Additional information about the booking"
+    },
+    "accessibilityRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of accessibility requirements"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AllocateAppointment Command",
+  "description": "Command to allocate an appointment slot for a participant",
+  "type": "object",
+  "required": [
+    "participantId",
+    "pathwayId",
+    "locationId",
+    "requestedDateTime",
+    "priority"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier of the participant"
+    },
+    "pathwayId": {
+      "type": "string",
+      "description": "Identifier of the screening pathway"
+    },
+    "locationId": {
+      "type": "string",
+      "description": "Identifier of the screening location"
+    },
+    "requestedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Requested date and time for the appointment"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW"],
+      "description": "Priority level for the allocation"
+    },
+    "specialRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of special requirements for the appointment"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the allocation request"
+    }
+  }
+}

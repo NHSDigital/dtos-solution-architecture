@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AppointmentAllocated Event",
+  "description": "Event indicating that an appointment slot has been successfully allocated for a participant",
+  "type": "object",
+  "required": [
+    "participantId",
+    "appointmentId",
+    "pathwayId",
+    "locationId",
+    "appointmentDateTime",
+    "allocationTimestamp",
+    "priority"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier of the participant"
+    },
+    "appointmentId": {
+      "type": "string",
+      "description": "Unique identifier of the allocated appointment"
+    },
+    "pathwayId": {
+      "type": "string",
+      "description": "Identifier of the screening pathway"
+    },
+    "locationId": {
+      "type": "string",
+      "description": "Identifier of the screening location"
+    },
+    "appointmentDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the allocated appointment"
+    },
+    "allocationTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the allocation occurred"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW"],
+      "description": "Priority level of the allocated appointment"
+    },
+    "specialRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Any special requirements for the appointment"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the allocation"
+    },
+    "locationDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the screening location"
+        },
+        "address": {
+          "type": "string",
+          "description": "Full address of the location"
+        },
+        "postcode": {
+          "type": "string",
+          "description": "Postcode of the location"
+        },
+        "contactNumber": {
+          "type": "string",
+          "description": "Contact number for the location"
+        }
+      }
+    },
+    "pathwayDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the screening pathway"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of screening pathway"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the screening pathway"
+        }
+      }
+    },
+    "participantDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the participant"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of birth of the participant"
+        },
+        "nhsNumber": {
+          "type": "string",
+          "description": "NHS number of the participant"
+        }
+      }
+    }
+  }
+}

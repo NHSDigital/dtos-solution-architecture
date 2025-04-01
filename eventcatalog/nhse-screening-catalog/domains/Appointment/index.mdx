@@ -1,0 +1,87 @@
+---
+# id of your domain, used for slugs and references in EventCatalog.
+id: Appointment
+
+# Display name of the domain, rendered in EventCatalog
+name: Appointment
+
+# Version of the domain
+version: 0.0.1
+
+# Short summary of your domain
+summary: |
+  Domain responsible for managing the allocation and booking of screening appointments, ensuring efficient use of screening capacity and optimal participant experience.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New domain
+    backgroundColor: blue
+    textColor: blue
+
+# Optional services this domain contains
+services:
+  - id: AppointmentAllocator
+    version: 0.0.1
+  - id: AppointmentBooker
+    version: 0.0.1
+---
+
+## Overview
+
+The Appointment domain is responsible for managing the entire appointment lifecycle within the screening system. This includes both the allocation of appointments based on capacity and demand, and the actual booking process for participants.
+
+## Key Concepts
+
+### Appointment
+
+A scheduled screening session for a participant at a specific location and time. Appointments can be allocated based on various factors including capacity, participant preferences, and clinical requirements.
+
+### Slot
+
+The available screening slots at different locations, taking into account staff, equipment, and facility availability.
+
+### AllocatedSlot
+
+The need for allocation of an appointment based on participant eligibility, pathway requirements, and screening intervals.
+
+## Domain Responsibilities
+
+1. **Appointment Allocation**
+
+   - Apply an appropriate allocation mechanism for a demand
+
+2. **Appointment Booking**
+
+   - Process appointment bookings
+   - Manage appointment modifications
+   - Handle cancellations and rescheduling
+
+## Service Interactions
+
+The domain interacts with other domains through commands and events:
+
+- **Receives Commands**
+
+  - `AllocateAppointment`: When a new appointment needs to be allocated
+  - `BookAppointment`: When an appointment needs to be booked
+  - `CancelAppointment`: When an appointment needs to be cancelled
+
+- **Sends Events**
+  - `AppointmentAllocated`: When an appointment slot is allocated
+  - `AppointmentBooked`: When an appointment is confirmed
+  - `AppointmentCancelled`: When an appointment is cancelled
+
+## Domain Boundaries
+
+The Appointment domain is responsible for:
+
+- Appointment allocation
+- Appointment management
+
+It does NOT handle:
+
+- Participant eligibility (handled by ParticipantManager domain)
+- Pathway management (handled by PathwayCoordinator domain)
+- Clinical outcomes (handled by Results domain)
+
+<NodeGraph />{" "}

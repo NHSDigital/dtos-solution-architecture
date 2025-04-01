@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CancelAppointment Command",
+  "description": "Command to cancel an existing appointment",
+  "type": "object",
+  "required": [
+    "participantId",
+    "appointmentId",
+    "cancellationReason",
+    "cancellationSource"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier of the participant"
+    },
+    "appointmentId": {
+      "type": "string",
+      "description": "Unique identifier of the appointment to cancel"
+    },
+    "cancellationReason": {
+      "type": "string",
+      "enum": [
+        "PATIENT_CANCELLED",
+        "CLINIC_CANCELLED",
+        "NO_SHOW",
+        "RESCHEDULED",
+        "ADMINISTRATIVE",
+        "OTHER"
+      ],
+      "description": "Reason for the cancellation"
+    },
+    "cancellationSource": {
+      "type": "string",
+      "enum": ["PATIENT", "CLINIC", "SYSTEM", "ADMIN"],
+      "description": "Source of the cancellation request"
+    },
+    "reschedulingRequested": {
+      "type": "boolean",
+      "description": "Whether the participant has requested rescheduling"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the cancellation"
+    }
+  }
+}

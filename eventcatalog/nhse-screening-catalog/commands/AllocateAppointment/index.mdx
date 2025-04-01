@@ -1,0 +1,57 @@
+---
+# id of your command, used for slugs and references in EventCatalog.
+id: AllocateAppointment
+
+# Display name of the Command, rendered in EventCatalog
+name: Allocate Appointment
+
+# Version of the Command
+version: 0.0.1
+
+# Short summary of your Command
+summary: |
+  Command to allocate an appointment slot for a participant.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New command
+    backgroundColor: blue
+    textColor: blue
+---
+
+## Overview
+
+The AllocateAppointment command is used to request the allocation of an appointment slot for a participant. This command is processed by the AppointmentAllocator service to find and reserve a suitable appointment slot based on the participant's requirements and available capacity.
+
+## Command Properties
+
+### Required Properties
+
+- `participantId`: Unique identifier of the participant
+- `pathwayId`: Identifier of the screening pathway
+- `locationId`: Identifier of the screening location
+- `requestedDateTime`: Requested date and time for the appointment
+- `priority`: Priority level for the allocation
+
+### Optional Properties
+
+- `specialRequirements`: List of special requirements for the appointment
+- `notes`: Additional notes about the allocation request
+
+## Business Rules
+
+1. The participant must be eligible for the requested pathway
+2. The requested location must be operational
+3. The requested date/time must be within valid booking timeframes
+4. The priority level must be valid
+
+## Service Handling
+
+This command is handled by the `AppointmentAllocator` service within the Appointment domain.
+
+## Related Events
+
+- `AppointmentAllocated`: Event published when allocation is successful
+- `AllocationFailed`: Event published when allocation fails
+
+<Schema />

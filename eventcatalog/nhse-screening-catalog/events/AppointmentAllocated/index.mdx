@@ -1,0 +1,65 @@
+---
+# id of your event, used for slugs and references in EventCatalog.
+id: AppointmentAllocated
+
+# Display name of the Event, rendered in EventCatalog
+name: Appointment Allocated
+
+# Version of the Event
+version: 0.0.1
+
+# Short summary of your Event
+summary: |
+  Event indicating that an appointment slot has been successfully allocated for a participant.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New event
+    backgroundColor: blue
+    textColor: blue
+---
+
+## Overview
+
+The AppointmentAllocated event is published when the AppointmentAllocator service successfully allocates an appointment slot for a participant. This event indicates that a suitable slot has been found and reserved based on the participant's requirements and available capacity.
+
+## Event Properties
+
+### Required Properties
+
+- `participantId`: Unique identifier of the participant
+- `appointmentId`: Unique identifier of the allocated appointment
+- `pathwayId`: Identifier of the screening pathway
+- `locationId`: Identifier of the screening location
+- `appointmentDateTime`: Date and time of the allocated appointment
+- `allocationTimestamp`: When the allocation occurred
+- `priority`: Priority level of the allocated appointment
+
+### Optional Properties
+
+- `specialRequirements`: Any special requirements for the appointment
+- `notes`: Additional notes about the allocation
+
+## Business Rules
+
+1. The appointment slot must be available and not already allocated
+2. The allocation must be within pathway-specific timeframes
+3. The location must be valid and operational
+4. The participant must be eligible for the appointment
+
+## Service Publishing
+
+This event is published by the `AppointmentAllocator` service within the Appointment domain.
+
+## Related Commands
+
+- `AllocateAppointment`: The command that triggered this event
+- `BookAppointment`: The next command that may be issued
+
+## Related Events
+
+- `AllocationFailed`: The event that may be published if allocation fails
+
+<NodeGraph />
+
+<Schema />

@@ -1,0 +1,132 @@
+---
+# id of your domain, used for slugs and references in EventCatalog.
+id: BIDataAnalysis
+
+# Display name of the Domain, rendered in EventCatalog
+name: BI & Data Analysis
+
+# Version of the Domain
+version: 0.0.1
+
+# Short summary of your Domain
+summary: |
+  Domain responsible for collecting, processing, and analyzing data from all screening service domains to support business intelligence and reporting needs.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New domain
+    backgroundColor: blue
+    textColor: blue
+
+services:
+  - id: AnalyticDataIngestionService
+    version: 0.0.1
+---
+
+## Overview
+
+The BI & Data Analysis domain is responsible for collecting, processing, and analyzing data from all screening service domains. It provides insights, reports, and analytics to support decision-making and service improvement.
+
+## Domain Responsibilities
+
+1. Data Collection
+
+   - Ingest events from all screening service domains
+   - Validate and transform data for analysis
+   - Maintain data quality and consistency
+
+2. Data Processing
+
+   - Process and enrich event data
+   - Apply business rules and transformations
+   - Handle data deduplication and reconciliation
+
+3. Data Analysis
+
+   - Generate analytical datasets
+   - Create business intelligence reports
+   - Support ad-hoc analysis
+
+4. Data Quality
+
+   - Monitor data quality metrics
+   - Detect and alert on issues
+   - Support data correction processes
+
+## Domain Services
+
+### AnalyticDataIngestionService
+
+Service responsible for ingesting and processing events from all screening service domains for analytical purposes.
+
+## Domain Events
+
+### Consumes Events
+
+The domain consumes events from all other domains in the system, including:
+
+- Participant Manager Domain events
+- Appointment Domain events
+- Screening Pathway Domain events
+- Results Management Domain events
+- Quality Assurance Domain events
+- Cohort Manager Domain events
+- Campaign Manager Domain events
+- Communications Manager Domain events
+- Participant Support Domain events
+- Business Audit Domain events
+
+### Publishes Events
+
+- `DataIngested`: When event data is successfully processed
+- `DataProcessingFailed`: When event processing fails
+- `DataQualityAlert`: When data quality issues are detected
+
+## Domain Commands
+
+### Handles Commands
+
+- `ProcessEventData`: Trigger processing of specific events
+- `ReprocessHistoricalData`: Reprocess historical event data
+- `ValidateDataQuality`: Run data quality validations
+- `ConfigureProcessingRules`: Update processing rules
+
+## Domain Dependencies
+
+### Required Services
+
+- Event Bus Service
+- Analytical Data Store Service
+- Monitoring Service
+- Alerting Service
+
+### Optional Services
+
+- Data Quality Service
+- Audit Service
+- Configuration Service
+
+## Domain Configuration
+
+### Processing Configuration
+
+- Batch size for event processing
+- Processing timeouts
+- Retry policies
+- Error thresholds
+
+### Storage Configuration
+
+- Data retention policies
+- Storage formats
+- Indexing strategies
+- Backup policies
+
+### Monitoring Configuration
+
+- Performance metrics
+- Health checks
+- Logging levels
+- Alert thresholds
+
+<Schema />

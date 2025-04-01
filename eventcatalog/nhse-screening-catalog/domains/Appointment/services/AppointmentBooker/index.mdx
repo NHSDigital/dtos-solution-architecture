@@ -1,0 +1,85 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: AppointmentBooker
+
+# Display name of the Service, rendered in EventCatalog
+name: Appointment Booker
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Service responsible for managing the booking process of screening appointments, ensuring compliance with pathway requirements and participant preferences.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: CancelAppointment
+    version: 0.0.1
+  - id: BookAppointment
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: AppointmentBooked
+    version: 0.0.1
+  - id: AppointmentModified
+    version: 0.0.1
+  - id: AppointmentCancelled
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New service
+    backgroundColor: blue
+    textColor: blue
+---
+
+## Overview
+
+The Appointment Booker service is responsible for managing the booking process of screening appointments. It ensures that appointments are booked in accordance with pathway requirements, participant preferences, and system constraints.
+
+## Responsibilities
+
+1. **Appointment Booking**
+
+   - Process appointment bookings
+   - Validate booking requirements
+   - Handle booking confirmations
+   - Manage booking notifications
+
+2. **Appointment Modifications**
+
+   - Process modification requests
+   - Handle rescheduling
+   - Manage booking changes
+   - Update related systems
+
+3. **Appointment Cancellations**
+   - Process cancellation requests
+   - Handle cancellation notifications
+   - Manage cancellation workflows
+   - Update related records
+
+## Service Interactions
+
+### Receives Events
+
+- `AppointmentAllocated`: When an appointment slot is allocated
+- `AppointmentModificationRequested`: When an appointment needs to be modified
+- `AppointmentCancellationRequested`: When an appointment needs to be cancelled
+
+### Sends Events
+
+- `AppointmentBooked`: When an appointment is confirmed
+- `AppointmentModified`: When an appointment is changed
+- `AppointmentCancelled`: When an appointment is cancelled
+
+## Business Rules
+
+1. Appointments must be booked within allocated timeframes
+2. Modifications must respect pathway requirements
+3. Cancellations must be handled appropriately
+4. All changes must be properly communicated
+
+<NodeGraph />{" "}
