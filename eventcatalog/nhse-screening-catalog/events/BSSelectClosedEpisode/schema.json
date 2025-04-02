@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "subject": {
+      "type": "object",
+      "properties": {
+        "nhs_number": {
+          "type": "string",
+          "description": "NHS number of the subject"
+        },
+        "superseded_nhs_number": {
+          "type": "string",
+          "description": "Previous NHS number if superseded"
+        },
+        "gp_practice_code": {
+          "type": "string",
+          "description": "GP practice code"
+        },
+        "bso_organisation_code": {
+          "type": "string",
+          "description": "BSO organization code"
+        },
+        "next_test_due_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when next test is due"
+        },
+        "subject_status_code": {
+          "type": "string",
+          "description": "Status code of the subject"
+        },
+        "early_recall_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Early recall date if applicable"
+        },
+        "latest_invitation_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of the latest invitation"
+        },
+        "removal_reason": {
+          "type": "string",
+          "description": "Reason for removal if applicable"
+        },
+        "removal_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of removal if applicable"
+        },
+        "reason_for_ceasing_code": {
+          "type": "string",
+          "description": "Code indicating reason for ceasing"
+        },
+        "is_higher_risk": {
+          "type": "boolean",
+          "description": "Indicates if subject is higher risk"
+        },
+        "higher_risk_next_test_due_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Next test due date for higher risk subjects"
+        },
+        "higher_risk_recall_due_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recall due date for higher risk subjects"
+        },
+        "higher_risk_active": {
+          "type": "boolean",
+          "description": "Indicates if higher risk status is active"
+        },
+        "gene_code": {
+          "type": "string",
+          "description": "Genetic code if applicable"
+        },
+        "risk_calculation_method": {
+          "type": "string",
+          "description": "Method used for risk calculation"
+        },
+        "preferred_language": {
+          "type": "string",
+          "description": "Preferred language for communication"
+        }
+      },
+      "required": ["nhs_number"]
+    },
+    "episodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nhs_number": {
+            "type": "string",
+            "description": "NHS number linking to subject"
+          },
+          "episode_id": {
+            "type": "string",
+            "description": "Unique identifier for the episode"
+          },
+          "episode_type": {
+            "type": "string",
+            "description": "Type of episode"
+          },
+          "change_db_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of database change"
+          },
+          "episode_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of episode"
+          },
+          "appointment_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of appointment"
+          },
+          "date_of_foa": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of first offer of appointment"
+          },
+          "date_of_as": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of assessment"
+          },
+          "early_recall": {
+            "type": "boolean",
+            "description": "Indicates if early recall is needed"
+          },
+          "call_recall_s": {
+            "type": "string",
+            "description": "Call/recall status"
+          },
+          "end_code": {
+            "type": "string",
+            "description": "End code for episode"
+          },
+          "la_bso_organisation": {
+            "type": "string",
+            "description": "LA/BSO organization code"
+          },
+          "bso_batch": {
+            "type": "string",
+            "description": "BSO batch identifier"
+          },
+          "reason_close": {
+            "type": "string",
+            "description": "Reason for closing episode"
+          },
+          "end_point": {
+            "type": "string",
+            "description": "End point of episode"
+          },
+          "final_action": {
+            "type": "string",
+            "description": "Final action taken"
+          }
+        },
+        "required": ["nhs_number", "episode_id"]
+      }
+    }
+  },
+  "required": ["subject", "episodes"]
+}

@@ -1,0 +1,68 @@
+---
+# id of your event, used for slugs and references in EventCatalog.
+id: SupportCaseUpdated
+
+# Display name of the Event, rendered in EventCatalog
+name: Support Case Updated
+
+# Version of the Event
+version: 0.0.1
+
+# Short summary of your Event
+summary: |
+  Event published when an existing support case is updated, capturing changes to case details, status, or resolution progress.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New event
+    backgroundColor: blue
+    textColor: blue
+---
+
+## Overview
+
+The SupportCaseUpdated event is published by the ParticipantSupport service when an existing support case is modified. This event captures changes to case details, status updates, and progress in resolving the support request.
+
+## Required Properties
+
+- `caseId`: Unique identifier for the support case
+- `participantId`: Identifier of the participant
+- `updatedTimestamp`: When the case was updated
+- `updatedBy`: Identifier of the agent making the update
+- `updateType`: Type of update (e.g., status change, note added, priority changed)
+- `previousState`: Previous state of the updated fields
+- `newState`: New state of the updated fields
+
+## Optional Properties
+
+- `resolutionNotes`: Notes about the resolution progress
+- `assignedAgentId`: New assigned agent if changed
+- `priority`: Updated priority if changed
+- `status`: Updated status if changed
+- `nextAction`: Next action required
+- `dueDate`: Updated due date if changed
+- `escalationReason`: Reason for escalation if escalated
+- `feedback`: Participant feedback if provided
+
+## Business Rules
+
+1. The case must exist and be active
+2. The update must be made by an authorized agent
+3. The update type must be valid
+4. The previous and new states must be different
+5. If status is updated, it must follow valid status transitions
+6. If priority is updated, it must be one of: LOW, MEDIUM, HIGH, URGENT
+7. If due date is updated, it must be in the future
+8. If feedback is provided, it must be valid
+
+## Service Publishing
+
+This event is published by the ParticipantSupport service.
+
+## Related Commands
+
+- `UpdateSupportCase`
+- `ResolveSupportCase`
+- `EscalateSupportCase`
+
+<Schema />{" "}

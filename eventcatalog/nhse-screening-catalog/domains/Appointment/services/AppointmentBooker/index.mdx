@@ -10,7 +10,7 @@ version: 0.0.1
 
 # Short summary of your Service
 summary: |
-  Service responsible for managing the booking process of screening appointments, ensuring compliance with pathway requirements and participant preferences.
+  Service responsible for managing the booking of screening appointments, handling participant confirmations, and managing appointment preferences.
 
 # Optional messages this service receives and it's version
 receives:
@@ -27,6 +27,12 @@ sends:
     version: 0.0.1
   - id: AppointmentCancelled
     version: 0.0.1
+  - id: AppointmentAttended
+    version: 0.0.1
+  - id: AppointmentNotAttended
+    version: 0.0.1
+  - id: AppointmentNotAttended
+    version: 0.0.1
 
 # Optional badges, rendered to UI by EventCatalog
 badges:
@@ -37,25 +43,18 @@ badges:
 
 ## Overview
 
-The Appointment Booker service is responsible for managing the booking process of screening appointments. It ensures that appointments are booked in accordance with pathway requirements, participant preferences, and system constraints.
+The AppointmentBooker service is responsible for managing the booking process of screening appointments. It handles participant confirmations, manages appointment preferences, and ensures all booking requirements are met.
 
 ## Responsibilities
 
-1. **Appointment Booking**
+1. **Booking Management**
 
    - Process appointment bookings
-   - Validate booking requirements
    - Handle booking confirmations
-   - Manage booking notifications
+   - Manage booking modifications
+   - Track booking status
 
-2. **Appointment Modifications**
-
-   - Process modification requests
-   - Handle rescheduling
-   - Manage booking changes
-   - Update related systems
-
-3. **Appointment Cancellations**
+2. **Appointment Cancellations**
    - Process cancellation requests
    - Handle cancellation notifications
    - Manage cancellation workflows
@@ -65,15 +64,15 @@ The Appointment Booker service is responsible for managing the booking process o
 
 ### Receives Events
 
-- `AppointmentAllocated`: When an appointment slot is allocated
-- `AppointmentModificationRequested`: When an appointment needs to be modified
-- `AppointmentCancellationRequested`: When an appointment needs to be cancelled
+- `BookAppointment`: Instruction to book an appointment
+- `CancelAppointment`: When an appointment needs to be AppointmentCancelled
 
 ### Sends Events
 
 - `AppointmentBooked`: When an appointment is confirmed
-- `AppointmentModified`: When an appointment is changed
 - `AppointmentCancelled`: When an appointment is cancelled
+- `AppointmentAttended`: When an appointment is attended
+- `AppointmentNotAttended`: When an appointment is not attended
 
 ## Business Rules
 

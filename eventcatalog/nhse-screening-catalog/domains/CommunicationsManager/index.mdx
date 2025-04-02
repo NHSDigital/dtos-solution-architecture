@@ -2,20 +2,20 @@
 # id of your domain, used for slugs and references in EventCatalog.
 id: CommunicationsManager
 
-# Display name of the domain, rendered in EventCatalog
+# Display name of the Domain, rendered in EventCatalog
 name: Communications Manager
 
-# Version of the domain
+# Version of the Domain
 version: 0.0.1
 
-# Short summary of your domain
+# Short summary of your Domain
 summary: |
-  Domain that contains all communications related related information
+  Domain responsible for managing all communications with participants, including invitations, reminders, results, and support messages.
 
 # Optional services. Groups services into this domain.
 services:
-    - id: CommunicationManagerService
-      version: 0.0.1
+  - id: CommunicationManagerService
+    version: 0.0.1
 
 # Optional badges, rendered to UI by EventCatalog
 badges:
@@ -26,6 +26,39 @@ badges:
 
 ## Overview
 
-Domain that contains all services that are related to Communications within National Screening Platform.
+The CommunicationsManager domain is responsible for managing all communications with participants across various channels. It handles the delivery of notifications, reminders, and support messages while respecting participant preferences and accessibility requirements.
+
+## Responsibilities
+
+1. **Communication Management**
+
+   - Process communication requests
+   - Handle message delivery
+   - Manage communication templates
+   - Track delivery status
+
+## Service Interactions
+
+### Receives Events
+
+- `SendInvitation`: When a communication needs to be sent to a participant
+- `SendParticipantResult`: When result needs to be sent to Participant
+- `SendGPResult`: When a result needs communicating with a GP
+- `SendReminder`: When an appointment reminder needs to be sent
+
+### Sends Events
+
+- `CommunicationSent`: When a message is sent
+- `CommunicationDelivered`: When a message is delivered
+- `CommunicationFailed`: When delivery fails
+
+## Business Rules
+
+1. Communications must respect participant preferences
+2. Accessibility requirements must be met
+3. Language preferences must be honored
+4. Delivery attempts must be tracked
+5. Opt-out requests must be respected
+6. Channel-specific formatting must be applied
 
 <NodeGraph />

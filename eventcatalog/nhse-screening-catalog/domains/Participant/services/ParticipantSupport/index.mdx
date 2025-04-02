@@ -1,0 +1,90 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: ParticipantSupport
+
+# Display name of the Service, rendered in EventCatalog
+name: Participant Support
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Service responsible for handling non-digital participant interactions, managing queries, and providing support through various channels including inbound calls.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: CreateSupportCase
+    version: 0.0.1
+  - id: UpdateSupportCase
+    version: 0.0.1
+  - id: ResolveSupportCase
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: SupportCaseCreated
+    version: 0.0.1
+  - id: SupportCaseUpdated
+    version: 0.0.1
+  - id: SupportCaseResolved
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New service
+    backgroundColor: blue
+    textColor: blue
+---
+
+## Overview
+
+The ParticipantSupport service is responsible for managing non-digital participant interactions and support requests. It handles inbound calls, manages participant queries, and ensures participants can access support through various channels.
+
+## Responsibilities
+
+1. **Call Management**
+
+   - Handle inbound support calls
+   - Route calls to appropriate agents
+   - Track call outcomes and resolutions
+   - Maintain call quality standards
+
+2. **Query Management**
+
+   - Process participant queries
+   - Track query status and resolution
+   - Escalate complex queries
+   - Maintain query history
+
+3. **Support Provision**
+   - Provide non-digital support options
+   - Manage support appointments
+   - Handle accessibility requests
+   - Coordinate with other services
+
+## Service Interactions
+
+### Receives Events
+
+- `ParticipantCreated`: When a new participant is registered
+- `ParticipantUpdated`: When participant information is updated
+- `SupportRequestCreated`: When a new support request is created
+- `SupportRequestUpdated`: When a support request is updated
+
+### Sends Events
+
+- `SupportCaseCreated`: When a new support case is created
+- `SupportCaseUpdated`: When a support case is updated
+- `SupportCaseResolved`: When a support case is resolved
+
+## Business Rules
+
+1. All support cases must be associated with a valid participant
+2. Support cases must be assigned to qualified agents
+3. Call quality standards must be maintained
+4. Accessibility requirements must be met
+5. Support cases must be resolved within defined timeframes
+6. Escalation procedures must be followed for complex cases
+
+<NodeGraph />

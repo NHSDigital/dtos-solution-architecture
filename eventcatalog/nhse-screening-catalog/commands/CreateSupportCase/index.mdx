@@ -1,0 +1,68 @@
+---
+# id of your command, used for slugs and references in EventCatalog.
+id: CreateSupportCase
+
+# Display name of the Command, rendered in EventCatalog
+name: Create Support Case
+
+# Version of the Command
+version: 0.0.1
+
+# Short summary of your Command
+summary: |
+  Command to create a new support case for a participant, initiating the support process and case management workflow.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: New command
+    backgroundColor: blue
+    textColor: blue
+---
+
+## Overview
+
+The CreateSupportCase command is sent to the ParticipantSupport service to create a new support case for a participant. This command initiates the support process and triggers the case management workflow.
+
+## Required Properties
+
+- `participantId`: Identifier of the participant requiring support
+- `caseType`: Type of support case (e.g., query, complaint, accessibility)
+- `priority`: Priority level of the case
+- `source`: Source of the support request (e.g., phone, email, walk-in)
+- `description`: Description of the support need
+- `requestedBy`: Identifier of the person/agent creating the case
+- `contactDetails`: Current contact details for the participant
+
+## Optional Properties
+
+- `accessibilityRequirements`: Any specific accessibility needs
+- `preferredContactMethod`: Participant's preferred contact method
+- `urgencyLevel`: Level of urgency for the case
+- `relatedCaseIds`: References to any related support cases
+- `location`: Location where support was requested
+- `notes`: Additional notes or context
+- `scheduledAppointment`: Details of any scheduled support appointment
+
+## Business Rules
+
+1. The participant must exist and be active in the system
+2. The case type must be valid and supported
+3. The priority must be one of: LOW, MEDIUM, HIGH, URGENT
+4. The source must be valid
+5. The description must not be empty
+6. The requestedBy user must have permission to create cases
+7. Contact details must be valid and up to date
+8. If accessibility requirements are specified, they must be valid
+9. If a scheduled appointment is provided, it must be in the future
+
+## Service Handling
+
+This command is handled by the ParticipantSupport service.
+
+## Related Events
+
+- `SupportCaseCreated`
+- `SupportCaseUpdated`
+- `SupportCaseEscalated`
+
+<Schema />{" "}

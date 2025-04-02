@@ -33,7 +33,7 @@ badges:
 
 ## Overview
 
-The Appointment Allocator service is responsible for managing the allocation of screening appointments across different locations. It optimizes the use of available capacity while ensuring efficient resource utilisation and participant satisfaction.
+The AppointmentAllocator service is responsible for managing the allocation of screening appointments across different locations. It optimizes the use of available capacity while ensuring efficient resource utilisation and participant satisfaction.
 
 ## Responsibilities
 
@@ -61,14 +61,12 @@ The Appointment Allocator service is responsible for managing the allocation of 
 
 ### Receives Events
 
-- `AppointmentRequested`: When a new appointment is needed
-- `CapacityUpdated`: When screening capacity changes
-- `AppointmentCancelled`: When an appointment is cancelled
+- `AllocateAppointment`: When a new appointment is needed
 
 ### Sends Events
 
 - `AppointmentAllocated`: When an appointment slot is allocated
-- `CapacityWarning`: When capacity constraints are detected
+- `AllocationFailed`: When capacity constraints are detected
 
 ## Business Rules
 
@@ -77,4 +75,4 @@ The Appointment Allocator service is responsible for managing the allocation of 
 3. Priority cases must be handled appropriately
 4. Resource utilization must be balanced
 
-<NodeGraph />{" "}
+<NodeGraph />
