@@ -1,0 +1,74 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: CommunicationManagerService
+
+# Display name of the Service, rendered in EventCatalog
+name: Communication Manager
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Manages all communication activities within the screening program, including notifications, reminders, and participant communications.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: SendResult
+    version: 0.0.1
+  - id: SendInvitation
+    version: 0.0.1
+  - id: SendReminder
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: ResultSent
+    version: 0.0.1
+  - id: InvitationSent
+    version: 0.0.1
+  - id: ReminderSent
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Communication Manager service is responsible for managing all communication activities within the screening program. It handles the delivery of notifications, reminders, and other communications to participants and healthcare providers through various channels.
+
+## Responsibilities
+
+1. **Communication Management**
+
+   - Process communication requests
+   - Manage communication templates
+   - Handle communication delivery
+   - Track communication status
+
+2. **Channel Management**
+
+   - Support multiple communication channels
+   - Manage channel preferences
+   - Handle channel failures
+   - Optimize channel selection
+
+3. **Integration**
+   - Connect with external services
+   - Manage communication data
+   - Handle communication errors
+   - Support communication analytics
+
+## Business Rules
+
+1. Communications must respect participant preferences
+2. All communications must be logged
+3. Failed communications must be retried
+4. Templates must be version controlled
+5. Communication history must be maintained
+
+<NodeGraph />

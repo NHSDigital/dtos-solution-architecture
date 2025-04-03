@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Get Demand Query Schema",
+  "description": "Schema for the GetDemand query that retrieves demand information for screening services",
+  "type": "object",
+  "required": ["serviceId", "timeRange", "geographicalArea", "cohortCriteria"],
+  "properties": {
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "timeRange": {
+      "type": "object",
+      "required": ["startDate", "endDate"],
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp for the start of the demand analysis period"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp for the end of the demand analysis period"
+        }
+      }
+    },
+    "geographicalArea": {
+      "type": "object",
+      "required": ["areaType", "areaCode"],
+      "properties": {
+        "areaType": {
+          "type": "string",
+          "enum": ["REGION", "ICB", "TRUST", "LOCALITY"],
+          "description": "Type of geographical area"
+        },
+        "areaCode": {
+          "type": "string",
+          "description": "Code identifying the geographical area"
+        }
+      }
+    },
+    "cohortCriteria": {
+      "type": "object",
+      "required": ["ageRange", "riskLevels", "exclusionCriteria"],
+      "properties": {
+        "ageRange": {
+          "type": "object",
+          "required": ["minAge", "maxAge"],
+          "properties": {
+            "minAge": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Minimum age for cohort inclusion"
+            },
+            "maxAge": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Maximum age for cohort inclusion"
+            }
+          }
+        },
+        "riskLevels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["LOW", "MEDIUM", "HIGH", "URGENT"]
+          },
+          "description": "Risk levels to include in the cohort"
+        },
+        "exclusionCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Criteria for excluding participants from the cohort"
+        }
+      }
+    },
+    "includeHistoricalData": {
+      "type": "boolean",
+      "description": "Whether to include historical demand patterns in the analysis",
+      "default": true
+    },
+    "includeProjections": {
+      "type": "boolean",
+      "description": "Whether to include demand projections in the analysis",
+      "default": true
+    }
+  }
+}

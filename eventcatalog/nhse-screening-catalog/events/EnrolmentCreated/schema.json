@@ -1,0 +1,246 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Enrolment Created Event Schema",
+  "description": "Schema for the EnrolmentCreated event that represents the creation of a new participant enrolment in a screening program",
+  "type": "object",
+  "required": [
+    "enrolmentId",
+    "participantId",
+    "programId",
+    "enrolmentType",
+    "enrolmentDate",
+    "createdBy",
+    "createdAt"
+  ],
+  "properties": {
+    "enrolmentId": {
+      "type": "string",
+      "description": "Unique identifier for the enrolment"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "programId": {
+      "type": "string",
+      "description": "Identifier of the screening program"
+    },
+    "enrolmentType": {
+      "type": "string",
+      "enum": [
+        "ROUTINE",
+        "RECALL",
+        "FOLLOW_UP",
+        "SPECIAL_CASE",
+        "TRANSFER",
+        "OTHER"
+      ],
+      "description": "Type of the enrolment"
+    },
+    "enrolmentDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the enrolment becomes effective"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Identifier of the person creating the enrolment"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the enrolment was created"
+    },
+    "participantDetails": {
+      "type": "object",
+      "required": [
+        "nhsNumber",
+        "firstName",
+        "lastName",
+        "dateOfBirth",
+        "gender"
+      ],
+      "properties": {
+        "nhsNumber": {
+          "type": "string",
+          "pattern": "^[0-9]{10}$",
+          "description": "NHS number of the participant"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "Participant's first name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Participant's last name"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "description": "Participant's date of birth"
+        },
+        "gender": {
+          "type": "string",
+          "enum": ["MALE", "FEMALE", "OTHER", "NOT_SPECIFIED"],
+          "description": "Participant's gender"
+        },
+        "postcode": {
+          "type": "string",
+          "pattern": "^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$",
+          "description": "Participant's postcode"
+        }
+      },
+      "description": "Basic personal details of the participant"
+    },
+    "contactDetails": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "object",
+          "properties": {
+            "line1": {
+              "type": "string",
+              "description": "First line of address"
+            },
+            "line2": {
+              "type": "string",
+              "description": "Second line of address"
+            },
+            "line3": {
+              "type": "string",
+              "description": "Third line of address"
+            },
+            "postcode": {
+              "type": "string",
+              "pattern": "^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$",
+              "description": "Postal code"
+            }
+          }
+        },
+        "phoneNumber": {
+          "type": "string",
+          "pattern": "^[0-9]{11}$",
+          "description": "Contact phone number"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email address"
+        }
+      },
+      "description": "Contact details for the participant"
+    },
+    "eligibilityDetails": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "description": "Participant's age at enrolment"
+        },
+        "eligibilityCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AGE_RANGE",
+              "GENDER",
+              "LOCATION",
+              "MEDICAL_ELIGIBILITY",
+              "OTHER"
+            ]
+          },
+          "description": "List of eligibility criteria met"
+        },
+        "exclusionFactors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HYSTERECTOMY",
+              "PREGNANT",
+              "RECENT_BIRTH",
+              "MEDICAL_CONTRAINDICATION",
+              "NONE"
+            ]
+          },
+          "description": "Factors that might affect eligibility"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about eligibility"
+        }
+      },
+      "description": "Details about participant's eligibility"
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "preferredLanguage": {
+          "type": "string",
+          "description": "Preferred language for communications"
+        },
+        "preferredContactMethod": {
+          "type": "string",
+          "enum": ["EMAIL", "SMS", "POST", "PHONE"],
+          "description": "Preferred method of contact"
+        },
+        "accessibilityNeeds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "WHEELCHAIR_ACCESS",
+              "SIGN_LANGUAGE",
+              "LARGE_PRINT",
+              "BRAILLE",
+              "HEARING_LOOP",
+              "OTHER"
+            ]
+          },
+          "description": "Accessibility requirements"
+        }
+      },
+      "description": "Participant's communication preferences"
+    },
+    "gpDetails": {
+      "type": "object",
+      "properties": {
+        "gpPracticeCode": {
+          "type": "string",
+          "description": "GP practice code"
+        },
+        "gpPracticeName": {
+          "type": "string",
+          "description": "Name of GP practice"
+        },
+        "gpCode": {
+          "type": "string",
+          "description": "GP's code"
+        },
+        "gpName": {
+          "type": "string",
+          "description": "GP's name"
+        }
+      },
+      "description": "Details of participant's GP practice"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system creating the enrolment"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

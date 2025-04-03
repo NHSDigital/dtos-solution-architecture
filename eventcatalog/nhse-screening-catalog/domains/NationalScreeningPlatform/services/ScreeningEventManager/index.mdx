@@ -1,0 +1,62 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: ScreeningEventManager
+
+# Display name of the Service, rendered in EventCatalog
+name: Screening Event Manager
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Manages screening events and their lifecycle, ensuring proper event handling, routing, and processing across the screening system.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: CreateEncounter
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: EncounterCreated
+    version: 0.0.1
+  - id: EncounterClosed
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Screening Event Manager service is responsible for managing screening events and their lifecycle within the system. It ensures proper event handling, routing, and processing across all screening services.
+
+## Responsibilities
+
+1. **Event Management**
+
+   - Process screening events
+   - Route events to appropriate services
+   - Track event status
+   - Handle event lifecycle
+
+2. **Event Processing**
+
+   - Validate event data
+   - Apply business rules
+   - Manage event flow
+   - Handle event errors
+
+## Business Rules
+
+1. All events must be validated
+2. Event routing must be accurate
+3. Event processing must be tracked
+4. Event data must be complete
+5. Event history must be maintained
+
+<NodeGraph />

@@ -2,25 +2,27 @@
 # id of your command, used for slugs and references in EventCatalog.
 id: CloseEpisode
 
-# Display name of the command, rendered in EventCatalog
+# Display name of the Command, rendered in EventCatalog
 name: Close Episode
 
-# Version of the command
+# Version of the Command
 version: 0.0.1
 
-# Short summary of your command
+# Short summary of your Command
 summary: |
-  Command to Participant Manager
+  Command to close a screening episode, including final status, outcome, and any relevant clinical information.
 
 # Optional badges, rendered to UI by EventCatalog
 badges:
-  - content: New service
-    backgroundColor: blue
-    textColor: blue
+  - content: Core Command
+    backgroundColor: green
+    textColor: white
 ---
 
 ## Overview
 
-The `Close Episode` command represents intent to update the episode of a participant over HTTP.
+The Close Episode command is used to formally close a screening episode, capturing the final status, clinical outcome, and any relevant information about the participant's screening journey. This command ensures proper documentation and completion of the screening process.
 
-<NodeGraph />
+## Command Data
+
+<Schema />

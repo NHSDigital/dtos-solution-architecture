@@ -1,0 +1,69 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: CapacityAndDemandPlanner
+
+# Display name of the Service, rendered in EventCatalog
+name: Capacity and Demand Planner
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Using the available Demand and Capacity values, allows the modelling of scenarios that will generate an AllocationPlan
+
+# Optional messages this service receives and it's version
+receives:
+  - id: UpdateAllocationPlan
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: AllocationPlanUpdated
+    version: 0.0.1
+  - id: AllocationPlanCreated
+    version: 0.0.1
+  - id: GetDemand
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Capacity and Demand Planner service is responsible for planning and forecasting screening capacity and demand across the system. It analyses historical data and current trends to predict future screening needs and helps optimize resource allocation.
+
+## Responsibilities
+
+1. **Demand Forecasting**
+
+   - Analyze historical screening data
+   - Retrieve expected demand
+   - Predict future screening demand
+   - Identify seasonal patterns and trends
+
+2. **Capacity Planning**
+
+   - Calculate required capacity
+   - Generate capacity recommendations
+   - Optimise resource allocation
+
+3. **Analysis and Reporting**
+   - Generate trend analysis reports
+   - Provide capacity utilisation insights
+   - Generate provisional allocation plans
+   - Monitor forecast accuracy
+
+## Business Rules
+
+1. Forecasts must be based on at least 12 months of historical data
+2. Demand predictions must account for seasonal variations
+3. Capacity recommendations must consider resource constraints
+4. All forecasts must include confidence levels
+5. Trend analysis must be updated monthly
+
+<NodeGraph />

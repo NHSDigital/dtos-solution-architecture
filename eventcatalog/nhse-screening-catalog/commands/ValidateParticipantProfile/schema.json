@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Validate Participant Profile Command Schema",
+  "description": "Schema for the ValidateParticipantProfile command that represents the intent to validate a participant's profile information",
+  "type": "object",
+  "required": ["participantId", "profileData", "validatedBy", "validatedAt"],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "profileData": {
+      "type": "object",
+      "required": ["personalDetails", "contactDetails", "demographics"],
+      "properties": {
+        "personalDetails": {
+          "type": "object",
+          "required": [
+            "nhsNumber",
+            "firstName",
+            "lastName",
+            "dateOfBirth",
+            "gender"
+          ],
+          "properties": {
+            "nhsNumber": {
+              "type": "string",
+              "pattern": "^[0-9]{10}$",
+              "description": "NHS number of the participant"
+            },
+            "firstName": {
+              "type": "string",
+              "description": "Participant's first name"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Participant's last name"
+            },
+            "dateOfBirth": {
+              "type": "string",
+              "format": "date",
+              "description": "Participant's date of birth"
+            },
+            "gender": {
+              "type": "string",
+              "enum": ["MALE", "FEMALE", "OTHER", "NOT_SPECIFIED"],
+              "description": "Participant's gender"
+            }
+          }
+        },
+        "contactDetails": {
+          "type": "object",
+          "required": ["address", "phoneNumber", "email"],
+          "properties": {
+            "address": {
+              "type": "object",
+              "required": ["line1", "postcode"],
+              "properties": {
+                "line1": {
+                  "type": "string",
+                  "description": "First line of address"
+                },
+                "line2": {
+                  "type": "string",
+                  "description": "Second line of address"
+                },
+                "line3": {
+                  "type": "string",
+                  "description": "Third line of address"
+                },
+                "postcode": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$",
+                  "description": "Postal code"
+                }
+              }
+            },
+            "phoneNumber": {
+              "type": "string",
+              "pattern": "^[0-9]{11}$",
+              "description": "Contact phone number"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "description": "Contact email address"
+            }
+          }
+        },
+        "demographics": {
+          "type": "object",
+          "properties": {
+            "ethnicity": {
+              "type": "string",
+              "description": "Participant's ethnicity"
+            },
+            "language": {
+              "type": "string",
+              "description": "Primary language"
+            },
+            "religion": {
+              "type": "string",
+              "description": "Religious affiliation"
+            }
+          }
+        }
+      }
+    },
+    "validatedBy": {
+      "type": "string",
+      "description": "Identifier of the person validating the profile"
+    },
+    "validatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the validation is being performed"
+    },
+    "validationRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ruleId", "description"],
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "description": "Identifier of the validation rule"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the validation rule"
+          }
+        }
+      },
+      "description": "List of validation rules to apply"
+    },
+    "previousValidation": {
+      "type": "object",
+      "properties": {
+        "validatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of previous validation"
+        },
+        "validatedBy": {
+          "type": "string",
+          "description": "Person who performed previous validation"
+        },
+        "validationResult": {
+          "type": "string",
+          "enum": ["PASSED", "FAILED", "PARTIAL"],
+          "description": "Result of previous validation"
+        }
+      },
+      "description": "Details of previous validation if any"
+    },
+    "validationContext": {
+      "type": "object",
+      "properties": {
+        "programId": {
+          "type": "string",
+          "description": "Identifier of the screening program"
+        },
+        "serviceId": {
+          "type": "string",
+          "description": "Identifier of the screening service"
+        },
+        "validationType": {
+          "type": "string",
+          "enum": ["INITIAL", "UPDATE", "REVALIDATION"],
+          "description": "Type of validation being performed"
+        }
+      },
+      "description": "Context information for the validation"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the validation"
+    }
+  }
+}

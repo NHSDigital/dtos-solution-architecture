@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Appointment Not Attended Event Schema",
+  "description": "Schema for the AppointmentNotAttended event that represents a participant failing to attend their scheduled screening appointment",
+  "type": "object",
+  "required": [
+    "appointmentId",
+    "participantId",
+    "serviceId",
+    "scheduledDate",
+    "scheduledTime",
+    "recordedBy",
+    "recordedAt"
+  ],
+  "properties": {
+    "appointmentId": {
+      "type": "string",
+      "description": "Unique identifier for the missed appointment"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Identifier of the screening service"
+    },
+    "scheduledDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the appointment was scheduled"
+    },
+    "scheduledTime": {
+      "type": "string",
+      "format": "time",
+      "description": "Time when the appointment was scheduled"
+    },
+    "recordedBy": {
+      "type": "string",
+      "description": "Identifier of the person recording the non-attendance"
+    },
+    "recordedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the non-attendance was recorded"
+    },
+    "appointmentType": {
+      "type": "string",
+      "enum": [
+        "INITIAL_SCREENING",
+        "FOLLOW_UP",
+        "RECALL",
+        "DIAGNOSTIC",
+        "REVIEW",
+        "OTHER"
+      ],
+      "description": "Type of the missed appointment"
+    },
+    "nonAttendanceReason": {
+      "type": "string",
+      "enum": [
+        "NO_CONTACT",
+        "CONTACTED_BUT_NO_REASON",
+        "FORGOT",
+        "TRANSPORT_ISSUES",
+        "WORK_COMMITMENTS",
+        "HEALTH_ISSUES",
+        "OTHER"
+      ],
+      "description": "Reason for non-attendance if known"
+    },
+    "contactAttempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "method", "outcome"],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the contact attempt was made"
+          },
+          "method": {
+            "type": "string",
+            "enum": ["PHONE", "SMS", "EMAIL", "POST", "VISIT"],
+            "description": "Method used to contact the participant"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "NO_ANSWER",
+              "VOICEMAIL",
+              "SPOKE_TO_PARTICIPANT",
+              "SPOKE_TO_REPRESENTATIVE",
+              "MESSAGE_SENT",
+              "MESSAGE_FAILED"
+            ],
+            "description": "Outcome of the contact attempt"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about the contact attempt"
+          }
+        }
+      },
+      "description": "History of attempts to contact the participant"
+    },
+    "riskAssessment": {
+      "type": "object",
+      "properties": {
+        "clinicalRisk": {
+          "type": "string",
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
+          "description": "Clinical risk level of non-attendance"
+        },
+        "vulnerabilityFactors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "MOBILITY_ISSUES",
+              "MENTAL_HEALTH",
+              "LEARNING_DISABILITY",
+              "LANGUAGE_BARRIER",
+              "SOCIAL_ISOLATION",
+              "OTHER"
+            ]
+          },
+          "description": "Factors that may affect participant's ability to attend"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about the risk assessment"
+        }
+      },
+      "description": "Assessment of risks associated with non-attendance"
+    },
+    "followUpActions": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["action", "dueDate"],
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": [
+                  "REBOOK_APPOINTMENT",
+                  "REFER_TO_GP",
+                  "REFER_TO_SOCIAL_SERVICES",
+                  "ESCALATE_TO_MANAGER",
+                  "OTHER"
+                ],
+                "description": "Type of follow-up action"
+              },
+              "dueDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Due date for the action"
+              },
+              "assignedTo": {
+                "type": "string",
+                "description": "Person responsible for the action"
+              },
+              "notes": {
+                "type": "string",
+                "description": "Additional notes about the action"
+              }
+            }
+          },
+          "description": "List of required follow-up actions"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["STANDARD", "HIGH", "URGENT"],
+          "description": "Priority level for follow-up"
+        }
+      },
+      "description": "Required follow-up actions and their priority"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system recording the non-attendance"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

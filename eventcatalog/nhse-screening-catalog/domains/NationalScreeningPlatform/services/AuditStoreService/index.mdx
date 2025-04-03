@@ -1,0 +1,74 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: AuditStoreService
+
+# Display name of the Service, rendered in EventCatalog
+name: Audit Store
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Manages the storage and retrieval of audit trails for all screening-related activities, ensuring compliance and traceability.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: AuditEvent
+    version: 0.0.1
+  - id: AuditQuery
+    version: 0.0.1
+  - id: AuditExport
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: AuditStored
+    version: 0.0.1
+  - id: AuditRetrieved
+    version: 0.0.1
+  - id: AuditExported
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Audit Store service is responsible for managing the storage and retrieval of audit trails for all screening-related activities. It ensures compliance with regulatory requirements and provides traceability for all system actions.
+
+## Responsibilities
+
+1. **Audit Management**
+
+   - Store audit events
+   - Maintain audit trails
+   - Handle audit queries
+   - Manage audit retention
+
+2. **Compliance**
+
+   - Ensure regulatory compliance
+   - Maintain data integrity
+   - Support audit investigations
+   - Handle audit reporting
+
+3. **Integration**
+   - Connect with audit sources
+   - Manage audit data
+   - Handle audit exports
+   - Maintain audit security
+
+## Business Rules
+
+1. All audit events must be stored with timestamp and user context
+2. Audit data must be retained for minimum 7 years
+3. Audit exports must be encrypted
+4. Access to audit data must be logged
+5. Audit queries must be authenticated
+
+<NodeGraph />

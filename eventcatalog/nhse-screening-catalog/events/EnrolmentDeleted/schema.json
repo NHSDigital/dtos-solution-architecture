@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Enrolment Deleted Event Schema",
+  "description": "Schema for the EnrolmentDeleted event that represents the deletion of a participant's enrolment from a screening program",
+  "type": "object",
+  "required": [
+    "enrolmentId",
+    "participantId",
+    "programId",
+    "deletionReason",
+    "deletedBy",
+    "deletedAt"
+  ],
+  "properties": {
+    "enrolmentId": {
+      "type": "string",
+      "description": "Unique identifier for the deleted enrolment"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "programId": {
+      "type": "string",
+      "description": "Identifier of the screening program"
+    },
+    "deletionReason": {
+      "type": "string",
+      "enum": [
+        "DECEASED",
+        "MOVED_ABROAD",
+        "OPTED_OUT",
+        "TRANSFERRED",
+        "INELIGIBLE",
+        "ADMINISTRATIVE",
+        "OTHER"
+      ],
+      "description": "Primary reason for the deletion"
+    },
+    "deletedBy": {
+      "type": "string",
+      "description": "Identifier of the person deleting the enrolment"
+    },
+    "deletedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the enrolment was deleted"
+    },
+    "originalEnrolment": {
+      "type": "object",
+      "properties": {
+        "enrolmentType": {
+          "type": "string",
+          "enum": [
+            "ROUTINE",
+            "RECALL",
+            "FOLLOW_UP",
+            "SPECIAL_CASE",
+            "TRANSFER",
+            "OTHER"
+          ],
+          "description": "Type of the original enrolment"
+        },
+        "enrolmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the enrolment was created"
+        },
+        "lastScreeningDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of last screening if applicable"
+        }
+      },
+      "description": "Details of the original enrolment"
+    },
+    "deletionDetails": {
+      "type": "object",
+      "properties": {
+        "reasonDetails": {
+          "type": "string",
+          "description": "Detailed explanation of the deletion reason"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the deletion becomes effective"
+        },
+        "isPermanent": {
+          "type": "boolean",
+          "description": "Whether the deletion is permanent"
+        },
+        "reEnrolmentEligible": {
+          "type": "boolean",
+          "description": "Whether the participant can be re-enrolled"
+        },
+        "reEnrolmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Earliest date when re-enrolment is possible"
+        }
+      },
+      "description": "Additional details about the deletion"
+    },
+    "dataRetention": {
+      "type": "object",
+      "properties": {
+        "retentionPeriod": {
+          "type": "integer",
+          "description": "Period in days for which data should be retained"
+        },
+        "anonymizationRequired": {
+          "type": "boolean",
+          "description": "Whether data should be anonymized"
+        },
+        "anonymizationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when data should be anonymized"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about data retention"
+        }
+      },
+      "description": "Data retention requirements"
+    },
+    "notifications": {
+      "type": "object",
+      "properties": {
+        "participantNotified": {
+          "type": "boolean",
+          "description": "Whether the participant was notified"
+        },
+        "gpNotified": {
+          "type": "boolean",
+          "description": "Whether the GP was notified"
+        },
+        "notificationMethod": {
+          "type": "string",
+          "enum": ["EMAIL", "SMS", "POST", "PHONE", "NONE"],
+          "description": "Method used for notification"
+        },
+        "notificationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when notifications were sent"
+        }
+      },
+      "description": "Notification details"
+    },
+    "auditTrail": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "action", "performedBy"],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the action was performed"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "DELETION_INITIATED",
+              "NOTIFICATION_SENT",
+              "GP_NOTIFIED",
+              "DATA_RETENTION_UPDATED",
+              "OTHER"
+            ],
+            "description": "Type of action performed"
+          },
+          "performedBy": {
+            "type": "string",
+            "description": "Person who performed the action"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about the action"
+          }
+        }
+      },
+      "description": "History of actions related to the deletion"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system processing the deletion"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

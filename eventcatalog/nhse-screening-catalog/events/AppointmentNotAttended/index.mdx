@@ -23,41 +23,6 @@ badges:
 
 The AppointmentNotAttended event is published when a participant fails to attend their scheduled appointment. This event triggers follow-up actions to manage the missed appointment and determine appropriate next steps in the screening pathway.
 
-## Event Properties
+## Event Data
 
-### Required Properties
-
-- `participantId`: Unique identifier of the participant
-- `appointmentId`: Unique identifier of the missed appointment
-- `nonAttendanceTimestamp`: When the non-attendance was recorded
-- `nonAttendanceType`: Type of non-attendance (e.g., no-show, late cancellation)
-- `nonAttendanceReason`: Reason for non-attendance if known
-- `recordedBy`: Identifier of the person/service recording the non-attendance
-
-### Optional Properties
-
-- `followUpRequired`: Whether follow-up is needed
-- `followUpPriority`: Priority level for follow-up
-- `reschedulingRequested`: Whether participant requested rescheduling
-- `notes`: Additional information about the non-attendance
-- `riskLevel`: Risk level associated with the non-attendance
-
-## Business Rules
-
-1. The appointment must exist and be in a booked state
-2. The non-attendance must be recorded within valid timeframes
-3. The non-attendance must be recorded by an authorised person/service
-4. Appropriate follow-up actions must be initiated
-5. Risk assessment must be completed if required
-
-## Service Publishing
-
-This event is published by the `AppointmentBooker` service within the Appointment domain.
-
-## Related Commands
-
-- `BookAppointment`: The command that led to this event
-- `RecordNonAttendance`: The command that triggered this event
-- `AllocateAppointment`: A command that may be issued after this event for rescheduling
-
-<NodeGraph />{" "}
+<Schema />

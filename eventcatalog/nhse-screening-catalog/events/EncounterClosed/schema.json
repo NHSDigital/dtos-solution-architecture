@@ -1,0 +1,256 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Encounter Closed Event Schema",
+  "description": "Schema for the EncounterClosed event that represents the closure of a screening encounter",
+  "type": "object",
+  "required": [
+    "encounterId",
+    "participantId",
+    "serviceId",
+    "encounterType",
+    "startDate",
+    "startTime",
+    "endDate",
+    "endTime",
+    "status",
+    "closedBy",
+    "closedAt"
+  ],
+  "properties": {
+    "encounterId": {
+      "type": "string",
+      "description": "Unique identifier for the closed encounter"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Identifier of the screening service"
+    },
+    "encounterType": {
+      "type": "string",
+      "enum": [
+        "INITIAL_SCREENING",
+        "FOLLOW_UP",
+        "DIAGNOSTIC",
+        "REVIEW",
+        "TELEPHONE",
+        "VIDEO_CALL",
+        "OTHER"
+      ],
+      "description": "Type of the screening encounter"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the encounter started"
+    },
+    "startTime": {
+      "type": "string",
+      "format": "time",
+      "description": "Time when the encounter started"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the encounter ended"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "time",
+      "description": "Time when the encounter ended"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "CANCELLED",
+        "NO_SHOW",
+        "INCOMPLETE",
+        "RESCHEDULED"
+      ],
+      "description": "Final status of the encounter"
+    },
+    "closedBy": {
+      "type": "string",
+      "description": "Identifier of the person closing the encounter"
+    },
+    "closedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the encounter was closed"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "type": "string",
+          "description": "Identifier of the screening site"
+        },
+        "siteName": {
+          "type": "string",
+          "description": "Name of the screening site"
+        },
+        "room": {
+          "type": "string",
+          "description": "Room or area where the encounter took place"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "line1": {
+              "type": "string",
+              "description": "First line of address"
+            },
+            "line2": {
+              "type": "string",
+              "description": "Second line of address"
+            },
+            "line3": {
+              "type": "string",
+              "description": "Third line of address"
+            },
+            "postcode": {
+              "type": "string",
+              "pattern": "^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$",
+              "description": "UK postcode"
+            }
+          },
+          "description": "Complete address of the screening site"
+        }
+      },
+      "description": "Location details of the encounter"
+    },
+    "staff": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["staffId", "role", "name"],
+        "properties": {
+          "staffId": {
+            "type": "string",
+            "description": "Unique identifier for the staff member"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "SCREENING_SPECIALIST",
+              "NURSE",
+              "RADIOLOGIST",
+              "PATHOLOGIST",
+              "ADMINISTRATOR",
+              "OTHER"
+            ],
+            "description": "Role of the staff member"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full name of the staff member"
+          }
+        }
+      },
+      "description": "List of staff members involved in the encounter"
+    },
+    "clinicalSummary": {
+      "type": "object",
+      "properties": {
+        "findings": {
+          "type": "string",
+          "description": "Clinical findings from the encounter"
+        },
+        "assessment": {
+          "type": "string",
+          "description": "Clinical assessment"
+        },
+        "plan": {
+          "type": "string",
+          "description": "Clinical plan or next steps"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional clinical notes"
+        }
+      },
+      "description": "Clinical summary of the encounter"
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "status"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SCREENING_RESULT",
+              "FOLLOW_UP_APPOINTMENT",
+              "REFERRAL",
+              "CLINICAL_INVESTIGATION",
+              "OTHER"
+            ],
+            "description": "Type of outcome"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["COMPLETED", "PENDING", "CANCELLED", "NOT_REQUIRED"],
+            "description": "Status of the outcome"
+          },
+          "details": {
+            "type": "string",
+            "description": "Details of the outcome"
+          }
+        }
+      },
+      "description": "List of outcomes from the encounter"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "reference"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CLINICAL_NOTES",
+              "IMAGING",
+              "LAB_RESULTS",
+              "CONSENT_FORM",
+              "OTHER"
+            ],
+            "description": "Type of attachment"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Reference to the attachment"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the attachment"
+          }
+        }
+      },
+      "description": "List of attachments from the encounter"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system closing the encounter"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

@@ -23,42 +23,6 @@ badges:
 
 The AllocationFailed event is published when the AppointmentAllocator service fails to allocate an appointment slot for a participant. This event indicates that the allocation attempt was unsuccessful and may trigger alternative allocation strategies or manual intervention.
 
-## Event Properties
-
-### Required Properties
-
-- `participantId`: Unique identifier of the participant
-- `allocationAttemptTimestamp`: When the allocation attempt occurred
-- `failureReason`: The reason for the allocation failure
-- `requestedDateTime`: The requested appointment date and time
-- `requestedLocationId`: The requested screening location
-- `priority`: Priority level of the allocation request
-
-### Optional Properties
-
-- `alternativeSlotsAvailable`: Whether alternative slots were found
-- `suggestedAlternativeSlots`: List of alternative slots that could be offered
-- `notes`: Additional information about the failure
-- `retryEligible`: Whether the allocation can be retried
-- `nextRetryTimestamp`: When the next retry can be attempted
-
-## Business Rules
-
-1. The allocation attempt must have been initiated
-2. The failure reason must be valid and documented
-3. Alternative slots must be identified if available
-4. Appropriate follow-up actions must be initiated
-5. The participant must be notified of the failure
-
-## Service Publishing
-
-This event is published by the `AppointmentAllocator` service within the Appointment domain.
-
-## Related Commands
-
-- `AllocateAppointment`: The command that triggered this event
-- `RetryAllocation`: A command that may be issued after this event
-
-<NodeGraph />{" "}
+## Event Data
 
 <Schema />

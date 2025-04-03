@@ -23,37 +23,6 @@ badges:
 
 The AppointmentBooked event is published when the AppointmentBooker service successfully books and confirms an allocated appointment slot. This event indicates that the participant has confirmed their attendance and the appointment details have been finalised.
 
-## Event Properties
+## Event Data
 
-### Required Properties
-
-- `participantId`: Unique identifier of the participant
-- `appointmentId`: Unique identifier of the booked appointment
-- `bookingTimestamp`: When the booking occurred
-- `confirmationMethod`: How the participant confirmed the booking
-- `contactPreferences`: How the participant wishes to be contacted
-- `bookingStatus`: Current status of the booking
-
-### Optional Properties
-
-- `additionalNotes`: Any additional information about the booking
-- `accessibilityRequirements`: Any accessibility needs for the appointment
-- `reminderPreferences`: How the participant wishes to receive reminders
-
-## Business Rules
-
-1. The appointment must be allocated and available
-2. The booking must be within valid booking timeframes
-3. The participant must have confirmed the appointment details
-4. Contact preferences must be valid and complete
-
-## Service Publishing
-
-This event is published by the `AppointmentBooker` service within the Appointment domain.
-
-## Related Commands
-
-- `BookAppointment`: The command that triggered this event
-- `CancelAppointment`: A command that may be issued after this event
-
-<NodeGraph />
+<Schema />

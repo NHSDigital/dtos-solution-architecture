@@ -1,0 +1,55 @@
+---
+# id of your domain, used for slugs and references in EventCatalog.
+id: NationalScreeningPlatform
+
+# Display name of the domain, rendered in EventCatalog
+name: National Screening Platform
+
+# Version of the domain
+version: 0.0.1
+
+# Short summary of your domain
+summary: |
+  Core platform services that manage the national screening infrastructure and operations, providing essential services for managing screening data, coordinating screening activities, and ensuring quality and compliance across the screening program.
+
+# Optional services. Groups services into this domain.
+services:
+  - id: AnalyticDataIngestionService
+    version: 0.0.1
+  - id: AppointmentAllocator
+    version: 0.0.1
+  - id: AppointmentBooker
+    version: 0.0.1
+  - id: AuditStoreService
+    version: 0.0.1
+  - id: CapacityAndDemandPlanner
+    version: 0.0.1
+  - id: CapacityManager
+    version: 0.0.1
+  - id: CohortManager
+    version: 0.0.1
+  - id: CommunicationManagerService
+    version: 0.0.1
+  - id: ParticipantManager
+    version: 0.0.1
+  - id: ParticipantSupport
+    version: 0.0.1
+  - id: PathwayCoordinator
+    version: 0.0.1
+  - id: ScreeningEventManager
+    version: 0.0.1
+  - id: ServiceLayerService
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Platform
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The National Screening Platform is the core infrastructure that supports all screening operations across the NHS. It provides essential services for managing screening data, coordinating screening activities, and ensuring quality and compliance across the screening program.
+
+<NodeGraph />

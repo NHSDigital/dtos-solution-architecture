@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Request Appointment Command Schema",
+  "description": "Schema for the RequestAppointment command that initiates an appointment booking request",
+  "type": "object",
+  "required": [
+    "participantId",
+    "serviceId",
+    "locationId",
+    "preferredSlot",
+    "appointmentType",
+    "contactDetails"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant requesting the appointment"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "locationId": {
+      "type": "string",
+      "description": "Unique identifier for the preferred location"
+    },
+    "preferredSlot": {
+      "type": "object",
+      "required": ["startTime", "endTime"],
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp for the preferred start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp for the preferred end time"
+        }
+      }
+    },
+    "appointmentType": {
+      "type": "string",
+      "enum": ["INITIAL_SCREENING", "FOLLOW_UP", "RECALL", "DIAGNOSTIC"],
+      "description": "Type of screening appointment requested"
+    },
+    "contactDetails": {
+      "type": "object",
+      "required": ["phoneNumber", "email"],
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Contact phone number for appointment notifications"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email for appointment notifications"
+        }
+      }
+    },
+    "accessibilityNeeds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["WHEELCHAIR_ACCESS", "SIGN_LANGUAGE", "HEARING_LOOP", "NONE"]
+      },
+      "description": "List of accessibility requirements"
+    },
+    "languagePreference": {
+      "type": "string",
+      "description": "Preferred language for communication"
+    },
+    "specialRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of any special requirements or accommodations needed"
+    },
+    "maxTravelDistance": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Maximum travel distance in kilometers"
+    },
+    "preferredDays": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+          "SUNDAY"
+        ]
+      },
+      "description": "Preferred days of the week for the appointment"
+    },
+    "preferredTimes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["MORNING", "AFTERNOON", "EVENING"]
+      },
+      "description": "Preferred times of day for the appointment"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or comments about the appointment request"
+    }
+  }
+}

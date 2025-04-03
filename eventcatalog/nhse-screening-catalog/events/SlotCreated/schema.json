@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Slot Created Event Schema",
+  "description": "Schema for the SlotCreated event that represents a new appointment slot being created in the system",
+  "type": "object",
+  "required": [
+    "slotId",
+    "serviceId",
+    "locationId",
+    "timeSlot",
+    "capacity",
+    "status",
+    "createdAt"
+  ],
+  "properties": {
+    "slotId": {
+      "type": "string",
+      "description": "Unique identifier for the created slot"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "locationId": {
+      "type": "string",
+      "description": "Unique identifier for the location"
+    },
+    "timeSlot": {
+      "type": "object",
+      "required": ["startTime", "endTime"],
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp for the slot start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp for the slot end time"
+        }
+      }
+    },
+    "capacity": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of appointments that can be booked in this slot"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["AVAILABLE", "FULL", "CANCELLED", "BLOCKED"],
+      "description": "Current status of the slot"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the slot was created"
+    },
+    "slotType": {
+      "type": "string",
+      "enum": ["STANDARD", "URGENT", "FOLLOW_UP", "RECALL"],
+      "description": "Type of appointment slot"
+    },
+    "accessibilityFeatures": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["WHEELCHAIR_ACCESS", "SIGN_LANGUAGE", "HEARING_LOOP", "NONE"]
+      },
+      "description": "List of accessibility features available in this slot"
+    },
+    "staffRequirements": {
+      "type": "object",
+      "properties": {
+        "minStaffCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Minimum number of staff required for this slot"
+        },
+        "requiredRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of required staff roles for this slot"
+        }
+      }
+    },
+    "equipmentRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of equipment required for this slot"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or comments about the slot"
+    }
+  }
+}

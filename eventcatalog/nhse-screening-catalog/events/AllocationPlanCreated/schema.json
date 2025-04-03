@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Allocation Plan Created Event Schema",
+  "description": "Schema for the AllocationPlanCreated event that indicates creation of a new allocation plan",
+  "type": "object",
+  "required": [
+    "planId",
+    "serviceId",
+    "locationId",
+    "allocationParameters",
+    "createdAt",
+    "createdBy",
+    "effectiveFrom"
+  ],
+  "properties": {
+    "planId": {
+      "type": "string",
+      "description": "Unique identifier for the allocation plan"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "locationId": {
+      "type": "string",
+      "description": "Unique identifier for the location"
+    },
+    "allocationParameters": {
+      "type": "object",
+      "required": [
+        "capacityDistribution",
+        "resourceAllocation",
+        "schedulingParameters"
+      ],
+      "properties": {
+        "capacityDistribution": {
+          "type": "object",
+          "required": ["totalCapacity", "reservedCapacity", "flexibleCapacity"],
+          "properties": {
+            "totalCapacity": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Total available capacity"
+            },
+            "reservedCapacity": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Capacity reserved for specific purposes"
+            },
+            "flexibleCapacity": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Flexible capacity for general use"
+            }
+          }
+        },
+        "resourceAllocation": {
+          "type": "object",
+          "required": ["staffCount", "equipmentCount", "roomCount"],
+          "properties": {
+            "staffCount": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Number of staff allocated"
+            },
+            "equipmentCount": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Number of equipment units allocated"
+            },
+            "roomCount": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Number of rooms allocated"
+            }
+          }
+        },
+        "schedulingParameters": {
+          "type": "object",
+          "required": ["slotDuration", "bufferTime", "maxBookingsPerDay"],
+          "properties": {
+            "slotDuration": {
+              "type": "number",
+              "minimum": 1,
+              "description": "Duration of each appointment slot in minutes"
+            },
+            "bufferTime": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Buffer time between appointments in minutes"
+            },
+            "maxBookingsPerDay": {
+              "type": "number",
+              "minimum": 1,
+              "description": "Maximum number of bookings allowed per day"
+            }
+          }
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the allocation plan was created"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Identifier of the user or system that created the allocation plan"
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the allocation plan becomes effective"
+    },
+    "effectiveUntil": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the allocation plan expires (optional)"
+    }
+  }
+}
