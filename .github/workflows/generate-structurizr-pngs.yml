@@ -10,7 +10,7 @@ jobs:
       # Give the default GITHUB_TOKEN write permission to commit and push the
       # added or changed files to the repository.
       contents: write
-      
+
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
@@ -22,11 +22,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "20"
 
       # Step 3: Download Structurizr Puppeteer repository
       - name: Download Structurizr Puppeteer
         run: |
+          cd structurizr
           git clone https://github.com/structurizr/puppeteer.git
           cd puppeteer
           npm i puppeteer
@@ -34,9 +35,10 @@ jobs:
       # Step 4: Start Structurizr Lite in Docker
       - name: Start Structurizr container
         run: |
+          cd structurizr
           docker run --name structurizr-github-action \
-          -d --rm -p 8080:8080 -v \
-          ./:/usr/local/structurizr structurizr/lite
+            -d --rm -p 8080:8080 -v \
+            ./:/usr/local/structurizr structurizr/lite
 
       # Step 5: Sleep until the docker container is ready
       - name: Sleep for 30 seconds
@@ -52,11 +54,11 @@ jobs:
       - name: Check workspace.dsl in Structurizr container
         run: |
           docker exec structurizr-github-action ls /usr/local/structurizr
-      
+
       - name: Turn off apparmor
-        run : |
-            echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
-      
+        run: |
+          echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+
       # Step 8: Run Puppeteer script
       - name: Export diagrams
         run: |
@@ -69,10 +71,10 @@ jobs:
           mkdir -p images
           cp puppeteer/*.png images/
           rm -rf puppeteer
-      
+
       # Step 10: Commit and push diagrams to the PR branch
       - uses: stefanzweifel/git-auto-commit-action@v5
-      
+
       # Step 11: Stop and remove the Docker container
       - name: Clean up Docker container
         if: always()
