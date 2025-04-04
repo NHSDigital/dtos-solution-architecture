@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "eventcatalog/nhse-screening-catalog/**"
+      - further-actions
+    # paths:
+    #   - "eventcatalog/nhse-screening-catalog/**"
   workflow_dispatch:
 
 jobs:
