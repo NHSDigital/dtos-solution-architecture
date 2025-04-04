@@ -8,6 +8,12 @@ on:
       - "eventcatalog/nhse-screening-catalog/**"
   workflow_dispatch:
 
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     name: Build
@@ -15,6 +21,7 @@ jobs:
     defaults:
       run:
         working-directory: eventcatalog/nhse-screening-catalog
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,7 +39,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: eventcatalog/nhse-screening-catalog/dist
+          path: ./eventcatalog/nhse-screening-catalog/dist
 
   deploy:
     environment:
