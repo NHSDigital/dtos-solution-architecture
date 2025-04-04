@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - publish-github-pages
   workflow_dispatch:
 
 jobs:
