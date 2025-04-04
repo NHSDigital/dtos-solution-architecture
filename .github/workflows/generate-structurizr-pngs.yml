@@ -62,7 +62,7 @@ jobs:
       # Step 8: Run Puppeteer script
       - name: Export diagrams
         run: |
-          cd puppeteer
+          cd structurizr/puppeteer
           node export-diagrams.js http://localhost:8080/workspace/diagrams png
 
       # Step 9: Copy pngs to images folder
