@@ -69,8 +69,8 @@ jobs:
       - name: Copy diagrams to /images
         run: |
           mkdir -p images
-          cp puppeteer/*.png images/
-          rm -rf puppeteer
+          cp structurizr/puppeteer/*.png images/
+          rm -rf structurizr/puppeteer
 
       # Step 10: Commit and push diagrams to the PR branch
       - uses: stefanzweifel/git-auto-commit-action@v5
