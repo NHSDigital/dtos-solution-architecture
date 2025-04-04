@@ -24,12 +24,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd eventcatalog/nhse-screening-catalog
           npm ci
 
       - name: Build EventCatalog
         run: |
-          cd eventcatalog/nhse-screening-catalog
           npm run build
 
       - name: Deploy to GitHub Pages
