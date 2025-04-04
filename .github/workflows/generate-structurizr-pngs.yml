@@ -2,6 +2,8 @@ name: Generate Structurizr PNGs
 
 on:
   pull_request:
+    paths:
+      - "structurizr/**"
 
 jobs:
   generate-diagrams:

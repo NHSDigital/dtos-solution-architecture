@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-04-04T13:23:31Z",
+  "lastModifiedDate" : "2025-04-04T14:40:10Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -2047,35 +2047,35 @@
       },
       "elements" : [ {
         "id" : "5",
-        "x" : 3200,
+        "x" : 3199,
         "y" : 1893
       }, {
         "id" : "34",
-        "x" : 950,
+        "x" : 949,
         "y" : 485
       }, {
         "id" : "35",
-        "x" : 1700,
+        "x" : 1699,
         "y" : 485
       }, {
         "id" : "36",
-        "x" : 2450,
+        "x" : 2449,
         "y" : 785
       }, {
         "id" : "37",
-        "x" : 3200,
+        "x" : 3199,
         "y" : 1039
       }, {
         "id" : "38",
-        "x" : 2450,
+        "x" : 2449,
         "y" : 185
       }, {
         "id" : "39",
-        "x" : 2450,
+        "x" : 2449,
         "y" : 1385
       }, {
         "id" : "53",
-        "x" : 200,
+        "x" : 199,
         "y" : 485
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
