@@ -4,9 +4,8 @@ on:
   push:
     branches:
       - main
-      - further-actions
-    # paths:
-    #   - "eventcatalog/nhse-screening-catalog/**"
+    paths:
+      - "eventcatalog/nhse-screening-catalog/**"
   workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
