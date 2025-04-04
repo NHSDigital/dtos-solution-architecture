@@ -1,0 +1,32 @@
+---
+# id of your event, used for slugs and references in EventCatalog.
+id: ParticipantProfileValidated
+
+# Display name of the Event, rendered in EventCatalog
+name: Participant Profile Validated
+
+# Version of the Event
+version: 0.0.1
+
+# Short summary of your Event
+summary: |
+  Indicates that a participant's profile has been successfully validated against defined rules and criteria, confirming their eligibility for screening services.
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Event
+    backgroundColor: green
+    textColor: white
+
+# The path to the schema for people to download. Relative to your command folder.
+# Resolved path for this would be /commands/InventoryAdjusted/schema.avro.
+schemaPath: "schemaparticipantprofilevalidated.json"
+---
+
+## Overview
+
+The Participant Profile Validated event is triggered when a participant's profile successfully passes all validation checks. This event confirms that the participant meets the required criteria and their information is complete and accurate.
+
+## Event Data
+
+<Schema />

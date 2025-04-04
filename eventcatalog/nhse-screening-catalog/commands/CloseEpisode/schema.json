@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Close Episode Command Schema",
+  "description": "Schema for the CloseEpisode command that represents the intent to close a screening episode",
+  "type": "object",
+  "required": [
+    "episodeId",
+    "participantId",
+    "status",
+    "outcome",
+    "closedBy",
+    "closedAt"
+  ],
+  "properties": {
+    "episodeId": {
+      "type": "string",
+      "description": "Unique identifier for the screening episode to be closed"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["COMPLETED", "CANCELLED", "TERMINATED", "TRANSFERRED"],
+      "description": "Final status of the episode"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "ABNORMAL",
+        "INCONCLUSIVE",
+        "REFERRED",
+        "FURTHER_INVESTIGATION_REQUIRED",
+        "NO_SHOW",
+        "DECLINED"
+      ],
+      "description": "Clinical outcome of the screening episode"
+    },
+    "closedBy": {
+      "type": "string",
+      "description": "Identifier of the person closing the episode"
+    },
+    "closedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the episode is being closed"
+    },
+    "clinicalResults": {
+      "type": "object",
+      "required": ["screeningResult", "riskLevel"],
+      "properties": {
+        "screeningResult": {
+          "type": "string",
+          "description": "Result of the screening test"
+        },
+        "riskLevel": {
+          "type": "string",
+          "enum": ["LOW", "MEDIUM", "HIGH", "URGENT"],
+          "description": "Risk level assessment"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Clinical recommendations based on results"
+        }
+      },
+      "description": "Clinical results and assessments from the episode"
+    },
+    "appointmentSummary": {
+      "type": "object",
+      "required": [
+        "totalAppointments",
+        "completedAppointments",
+        "cancelledAppointments"
+      ],
+      "properties": {
+        "totalAppointments": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of appointments in the episode"
+        },
+        "completedAppointments": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of completed appointments"
+        },
+        "cancelledAppointments": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of cancelled appointments"
+        }
+      },
+      "description": "Summary of appointments in the episode"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for closing the episode, if applicable"
+    },
+    "nextSteps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Recommended next steps for the participant"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or comments about the episode closure"
+    }
+  }
+}

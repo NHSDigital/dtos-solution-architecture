@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Appointment Cancelled Event Schema",
+  "description": "Schema for the AppointmentCancelled event that represents the cancellation of a screening appointment",
+  "type": "object",
+  "required": [
+    "appointmentId",
+    "participantId",
+    "serviceId",
+    "cancellationReason",
+    "cancelledBy",
+    "cancelledAt"
+  ],
+  "properties": {
+    "appointmentId": {
+      "type": "string",
+      "description": "Unique identifier for the cancelled appointment"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Identifier of the screening service"
+    },
+    "cancellationReason": {
+      "type": "string",
+      "enum": [
+        "PATIENT_REQUEST",
+        "CLINIC_CANCELLED",
+        "WEATHER",
+        "STAFF_UNAVAILABLE",
+        "EQUIPMENT_ISSUE",
+        "FACILITY_ISSUE",
+        "OTHER"
+      ],
+      "description": "Primary reason for the cancellation"
+    },
+    "cancelledBy": {
+      "type": "string",
+      "description": "Identifier of the person or system that cancelled the appointment"
+    },
+    "cancelledAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the appointment was cancelled"
+    },
+    "originalAppointment": {
+      "type": "object",
+      "properties": {
+        "scheduledDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Originally scheduled date"
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "time",
+          "description": "Originally scheduled time"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Duration in minutes"
+        },
+        "appointmentType": {
+          "type": "string",
+          "enum": [
+            "INITIAL_SCREENING",
+            "FOLLOW_UP",
+            "RECALL",
+            "DIAGNOSTIC",
+            "REVIEW",
+            "OTHER"
+          ],
+          "description": "Type of the cancelled appointment"
+        }
+      },
+      "description": "Details of the original appointment"
+    },
+    "cancellationDetails": {
+      "type": "object",
+      "properties": {
+        "reasonDetails": {
+          "type": "string",
+          "description": "Detailed explanation of the cancellation reason"
+        },
+        "isRebookable": {
+          "type": "boolean",
+          "description": "Whether the appointment can be rebooked"
+        },
+        "rebookingDeadline": {
+          "type": "string",
+          "format": "date",
+          "description": "Deadline for rebooking if applicable"
+        },
+        "alternativeOptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date",
+                "description": "Alternative appointment date"
+              },
+              "time": {
+                "type": "string",
+                "format": "time",
+                "description": "Alternative appointment time"
+              },
+              "location": {
+                "type": "string",
+                "description": "Alternative location"
+              }
+            }
+          },
+          "description": "Alternative appointment options if available"
+        }
+      },
+      "description": "Additional details about the cancellation"
+    },
+    "notificationStatus": {
+      "type": "object",
+      "properties": {
+        "notifiedChannels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["EMAIL", "SMS", "POST", "PHONE"]
+          }
+        },
+        "notificationStatus": {
+          "type": "string",
+          "enum": ["PENDING", "SENT", "FAILED"],
+          "description": "Status of cancellation notifications"
+        },
+        "notificationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When notifications were sent"
+        }
+      },
+      "description": "Status of cancellation notifications"
+    },
+    "impactAssessment": {
+      "type": "object",
+      "properties": {
+        "clinicalImpact": {
+          "type": "string",
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
+          "description": "Clinical impact of the cancellation"
+        },
+        "reschedulingPriority": {
+          "type": "string",
+          "enum": ["STANDARD", "HIGH", "URGENT"],
+          "description": "Priority for rescheduling"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about the impact"
+        }
+      },
+      "description": "Assessment of the cancellation's impact"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system that processed the cancellation"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Appointment Attended Event Schema",
+  "description": "Schema for the AppointmentAttended event that represents a participant attending their screening appointment",
+  "type": "object",
+  "required": [
+    "appointmentId",
+    "participantId",
+    "serviceId",
+    "attendanceTime",
+    "attendanceStatus",
+    "recordedBy"
+  ],
+  "properties": {
+    "appointmentId": {
+      "type": "string",
+      "description": "Unique identifier for the appointment"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Identifier of the screening service"
+    },
+    "attendanceTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the participant attended"
+    },
+    "attendanceStatus": {
+      "type": "string",
+      "enum": ["ON_TIME", "LATE", "VERY_LATE", "NO_SHOW"],
+      "description": "Status of the attendance"
+    },
+    "recordedBy": {
+      "type": "string",
+      "description": "Identifier of the person recording the attendance"
+    },
+    "arrivalTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the participant arrived"
+    },
+    "departureTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the participant departed"
+    },
+    "waitTime": {
+      "type": "integer",
+      "description": "Time spent waiting in minutes"
+    },
+    "attendanceNotes": {
+      "type": "string",
+      "description": "Additional notes about the attendance"
+    },
+    "accompaniedBy": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "relationship"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the accompanying person"
+          },
+          "relationship": {
+            "type": "string",
+            "description": "Relationship to the participant"
+          }
+        }
+      },
+      "description": "List of people who accompanied the participant"
+    },
+    "accessibilityNeeds": {
+      "type": "object",
+      "properties": {
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "WHEELCHAIR_ACCESS",
+              "SIGN_LANGUAGE",
+              "LARGE_PRINT",
+              "BRAILLE",
+              "HEARING_LOOP",
+              "OTHER"
+            ]
+          },
+          "description": "List of accessibility requirements"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about accessibility needs"
+        }
+      },
+      "description": "Accessibility requirements for the appointment"
+    },
+    "clinicalObservations": {
+      "type": "object",
+      "properties": {
+        "vitalSigns": {
+          "type": "object",
+          "properties": {
+            "bloodPressure": {
+              "type": "string",
+              "description": "Blood pressure reading"
+            },
+            "temperature": {
+              "type": "number",
+              "description": "Body temperature"
+            },
+            "pulse": {
+              "type": "integer",
+              "description": "Pulse rate"
+            }
+          }
+        },
+        "observations": {
+          "type": "string",
+          "description": "Clinical observations during the appointment"
+        }
+      },
+      "description": "Clinical observations made during the appointment"
+    },
+    "nextAppointment": {
+      "type": "object",
+      "properties": {
+        "scheduledDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the next appointment"
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "time",
+          "description": "Time of the next appointment"
+        },
+        "appointmentType": {
+          "type": "string",
+          "description": "Type of the next appointment"
+        }
+      },
+      "description": "Details of the next scheduled appointment if any"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system recording the attendance"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

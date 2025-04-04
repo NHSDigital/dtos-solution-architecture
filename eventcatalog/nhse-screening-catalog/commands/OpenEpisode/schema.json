@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Open Episode Command Schema",
+  "description": "Schema for the OpenEpisode command that represents the intent to create a new screening episode for a participant",
+  "type": "object",
+  "required": [
+    "participantId",
+    "programId",
+    "serviceId",
+    "episodeType",
+    "openedBy",
+    "openedAt"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "programId": {
+      "type": "string",
+      "description": "Unique identifier for the screening program"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "episodeType": {
+      "type": "string",
+      "enum": [
+        "ROUTINE",
+        "RECALL",
+        "FOLLOW_UP",
+        "DIAGNOSTIC",
+        "URGENT",
+        "SPECIAL_CASE"
+      ],
+      "description": "Type of screening episode"
+    },
+    "openedBy": {
+      "type": "string",
+      "description": "Identifier of the person opening the episode"
+    },
+    "openedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the episode is being opened"
+    },
+    "eligibilityDetails": {
+      "type": "object",
+      "required": ["isEligible", "eligibilityDate"],
+      "properties": {
+        "isEligible": {
+          "type": "boolean",
+          "description": "Whether the participant is eligible for this episode"
+        },
+        "eligibilityDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when eligibility was determined"
+        },
+        "eligibilityCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of eligibility criteria met"
+        }
+      },
+      "description": "Details about participant eligibility"
+    },
+    "riskFactors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["factor", "level"],
+        "properties": {
+          "factor": {
+            "type": "string",
+            "description": "Name of the risk factor"
+          },
+          "level": {
+            "type": "string",
+            "enum": ["LOW", "MEDIUM", "HIGH", "URGENT"],
+            "description": "Level of risk"
+          }
+        }
+      },
+      "description": "List of identified risk factors"
+    },
+    "accessibilityNeeds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["WHEELCHAIR_ACCESS", "SIGN_LANGUAGE", "HEARING_LOOP", "NONE"]
+      },
+      "description": "List of accessibility requirements"
+    },
+    "languagePreferences": {
+      "type": "object",
+      "properties": {
+        "primaryLanguage": {
+          "type": "string",
+          "description": "Primary language for communication"
+        },
+        "interpreterRequired": {
+          "type": "boolean",
+          "description": "Whether an interpreter is required"
+        }
+      },
+      "description": "Language preferences for communication"
+    },
+    "priorityLevel": {
+      "type": "string",
+      "enum": ["STANDARD", "HIGH", "URGENT"],
+      "description": "Priority level for this episode"
+    },
+    "targetCompletionDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Target date for completing the episode"
+    },
+    "referralSource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["GP", "HOSPITAL", "SELF", "OTHER_PROGRAM", "OTHER"],
+          "description": "Type of referral source"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Reference number or identifier from the source"
+        }
+      },
+      "description": "Information about where the episode was referred from"
+    },
+    "clinicalNotes": {
+      "type": "string",
+      "description": "Initial clinical notes or observations"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "content"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "REFERRAL_LETTER",
+              "CLINICAL_NOTES",
+              "IMAGING",
+              "LAB_RESULTS",
+              "OTHER"
+            ],
+            "description": "Type of attachment"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content or reference to the attachment"
+          }
+        }
+      },
+      "description": "Initial clinical documents or attachments"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional administrative notes about opening the episode"
+    }
+  }
+}

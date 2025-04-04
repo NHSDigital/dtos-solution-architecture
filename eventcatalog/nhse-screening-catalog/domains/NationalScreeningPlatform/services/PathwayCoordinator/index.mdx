@@ -1,0 +1,114 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: PathwayCoordinator
+
+# Display name of the Service, rendered in EventCatalog
+name: Pathway Coordinator
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Coordinates screening pathways, managing participant progression through screening programs and ensuring adherence to screening protocols.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: AllocationFailed
+    version: 0.0.1
+  - id: AllocationPlanCreated
+    version: 0.0.1
+  - id: AllocationPlanUpdated
+    version: 0.0.1
+  - id: AppointmentAllocated
+    version: 0.0.1
+  - id: AppointmentAttended
+    version: 0.0.1
+  - id: AppointmentBooked
+    version: 0.0.1
+  - id: AppointmentCancelled
+    version: 0.0.1
+  - id: AppointmentNotAttended
+    version: 0.0.1
+  - id: AppointmentRequestFailed
+    version: 0.0.1
+  - id: CapacityUpdated
+    version: 0.0.1
+  - id: EncounterClosed
+    version: 0.0.1
+  - id: EncounterCreated
+    version: 0.0.1
+  - id: EnrolmentCreated
+    version: 0.0.1
+  - id: EnrolmentDeleted
+    version: 0.0.1
+  - id: EpisodeClosed
+    version: 0.0.1
+  - id: EnrolmentOpened
+    version: 0.0.1
+  - id: ParticipantProfileException
+    version: 0.0.1
+  - id: ParticipantProfileValidated
+    version: 0.0.1
+  - id: SlotCreated
+    version: 0.0.1
+  - id: SupportCaseCreated
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: AllocateAppointment
+    version: 0.0.1
+  - id: CreateEncounter
+    version: 0.0.1
+  - id: CreateEnrolment
+    version: 0.0.1
+  - id: CreateSlot
+    version: 0.0.1
+  - id: DeleteEnrolment
+    version: 0.0.1
+  - id: OpenEpisode
+    version: 0.0.1
+  - id: SendInvitation
+    version: 0.0.1
+  - id: SendResult
+    version: 0.0.1
+  - id: ValidateParticipantProfile
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Pathway Coordinator service is responsible for managing screening pathways and coordinating participant progression through screening programs. It ensures adherence to screening protocols and manages the flow of participants through different stages of screening.
+
+## Responsibilities
+
+1. **Pathway Management**
+
+   - Create and manage screening pathways
+   - Track pathway progress
+   - Handle pathway transitions
+   - Manage pathway completion
+
+2. **Protocol Compliance**
+
+   - Ensure protocol adherence
+   - Manage screening intervals
+   - Handle protocol variations
+   - Track compliance metrics
+
+## Business Rules
+
+1. Pathways must follow defined protocols
+2. All pathway changes must be tracked
+3. Milestones must be validated
+4. Pathway data must be complete
+5. Compliance must be monitored
+
+<NodeGraph />

@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Participant Profile Validated Event Schema",
+  "description": "Schema for the ParticipantProfileValidated event that indicates successful validation of a participant's profile",
+  "type": "object",
+  "required": [
+    "participantId",
+    "serviceId",
+    "validationTimestamp",
+    "validatorId",
+    "validationRules",
+    "profileData"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "validationTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the validation was performed"
+    },
+    "validatorId": {
+      "type": "string",
+      "description": "Identifier of the system or user that performed the validation"
+    },
+    "validationRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ruleId", "ruleName", "ruleVersion"],
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "description": "Unique identifier for the validation rule"
+          },
+          "ruleName": {
+            "type": "string",
+            "description": "Name of the validation rule"
+          },
+          "ruleVersion": {
+            "type": "string",
+            "description": "Version of the validation rule"
+          }
+        }
+      },
+      "description": "List of validation rules that were checked"
+    },
+    "profileData": {
+      "type": "object",
+      "required": ["demographics", "contactDetails", "eligibility"],
+      "properties": {
+        "demographics": {
+          "type": "object",
+          "required": ["dateOfBirth", "gender", "nhsNumber"],
+          "properties": {
+            "dateOfBirth": {
+              "type": "string",
+              "format": "date",
+              "description": "Participant's date of birth"
+            },
+            "gender": {
+              "type": "string",
+              "enum": ["MALE", "FEMALE", "OTHER", "NOT_SPECIFIED"],
+              "description": "Participant's gender"
+            },
+            "nhsNumber": {
+              "type": "string",
+              "pattern": "^[0-9]{10}$",
+              "description": "Participant's NHS number"
+            }
+          }
+        },
+        "contactDetails": {
+          "type": "object",
+          "required": ["address", "primaryContact"],
+          "properties": {
+            "address": {
+              "type": "object",
+              "required": ["line1", "postcode"],
+              "properties": {
+                "line1": {
+                  "type": "string",
+                  "description": "First line of address"
+                },
+                "postcode": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$",
+                  "description": "Postal code"
+                }
+              }
+            },
+            "primaryContact": {
+              "type": "object",
+              "required": ["type", "value"],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["PHONE", "EMAIL", "POST"],
+                  "description": "Type of contact method"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Contact value"
+                }
+              }
+            }
+          }
+        },
+        "eligibility": {
+          "type": "object",
+          "required": ["status", "criteria"],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["ELIGIBLE", "NOT_ELIGIBLE", "PENDING_REVIEW"],
+              "description": "Eligibility status"
+            },
+            "criteria": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of eligibility criteria met"
+            }
+          }
+        }
+      }
+    }
+  }
+}

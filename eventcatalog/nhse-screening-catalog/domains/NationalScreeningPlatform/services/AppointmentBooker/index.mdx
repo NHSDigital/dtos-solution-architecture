@@ -1,0 +1,75 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: AppointmentBooker
+
+# Display name of the Service, rendered in EventCatalog
+name: Appointment Booker
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Handles the booking and confirmation of screening appointments for both the participant and staff member.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: CreateSlot
+    version: 0.0.1
+  - id: RequestAppointment
+    version: 0.0.1
+  - id: GetAvailableSlots
+    version: 0.0.1
+  - id: CancelAppointment
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: AppointmentBooked
+    version: 0.0.1
+  - id: AppointmentAttended
+    version: 0.0.1
+  - id: AppointmentCancelled
+    version: 0.0.1
+  - id: AppointmentNotAttended
+    version: 0.0.1
+  - id: AppointmentRequestFailed
+    version: 0.0.1
+  - id: SlotCreated
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Appointment Booker service manages the booking and confirmation process for screening appointments. It ensures that appointments are properly booked, confirmed.
+
+## Responsibilities
+
+1. **Booking Management**
+
+   - Process booking requests
+   - Confirm appointments
+   - Handle booking modifications
+   - Manage cancellations
+
+2. **Integration**
+   - Connect with external booking systems
+   - Manage booking data
+   - Handle booking conflicts
+   - Maintain booking records
+
+## Business Rules
+
+1. Bookings must be confirmed within 24 hours
+2. All bookings must include participant contact details
+3. Reminders must be sent 48 hours before appointment
+4. Cancellations must be processed within 4 hours
+5. Booking records must be maintained for 7 years
+
+<NodeGraph />

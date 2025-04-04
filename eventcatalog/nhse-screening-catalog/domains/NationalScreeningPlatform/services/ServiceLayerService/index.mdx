@@ -1,0 +1,76 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: ServiceLayerService
+
+# Display name of the Service, rendered in EventCatalog
+name: Service Layer
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Provides a unified service layer for the screening platform, handling service orchestration, integration, and coordination between different system components.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: BSSelectEpisodeClosed
+    version: 0.0.1
+  - id: CaaSEligibleParticipant
+    version: 0.0.1
+  - id: NBSSAppointmentBooked
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: CreateEnrolment
+    version: 0.0.1
+  - id: OpenEpisode
+    version: 0.0.1
+  - id: CloseEpisode
+    version: 0.0.1
+  - id: SendResult
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Service Layer service acts as the central coordination point for the screening platform, providing a unified interface for service interactions and ensuring proper orchestration between different system components.
+
+## Responsibilities
+
+1. **Service Orchestration**
+
+   - Coordinate service interactions
+   - Manage service workflows
+   - Handle service dependencies
+   - Ensure service availability
+
+2. **Integration Management**
+
+   - Connect different services
+   - Manage service interfaces
+   - Handle service routing
+   - Support service discovery
+
+3. **Service Coordination**
+   - Process service requests
+   - Manage service responses
+   - Handle service errors
+   - Monitor service health
+
+## Business Rules
+
+1. All service requests must be validated
+2. Service dependencies must be checked
+3. Service responses must be tracked
+4. Service health must be monitored
+5. Service errors must be handled
+
+<NodeGraph />

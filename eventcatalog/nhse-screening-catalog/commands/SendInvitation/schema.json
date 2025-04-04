@@ -1,0 +1,178 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Send Invitation Command Schema",
+  "description": "Schema for the SendInvitation command that represents the intent to send a screening invitation to a participant",
+  "type": "object",
+  "required": [
+    "participantId",
+    "programId",
+    "invitationType",
+    "communicationPreferences",
+    "sentBy",
+    "sentAt"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "programId": {
+      "type": "string",
+      "description": "Unique identifier for the screening program"
+    },
+    "invitationType": {
+      "type": "string",
+      "enum": ["INITIAL", "RECALL", "FOLLOW_UP", "REINVITATION", "REMINDER"],
+      "description": "Type of screening invitation"
+    },
+    "communicationPreferences": {
+      "type": "object",
+      "required": ["preferredChannel", "language"],
+      "properties": {
+        "preferredChannel": {
+          "type": "string",
+          "enum": ["EMAIL", "SMS", "POST", "PORTAL"],
+          "description": "Preferred communication channel"
+        },
+        "language": {
+          "type": "string",
+          "description": "Preferred language for communication"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["PLAIN_TEXT", "HTML", "PDF"],
+          "description": "Preferred format for the invitation"
+        }
+      },
+      "description": "Participant's communication preferences"
+    },
+    "sentBy": {
+      "type": "string",
+      "description": "Identifier of the person sending the invitation"
+    },
+    "sentAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the invitation is being sent"
+    },
+    "eligibilityDetails": {
+      "type": "object",
+      "required": ["isEligible", "eligibilityDate"],
+      "properties": {
+        "isEligible": {
+          "type": "boolean",
+          "description": "Whether the participant is eligible for screening"
+        },
+        "eligibilityDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when eligibility was determined"
+        },
+        "eligibilityCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of eligibility criteria met"
+        }
+      },
+      "description": "Details about participant eligibility"
+    },
+    "appointmentPreferences": {
+      "type": "object",
+      "properties": {
+        "preferredDays": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "description": "Preferred days of the week"
+        },
+        "preferredTimes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["MORNING", "AFTERNOON", "EVENING"]
+          },
+          "description": "Preferred times of day"
+        },
+        "maxTravelDistance": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum travel distance in kilometers"
+        }
+      },
+      "description": "Participant's appointment preferences"
+    },
+    "accessibilityNeeds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["WHEELCHAIR_ACCESS", "SIGN_LANGUAGE", "HEARING_LOOP", "NONE"]
+      },
+      "description": "List of accessibility requirements"
+    },
+    "invitationContent": {
+      "type": "object",
+      "required": ["templateId", "variables"],
+      "properties": {
+        "templateId": {
+          "type": "string",
+          "description": "Identifier of the invitation template to use"
+        },
+        "variables": {
+          "type": "object",
+          "description": "Variables to be used in the template"
+        }
+      },
+      "description": "Content configuration for the invitation"
+    },
+    "responseDeadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Deadline for responding to the invitation"
+    },
+    "priorityLevel": {
+      "type": "string",
+      "enum": ["STANDARD", "HIGH", "URGENT"],
+      "description": "Priority level for this invitation"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "content"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "INFORMATION_SHEET",
+              "CONSENT_FORM",
+              "PREPARATION_GUIDE",
+              "OTHER"
+            ],
+            "description": "Type of attachment"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content or reference to the attachment"
+          }
+        }
+      },
+      "description": "Additional documents to be sent with the invitation"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about sending the invitation"
+    }
+  }
+}

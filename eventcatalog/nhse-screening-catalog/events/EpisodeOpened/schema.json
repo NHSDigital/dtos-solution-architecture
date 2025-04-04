@@ -1,0 +1,231 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Episode Opened Event Schema",
+  "description": "Schema for the EpisodeOpened event that represents the opening of a new screening episode for a participant",
+  "type": "object",
+  "required": [
+    "episodeId",
+    "participantId",
+    "programId",
+    "serviceId",
+    "episodeType",
+    "openedBy",
+    "openedAt"
+  ],
+  "properties": {
+    "episodeId": {
+      "type": "string",
+      "description": "Unique identifier for the new episode"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "programId": {
+      "type": "string",
+      "description": "Identifier of the screening program"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Identifier of the screening service"
+    },
+    "episodeType": {
+      "type": "string",
+      "enum": [
+        "ROUTINE",
+        "RECALL",
+        "FOLLOW_UP",
+        "DIAGNOSTIC",
+        "URGENT",
+        "SPECIAL_CASE"
+      ],
+      "description": "Type of the screening episode"
+    },
+    "openedBy": {
+      "type": "string",
+      "description": "Identifier of the person opening the episode"
+    },
+    "openedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the episode was opened"
+    },
+    "eligibilityDetails": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "description": "Participant's age at episode opening"
+        },
+        "eligibilityCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of eligibility criteria met"
+        },
+        "exclusionFactors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Factors affecting eligibility"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional eligibility notes"
+        }
+      },
+      "description": "Details about participant eligibility"
+    },
+    "riskFactors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["factor", "level"],
+        "properties": {
+          "factor": {
+            "type": "string",
+            "enum": [
+              "FAMILY_HISTORY",
+              "PREVIOUS_ABNORMAL",
+              "LIFESTYLE",
+              "MEDICAL_CONDITION",
+              "MEDICATION",
+              "OTHER"
+            ],
+            "description": "Type of risk factor"
+          },
+          "level": {
+            "type": "string",
+            "enum": ["LOW", "MEDIUM", "HIGH", "URGENT"],
+            "description": "Level of risk"
+          },
+          "details": {
+            "type": "string",
+            "description": "Detailed description of the risk factor"
+          }
+        }
+      },
+      "description": "List of relevant risk factors"
+    },
+    "accessibilityNeeds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "WHEELCHAIR_ACCESS",
+          "HEARING_LOOP",
+          "SIGN_LANGUAGE",
+          "LARGE_PRINT",
+          "BRAILLE",
+          "OTHER"
+        ]
+      },
+      "description": "List of accessibility requirements"
+    },
+    "languagePreferences": {
+      "type": "object",
+      "properties": {
+        "preferredLanguage": {
+          "type": "string",
+          "description": "Participant's preferred language"
+        },
+        "interpreterRequired": {
+          "type": "boolean",
+          "description": "Whether an interpreter is needed"
+        },
+        "interpreterLanguage": {
+          "type": "string",
+          "description": "Language for interpreter if required"
+        }
+      },
+      "description": "Language and communication preferences"
+    },
+    "priorityLevel": {
+      "type": "string",
+      "enum": ["STANDARD", "HIGH", "URGENT"],
+      "description": "Priority level for the episode"
+    },
+    "targetCompletionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Target date for completing the episode"
+    },
+    "referralSource": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": ["GP", "HOSPITAL", "SELF", "OTHER_PROGRAM", "OTHER"],
+          "description": "Source of the referral"
+        },
+        "referralId": {
+          "type": "string",
+          "description": "Identifier of the referral"
+        },
+        "referralDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the referral"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional referral notes"
+        }
+      },
+      "description": "Details about the referral source"
+    },
+    "clinicalNotes": {
+      "type": "string",
+      "description": "Initial clinical notes for the episode"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "reference"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "REFERRAL_LETTER",
+              "CLINICAL_NOTES",
+              "IMAGING",
+              "LAB_RESULTS",
+              "OTHER"
+            ],
+            "description": "Type of attachment"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Reference to the attachment"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the attachment"
+          }
+        }
+      },
+      "description": "List of relevant attachments"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system opening the episode"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

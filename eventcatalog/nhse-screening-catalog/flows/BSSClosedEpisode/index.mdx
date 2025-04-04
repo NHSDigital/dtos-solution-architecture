@@ -1,0 +1,52 @@
+---
+id: "BSSClosedEpisode"
+name: "Participant Closed Episode"
+version: "0.0.1"
+summary: "Flow for when particiants screening or assessment episodes are closed"
+steps:
+  - id: "BSSelectClosedEpisode"
+    title: "BS Select receives closed episodes from NBSS"
+    summary: "Participant closed episodes"
+    # here we define the externalSystem.
+    externalSystem:
+     name: "BS Select"
+     summary: "Legacy call-recall system"
+    # What happens next? Define the next step  
+    next_step: 
+      id: "BSSelect"
+      label: "Publishes closed episodes to NSP"
+    
+  - id: "BSSelect"
+    title: "BSSelect"
+    summary: "Publish closed episodes"
+    # This step is a message, include the message and version
+    message:
+      id: "BSSelectEpisodeClosed"
+      version: "0.0.1"
+    next_step:
+      id : "ServiceLayer"
+      label: "Service Layer process closed episode from BS Select"
+  
+  - id: "ServiceLayer"
+    title: "Participant Closed Episodes"
+    summary: "Service Layer receives closed episodes"
+    # This step is a message, include the message and version
+    message:
+      id: "EpisodeClosed"
+      version: "0.0.1"
+    next_step: 
+      id: "PathwayCoordinator"
+      label: "Publish closed episode to pathway coordinator"
+
+  - id: "PathwayCoordinator"
+    title: "Pathway Coordinate receives closed episode event"
+    summary: "Participant closed episode events from service layer"
+     # This step is a message, include the message and version
+    message:
+      id: "CloseParticipantEpisode"
+      version: "0.0.1"
+
+---
+This flow documents what happens when a User Cancels Subscription in our system. 
+
+ <NodeGraph />

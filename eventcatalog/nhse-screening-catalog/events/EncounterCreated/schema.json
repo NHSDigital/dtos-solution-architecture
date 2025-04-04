@@ -1,0 +1,225 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Encounter Created Event Schema",
+  "description": "Schema for the EncounterCreated event that represents the creation of a new screening encounter",
+  "type": "object",
+  "required": [
+    "encounterId",
+    "participantId",
+    "serviceId",
+    "encounterType",
+    "startDate",
+    "startTime",
+    "createdBy",
+    "createdAt"
+  ],
+  "properties": {
+    "encounterId": {
+      "type": "string",
+      "description": "Unique identifier for the encounter"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Identifier of the screening service"
+    },
+    "encounterType": {
+      "type": "string",
+      "enum": [
+        "INITIAL_SCREENING",
+        "FOLLOW_UP",
+        "RECALL",
+        "DIAGNOSTIC",
+        "REVIEW",
+        "TRAINING",
+        "OTHER"
+      ],
+      "description": "Type of the encounter"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the encounter starts"
+    },
+    "startTime": {
+      "type": "string",
+      "format": "time",
+      "description": "Time when the encounter starts"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Identifier of the person creating the encounter"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the encounter was created"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "type": "string",
+          "description": "Identifier of the screening site"
+        },
+        "siteName": {
+          "type": "string",
+          "description": "Name of the screening site"
+        },
+        "room": {
+          "type": "string",
+          "description": "Room or area where the encounter takes place"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "line1": {
+              "type": "string",
+              "description": "First line of address"
+            },
+            "line2": {
+              "type": "string",
+              "description": "Second line of address"
+            },
+            "line3": {
+              "type": "string",
+              "description": "Third line of address"
+            },
+            "postcode": {
+              "type": "string",
+              "pattern": "^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$",
+              "description": "Postal code"
+            }
+          }
+        }
+      },
+      "description": "Location details for the encounter"
+    },
+    "staff": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["staffId", "role"],
+        "properties": {
+          "staffId": {
+            "type": "string",
+            "description": "Identifier of the staff member"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "SCREENING_SPECIALIST",
+              "NURSE",
+              "DOCTOR",
+              "TECHNICIAN",
+              "TRAINEE",
+              "OTHER"
+            ],
+            "description": "Role of the staff member"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the staff member"
+          }
+        }
+      },
+      "description": "List of staff members involved in the encounter"
+    },
+    "participantDetails": {
+      "type": "object",
+      "properties": {
+        "accessibilityNeeds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "WHEELCHAIR_ACCESS",
+              "SIGN_LANGUAGE",
+              "LARGE_PRINT",
+              "BRAILLE",
+              "HEARING_LOOP",
+              "OTHER"
+            ]
+          },
+          "description": "Participant's accessibility requirements"
+        },
+        "language": {
+          "type": "string",
+          "description": "Participant's preferred language"
+        },
+        "interpreterRequired": {
+          "type": "boolean",
+          "description": "Whether an interpreter is required"
+        }
+      },
+      "description": "Details about the participant's needs"
+    },
+    "clinicalContext": {
+      "type": "object",
+      "properties": {
+        "previousEncounters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "encounterId": {
+                "type": "string",
+                "description": "Identifier of the previous encounter"
+              },
+              "date": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of the previous encounter"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of the previous encounter"
+              }
+            }
+          },
+          "description": "History of previous encounters"
+        },
+        "riskFactors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "FAMILY_HISTORY",
+              "PREVIOUS_ABNORMAL_RESULTS",
+              "IMMUNOSUPPRESSED",
+              "HIV_POSITIVE",
+              "OTHER"
+            ]
+          },
+          "description": "Relevant risk factors"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional clinical notes"
+        }
+      },
+      "description": "Clinical context for the encounter"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system creating the encounter"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

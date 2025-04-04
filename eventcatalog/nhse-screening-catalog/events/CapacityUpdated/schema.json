@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Capacity Updated Event Schema",
+  "description": "Schema for the CapacityUpdated event that indicates changes to screening service capacity",
+  "type": "object",
+  "required": [
+    "serviceId",
+    "locationId",
+    "timestamp",
+    "previousCapacity",
+    "newCapacity",
+    "changeReason",
+    "effectiveFrom"
+  ],
+  "properties": {
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "locationId": {
+      "type": "string",
+      "description": "Unique identifier for the location where capacity has changed"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the capacity update occurred"
+    },
+    "previousCapacity": {
+      "type": "object",
+      "required": ["totalSlots", "availableSlots", "resourceCount"],
+      "properties": {
+        "totalSlots": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total number of appointment slots before the update"
+        },
+        "availableSlots": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of available appointment slots before the update"
+        },
+        "resourceCount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of resources (staff, equipment, etc.) before the update"
+        }
+      }
+    },
+    "newCapacity": {
+      "type": "object",
+      "required": ["totalSlots", "availableSlots", "resourceCount"],
+      "properties": {
+        "totalSlots": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total number of appointment slots after the update"
+        },
+        "availableSlots": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of available appointment slots after the update"
+        },
+        "resourceCount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of resources (staff, equipment, etc.) after the update"
+        }
+      }
+    },
+    "changeReason": {
+      "type": "string",
+      "description": "Reason for the capacity change",
+      "enum": [
+        "STAFF_CHANGE",
+        "EQUIPMENT_CHANGE",
+        "OPERATIONAL_CHANGE",
+        "MAINTENANCE",
+        "OTHER"
+      ]
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the new capacity becomes effective"
+    },
+    "effectiveUntil": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the new capacity expires (optional)"
+    }
+  }
+}

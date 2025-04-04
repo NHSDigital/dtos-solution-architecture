@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Participant Profile Exception Event Schema",
+  "description": "Schema for the ParticipantProfileException event that indicates validation failures or issues with a participant's profile",
+  "type": "object",
+  "required": [
+    "participantId",
+    "serviceId",
+    "exceptionTimestamp",
+    "validatorId",
+    "validationFailures",
+    "severity",
+    "requiredActions"
+  ],
+  "properties": {
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "exceptionTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the exception was detected"
+    },
+    "validatorId": {
+      "type": "string",
+      "description": "Identifier of the system or user that detected the exception"
+    },
+    "validationFailures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ruleId", "ruleName", "failureReason", "affectedFields"],
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "description": "Unique identifier for the validation rule that failed"
+          },
+          "ruleName": {
+            "type": "string",
+            "description": "Name of the validation rule that failed"
+          },
+          "failureReason": {
+            "type": "string",
+            "description": "Detailed explanation of why the validation failed"
+          },
+          "affectedFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of profile fields that caused the validation failure"
+          }
+        }
+      },
+      "description": "List of validation failures detected"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+      "description": "Severity level of the exception"
+    },
+    "requiredActions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["actionType", "description", "deadline"],
+        "properties": {
+          "actionType": {
+            "type": "string",
+            "enum": [
+              "UPDATE_PROFILE",
+              "VERIFY_INFORMATION",
+              "OBTAIN_DOCUMENTATION",
+              "ESCALATE"
+            ],
+            "description": "Type of action required"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the required action"
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp for when the action must be completed"
+          }
+        }
+      },
+      "description": "List of actions required to resolve the exception"
+    },
+    "profileData": {
+      "type": "object",
+      "description": "Current state of the participant's profile data"
+    },
+    "exceptionContext": {
+      "type": "object",
+      "properties": {
+        "previousValidationStatus": {
+          "type": "string",
+          "enum": ["VALID", "INVALID", "PENDING"],
+          "description": "Previous validation status of the profile"
+        },
+        "validationHistory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["timestamp", "status", "validatorId"],
+            "properties": {
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "ISO 8601 timestamp of the validation attempt"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["VALID", "INVALID", "PENDING"],
+                "description": "Status of the validation attempt"
+              },
+              "validatorId": {
+                "type": "string",
+                "description": "Identifier of the validator"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

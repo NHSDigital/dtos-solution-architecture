@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Appointment Request Failed Event Schema",
+  "description": "Schema for the AppointmentRequestFailed event that represents a failed attempt to book an appointment",
+  "type": "object",
+  "required": [
+    "requestId",
+    "participantId",
+    "failureReason",
+    "failureTimestamp",
+    "originalRequest"
+  ],
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "Unique identifier for the failed appointment request"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant who requested the appointment"
+    },
+    "failureReason": {
+      "type": "string",
+      "enum": [
+        "NO_AVAILABLE_SLOTS",
+        "CAPACITY_EXCEEDED",
+        "INVALID_REQUEST",
+        "SERVICE_UNAVAILABLE",
+        "LOCATION_UNAVAILABLE",
+        "VALIDATION_ERROR",
+        "CONFLICTING_APPOINTMENT",
+        "ELIGIBILITY_ERROR",
+        "TECHNICAL_ERROR"
+      ],
+      "description": "Reason why the appointment request failed"
+    },
+    "failureTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the failure occurred"
+    },
+    "originalRequest": {
+      "type": "object",
+      "required": [
+        "serviceId",
+        "locationId",
+        "preferredSlot",
+        "appointmentType"
+      ],
+      "properties": {
+        "serviceId": {
+          "type": "string",
+          "description": "Unique identifier for the requested screening service"
+        },
+        "locationId": {
+          "type": "string",
+          "description": "Unique identifier for the requested location"
+        },
+        "preferredSlot": {
+          "type": "object",
+          "required": ["startTime", "endTime"],
+          "properties": {
+            "startTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 timestamp for the preferred start time"
+            },
+            "endTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 timestamp for the preferred end time"
+            }
+          }
+        },
+        "appointmentType": {
+          "type": "string",
+          "enum": ["INITIAL_SCREENING", "FOLLOW_UP", "RECALL", "DIAGNOSTIC"],
+          "description": "Type of screening appointment requested"
+        }
+      }
+    },
+    "validationErrors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["field", "message"],
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Field that failed validation"
+          },
+          "message": {
+            "type": "string",
+            "description": "Validation error message"
+          }
+        }
+      },
+      "description": "List of validation errors that occurred"
+    },
+    "attemptedAlternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slotId", "reason"],
+        "properties": {
+          "slotId": {
+            "type": "string",
+            "description": "Identifier of the alternative slot attempted"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason why this alternative was not suitable"
+          }
+        }
+      },
+      "description": "List of alternative slots that were attempted"
+    },
+    "capacityDetails": {
+      "type": "object",
+      "properties": {
+        "requestedCapacity": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Capacity requested in the original request"
+        },
+        "availableCapacity": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Available capacity at the time of failure"
+        }
+      },
+      "description": "Capacity-related details if the failure was due to capacity issues"
+    },
+    "retryPossible": {
+      "type": "boolean",
+      "description": "Indicates whether the request can be retried"
+    },
+    "nextAvailableSlot": {
+      "type": "object",
+      "properties": {
+        "slotId": {
+          "type": "string",
+          "description": "Identifier of the next available slot"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the next available slot"
+        }
+      },
+      "description": "Details of the next available slot, if any"
+    }
+  }
+}

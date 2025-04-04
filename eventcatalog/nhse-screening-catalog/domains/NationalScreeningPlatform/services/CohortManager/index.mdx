@@ -1,0 +1,70 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: CohortManager
+
+# Display name of the Service, rendered in EventCatalog
+name: Cohort Manager
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Manages screening cohorts, including creation, maintenance, inclusion and exclusion overrides and validation checks.
+
+# Optional messages this service receives and it's version
+receives:
+  - id: ValidateParticipantProfile
+    version: 0.0.1
+  - id: GetDemand
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: ParticipantProfileValidated
+    version: 0.0.1
+  - id: ParticipantProfileException
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Cohort Manager service is responsible for managing screening cohorts, which are groups of participants defined by specific criteria. It handles the creation, maintenance, and analysis of these cohorts to support screening operations and research.
+
+## Responsibilities
+
+1. **Cohort Management**
+
+   - Create and maintain cohorts
+   - Define cohort criteria
+   - Update cohort membership
+   - Track cohort changes
+
+2. **Analysis**
+
+   - Perform cohort analysis
+   - Generate cohort reports
+   - Track cohort metrics
+   - Support research activities
+
+3. **Integration**
+   - Connect with participant data
+   - Manage cohort data
+   - Handle cohort queries
+   - Support data exports
+
+## Business Rules
+
+1. Cohort criteria must be clearly defined and validated
+2. Cohort membership must be regularly reviewed
+3. Cohort changes must be tracked and audited
+4. Analysis results must be reproducible
+5. Cohort data must be anonymized for research
+
+<NodeGraph />

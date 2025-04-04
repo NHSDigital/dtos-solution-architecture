@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Send Result Command Schema",
+  "description": "Schema for the SendResult command that represents the intent to send screening results to a participant",
+  "type": "object",
+  "required": [
+    "episodeId",
+    "participantId",
+    "resultType",
+    "resultContent",
+    "communicationPreferences",
+    "sentBy",
+    "sentAt"
+  ],
+  "properties": {
+    "episodeId": {
+      "type": "string",
+      "description": "Unique identifier for the screening episode"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "resultType": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "ABNORMAL",
+        "INCONCLUSIVE",
+        "REFERRED",
+        "FURTHER_INVESTIGATION_REQUIRED"
+      ],
+      "description": "Type of screening result"
+    },
+    "resultContent": {
+      "type": "object",
+      "required": ["summary", "details", "recommendations"],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "Summary of the screening result"
+        },
+        "details": {
+          "type": "object",
+          "description": "Detailed screening results and measurements"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Clinical recommendations based on results"
+        },
+        "nextSteps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Recommended next steps for the participant"
+        }
+      },
+      "description": "Content of the screening result"
+    },
+    "communicationPreferences": {
+      "type": "object",
+      "required": ["preferredChannel", "language"],
+      "properties": {
+        "preferredChannel": {
+          "type": "string",
+          "enum": ["EMAIL", "SMS", "POST", "PORTAL"],
+          "description": "Preferred communication channel"
+        },
+        "language": {
+          "type": "string",
+          "description": "Preferred language for communication"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["PLAIN_TEXT", "HTML", "PDF"],
+          "description": "Preferred format for the result"
+        }
+      },
+      "description": "Participant's communication preferences"
+    },
+    "sentBy": {
+      "type": "string",
+      "description": "Identifier of the person sending the result"
+    },
+    "sentAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the result is being sent"
+    },
+    "followUpAppointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "string",
+          "description": "Identifier of the follow-up appointment"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the follow-up appointment"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the follow-up appointment"
+        }
+      },
+      "description": "Details of any follow-up appointment"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "content"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["REPORT", "LETTER", "REFERRAL", "INFORMATION_SHEET"],
+            "description": "Type of attachment"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content or reference to the attachment"
+          }
+        }
+      },
+      "description": "Additional documents to be sent with the result"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["STANDARD", "URGENT", "HIGH_PRIORITY"],
+      "description": "Priority level for sending the result"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about sending the result"
+    }
+  }
+}
