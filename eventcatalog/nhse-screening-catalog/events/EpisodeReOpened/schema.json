@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Closed Episode Event Schema",
+  "description": "Schema for the closedEpisode event that represents a completed screening episode",
+  "type": "object",
+  "required": [
+    "episodeId",
+    "participantId",
+    "serviceId",
+    "startDate",
+    "endDate",
+    "status",
+    "outcome",
+    "closedAt"
+  ],
+  "properties": {
+    "episodeId": {
+      "type": "string",
+      "description": "Unique identifier for the screening episode"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Unique identifier for the screening service"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the episode started"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the episode ended"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["COMPLETED", "CANCELLED", "TERMINATED", "TRANSFERRED"],
+      "description": "Final status of the episode"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "ABNORMAL",
+        "INCONCLUSIVE",
+        "REFERRED",
+        "FURTHER_INVESTIGATION_REQUIRED",
+        "NO_SHOW",
+        "DECLINED"
+      ],
+      "description": "Clinical outcome of the screening episode"
+    },
+    "closedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the episode was closed"
+    },
+    "appointments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["appointmentId", "date", "type", "status"],
+        "properties": {
+          "appointmentId": {
+            "type": "string",
+            "description": "Unique identifier for the appointment"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp of the appointment"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["INITIAL_SCREENING", "FOLLOW_UP", "RECALL", "DIAGNOSTIC"],
+            "description": "Type of appointment"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["COMPLETED", "CANCELLED", "NO_SHOW", "RESCHEDULED"],
+            "description": "Status of the appointment"
+          }
+        }
+      },
+      "description": "List of appointments associated with this episode"
+    },
+    "clinicalResults": {
+      "type": "object",
+      "properties": {
+        "screeningResult": {
+          "type": "string",
+          "description": "Result of the screening test"
+        },
+        "riskLevel": {
+          "type": "string",
+          "enum": ["LOW", "MEDIUM", "HIGH", "URGENT"],
+          "description": "Risk level assessment"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Clinical recommendations based on results"
+        }
+      },
+      "description": "Clinical results and assessments from the episode"
+    },
+    "qualityMetrics": {
+      "type": "object",
+      "properties": {
+        "completionTime": {
+          "type": "integer",
+          "description": "Time taken to complete the episode in days"
+        },
+        "appointmentAttendanceRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of attended appointments"
+        },
+        "protocolCompliance": {
+          "type": "boolean",
+          "description": "Whether the episode followed all required protocols"
+        }
+      },
+      "description": "Quality metrics for the episode"
+    },
+    "auditTrail": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "action", "actor"],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp of the action"
+          },
+          "action": {
+            "type": "string",
+            "description": "Description of the action taken"
+          },
+          "actor": {
+            "type": "string",
+            "description": "Identifier of who performed the action"
+          }
+        }
+      },
+      "description": "Audit trail of significant actions in the episode"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or comments about the episode"
+    }
+  }
+}

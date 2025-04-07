@@ -18,20 +18,24 @@ receives:
     version: 0.0.1
   - id: DeleteEnrolment
     version: 0.0.1
-  - id: ParticipantUpdated
-    version: 0.0.1
   - id: CloseEpisode
     version: 0.0.1
   - id: OpenEpisode
     version: 0.0.1
+  - id: ReopenEpisode
+    version: 0.0.1
 
 # Optional messages this service sends and it's version
 sends:
-  - id: ParticipantProfileUpdated
+  - id: EnrolmentCreated
     version: 0.0.1
-  - id: EligibilityDetermined
+  - id: EnrolmentDeleted
     version: 0.0.1
-  - id: ScreeningHistoryUpdated
+  - id: EpisodeClosed
+    version: 0.0.1
+  - id: EpisodeReOpened
+    version: 0.0.1
+  - id: EpisodeOpened
     version: 0.0.1
 
 # Optional badges, rendered to UI by EventCatalog

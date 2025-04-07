@@ -1,5 +1,6 @@
 /** @type {import('@eventcatalog/core/bin/eventcatalog.config').Config} */
 export default {
+  cId: 'e56b5efd-7a73-4ee9-a522-b1aa313c1c5e',
   title: "Digital Screening Event Catalog",
   tagline: "Discover, Explore and Document your Event Driven Architectures",
   organizationName: "NHS England",
