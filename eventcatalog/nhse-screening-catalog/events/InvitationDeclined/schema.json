@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Appointment Booked Event Schema",
+  "description": "Schema for the AppointmentBooked event that represents a successful booking of a screening appointment",
+  "type": "object",
+  "required": [
+    "appointmentId",
+    "participantId",
+    "serviceId",
+    "appointmentType",
+    "scheduledDate",
+    "scheduledTime",
+    "duration",
+    "bookedBy",
+    "bookedAt"
+  ],
+  "properties": {
+    "appointmentId": {
+      "type": "string",
+      "description": "Unique identifier for the appointment"
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Unique identifier for the participant"
+    },
+    "serviceId": {
+      "type": "string",
+      "description": "Identifier of the screening service"
+    },
+    "appointmentType": {
+      "type": "string",
+      "enum": [
+        "INITIAL_SCREENING",
+        "FOLLOW_UP",
+        "RECALL",
+        "DIAGNOSTIC",
+        "REVIEW",
+        "OTHER"
+      ],
+      "description": "Type of the appointment"
+    },
+    "scheduledDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the appointment is scheduled"
+    },
+    "scheduledTime": {
+      "type": "string",
+      "format": "time",
+      "description": "Time when the appointment is scheduled"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the appointment in minutes"
+    },
+    "bookedBy": {
+      "type": "string",
+      "description": "Identifier of the person or system that booked the appointment"
+    },
+    "bookedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the appointment was booked"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "type": "string",
+          "description": "Identifier of the screening site"
+        },
+        "siteName": {
+          "type": "string",
+          "description": "Name of the screening site"
+        },
+        "room": {
+          "type": "string",
+          "description": "Room or area where the appointment will take place"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "line1": {
+              "type": "string",
+              "description": "First line of address"
+            },
+            "line2": {
+              "type": "string",
+              "description": "Second line of address"
+            },
+            "line3": {
+              "type": "string",
+              "description": "Third line of address"
+            },
+            "postcode": {
+              "type": "string",
+              "pattern": "^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$",
+              "description": "Postal code"
+            }
+          }
+        }
+      },
+      "description": "Location details for the appointment"
+    },
+    "preparationInstructions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of preparation instructions for the participant"
+    },
+    "accessibilityRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "WHEELCHAIR_ACCESS",
+          "SIGN_LANGUAGE",
+          "LARGE_PRINT",
+          "BRAILLE",
+          "HEARING_LOOP",
+          "OTHER"
+        ]
+      },
+      "description": "List of accessibility requirements for the appointment"
+    },
+    "reminderPreferences": {
+      "type": "object",
+      "properties": {
+        "reminderTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["EMAIL", "SMS", "POST", "PHONE"]
+          }
+        },
+        "reminderDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 14
+          }
+        }
+      },
+      "description": "Participant's preferences for appointment reminders"
+    },
+    "bookingReference": {
+      "type": "string",
+      "description": "External booking reference number"
+    },
+    "cancellationPolicy": {
+      "type": "object",
+      "properties": {
+        "minimumNoticeHours": {
+          "type": "integer",
+          "description": "Minimum notice required for cancellation in hours"
+        },
+        "cancellationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for online cancellation"
+        }
+      },
+      "description": "Cancellation policy details"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source system that created the booking"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the event schema"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking related events"
+        }
+      },
+      "description": "Additional metadata about the event"
+    }
+  }
+}

@@ -1,16 +1,16 @@
 ---
 # id of your event, used for slugs and references in EventCatalog.
-id: AppointmentCancelled
+id: InvitationExpired
 
 # Display name of the Event, rendered in EventCatalog
-name: Appointment Cancelled
+name: Invitation Expired
 
 # Version of the Event
 version: 0.0.1
 
 # Short summary of your Event
 summary: |
-  Event indicating that an appointment (allocated or booked) has been cancelled.
+  Event indicating that an invitation has expired.
 
 # Optional badges, rendered to UI by EventCatalog
 badges:
@@ -21,7 +21,7 @@ badges:
 
 ## Overview
 
-The AppointmentCancelled event is published when an appointment is cancelled, whether it was previously allocated or booked. This event indicates that the appointment slot is no longer assigned to the participant and may be available for reallocation.
+The InvitationExpired event is sent when an invitation has not been acknowledged within a certain time frame.
 
 ## Event Data
 
