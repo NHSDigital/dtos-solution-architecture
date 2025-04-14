@@ -1,0 +1,27 @@
+{
+  "resourceType" : "Location",
+  // from Resource: id, meta, implicitRules, and language
+  // from DomainResource: text, contained, extension, and modifierExtension
+  "identifier" : [{ Identifier }], // Unique code or number identifying the location to its users
+  "status" : "<code>", // active | suspended | inactive
+  "operationalStatus" : { Coding }, // The operational status of the location (typically only for a bed/room) icon
+  "name" : "<string>", // Name of the location as used by humans
+  "alias" : ["<string>"], // A list of alternate names that the location is known as, or was known as, in the past
+  "description" : "<markdown>", // Additional details about the location that could be displayed as further information to identify the location beyond its name
+  "mode" : "<code>", // instance | kind
+  "type" : [{ CodeableConcept }], // Type of function performed icon
+  "contact" : [{ ExtendedContactDetail }], // Official contact details for the location
+  "address" : { Address }, // Physical location
+  "form" : { CodeableConcept }, // Physical form of the location
+  "position" : { // The absolute geographic location
+    "longitude" : <decimal>, // R!  Longitude with WGS84 datum
+    "latitude" : <decimal>, // R!  Latitude with WGS84 datum
+    "altitude" : <decimal> // Altitude with WGS84 datum
+  },
+  "managingOrganization" : { Reference(Organization) }, // Organization responsible for provisioning and upkeep
+  "partOf" : { Reference(Location) }, // Another Location this one is physically a part of
+  "characteristic" : [{ CodeableConcept }], // Collection of characteristics (attributes)
+  "hoursOfOperation" : [{ Availability }], // What days/times during a week is this location usually open (including exceptions)
+  "virtualService" : [{ VirtualServiceDetail }], // Connection details of a virtual service (e.g. conference call)
+  "endpoint" : [{ Reference(Endpoint) }] // Technical endpoints providing access to services operated for the location
+}
