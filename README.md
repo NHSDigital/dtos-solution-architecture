@@ -32,26 +32,37 @@ First, pull the latest Structurizr lite image:
 docker pull structurizr/lite
 ```
 
+Clone the repository
+HTTPS
+```bash
+git clone https://github.com/NHSDigital/dtos-solution-architecture.git
+```
+
+SSH
+```bash
+git clone git@github.com:NHSDigital/dtos-solution-architecture.git
+```
+
 Then run the container (commands vary by operating system):
 
 ##### MacOS and Linux
 
 ```bash
-cd eventcatalog/nhse-screening-catalog
+cd dtos-solution-architecture/eventcatalog/nhse-screening-catalog
 docker run -it --rm -p 8080:8080 -v ./:/usr/local/structurizr structurizr/lite
 ```
 
 Note: For MacOS Sequoia 15.2 and later, use this command instead to avoid sigterm exceptions:
 
 ```bash
-cd eventcatalog/nhse-screening-catalog
+cd dtos-solution-architecture/eventcatalog/nhse-screening-catalog
 docker run --rm -e JAVA_TOOL_OPTIONS="-XX:UseSVE=0" -p 8080:8080 -v ./:/usr/local/structurizr structurizr/lite
 ```
 
 ##### Windows
 
 ```bash
-cd eventcatalog/nhse-screening-catalog
+cd dtos-solution-architecture/eventcatalog/nhse-screening-catalog
 docker run -it --rm -p 8080:8080 -v %cd%:/usr/local/structurizr structurizr/lite
 ```
 
@@ -59,7 +70,7 @@ Once running, access the live view at http://localhost:8080
 
 ### 2. Event Catalog
 
-The Event Catalog is located in the `/eventcatalog/nhse-screening-catalog` directory and contains documentation for system events. Each event is documented with its schema and related information.
+The Event Catalog is located in the `/dtos-solution-architecture/eventcatalog/nhse-screening-catalog` directory and contains documentation for system events. Each event is documented with its schema and related information.
 
 #### Prerequisites
 
@@ -71,7 +82,7 @@ The Event Catalog is located in the `/eventcatalog/nhse-screening-catalog` direc
 1. Navigate to the eventcatalog directory:
 
 ```bash
-cd eventcatalog/nhse-screening-catalog
+cd dtos-solution-architecture/eventcatalog/nhse-screening-catalog
 ```
 
 2. Install dependencies:
@@ -131,3 +142,15 @@ How to make changes to the eventcatalog is covered very explicitly in the docuem
 5. Merge only after approval
 
 Remember: Never merge directly into the main branch. All changes must go through the Pull Request process.
+
+### Create new branch and push to GitHub
+
+git status # to see what has changed
+git checkout -b json-formatting # create a branch (eg json-formatting)
+git add . # add teh changed files to the list to push to Github
+git commit -m "Addition of LocationDetails" # commit the changed files
+git push --set-upstream origin json-formatting # push the changed files to GitHub
+
+Create a pull request for 'json-formatting' on GitHub by visiting: 
+https://github.com/NHSDigital/dtos-solution-architecture/pull/new/json-formatting
+
