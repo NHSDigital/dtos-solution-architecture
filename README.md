@@ -33,6 +33,7 @@ docker pull structurizr/lite
 ```
 
 Clone the repository
+
 HTTPS
 ```bash
 git clone https://github.com/NHSDigital/dtos-solution-architecture.git
@@ -143,14 +144,14 @@ How to make changes to the eventcatalog is covered very explicitly in the docuem
 
 Remember: Never merge directly into the main branch. All changes must go through the Pull Request process.
 
-### Create new branch and push to GitHub
+### Create new branch and push to GitHub (using "json-formatting" as an example)
 
-git status # to see what has changed
-git checkout -b json-formatting # create a branch (eg json-formatting)
-git add . # add teh changed files to the list to push to Github
-git commit -m "Addition of LocationDetails" # commit the changed files
-git push --set-upstream origin json-formatting # push the changed files to GitHub
+- git status # to see what has changed
+- git checkout -b json-formatting # create a branch (eg json-formatting)
+- git add . # add the changed files to the list to push to Github
+- git commit -m "Addition of new json-formatting" # commit the changed files with message
+- git push --set-upstream origin json-formatting # push the changed files to GitHub
 
 Create a pull request for 'json-formatting' on GitHub by visiting: 
-https://github.com/NHSDigital/dtos-solution-architecture/pull/new/json-formatting
+-https://github.com/NHSDigital/dtos-solution-architecture/pull/new/json-formatting
 
