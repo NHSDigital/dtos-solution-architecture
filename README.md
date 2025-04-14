@@ -153,5 +153,6 @@ Remember: Never merge directly into the main branch. All changes must go through
 - git push --set-upstream origin json-formatting # push the changed files to GitHub
 
 Create a pull request for 'json-formatting' on GitHub by visiting: 
--https://github.com/NHSDigital/dtos-solution-architecture/pull/new/json-formatting
+
+https://github.com/NHSDigital/dtos-solution-architecture/pull/new/json-formatting
 
