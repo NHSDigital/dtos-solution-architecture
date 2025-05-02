@@ -93,9 +93,17 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         serviceLayer = softwareSystem "Service Layer" "Service integration layer used to transition from legacy to the future platform"{
             serviceLayer_API = container "Service Layer API" "External API for external systems to interface with NSP" ".net Azure Function"
             serviceLayer_MeshMailbox = container "Service Layer Mesh Mailbox" "External mesh mailbox to ingest data" "Mesh Mailbox"
-            serviceLayer_ProcessingQueue = container "Service Layer Processing Queue" "Asynchronous queue for processing inbound data items" "Eventgrid"
-            serviceLayer_DataProcessor = container "Service Layer Data Processor" "Multiple data processors that convert data into NSP Events" ".net Azure Function"
-            
+            serviceLayer_ProcessingFunctions = container "Service Layer Processing Functions" "Multiple functions to perform ETL on ingested data" ".net Azure Function" {
+                serviceLayer_ProcessingFunctions_FileDiscovery = component "File Discovery Function" "Timer-triggered function for polling MESH mailbox" ".net Azure Function"
+                serviceLayer_ProcessingFunctions_FileExtract = component "File Extract Function" "Queue-triggered function for downloading file from MESH mailbox" ".net Azure Function"
+                serviceLayer_ProcessingFunctions_FileTransform = component "File Transform Function" "Queue-triggered function for parsing and validating downloaded file, and storing structured data" ".net Azure Function"
+            }
+            serviceLayer_InternalQueues = container "Service Layer Internal Queues" "Multiple asynchronous queues to regulate processing of ingested data" "Azure Storage Queues" {
+                serviceLayer_InternalQueues_FileExtractQueue = component "File Extract Queue" "Internal queue to regulate flow of file downloads" "Azure Storage Queue" "Queue"
+                serviceLayer_InternalQueues_FileTransformQueue = component "File Transform Queue" "Internal queue to regulate flow of file parsing and data appending" "Azure Storage Queue" "Queue"
+            }
+            serviceLayer_FileStore = container "Service Layer File Store" "Binary file store to retain original downloaded files for processing and archival" "Azure Blob Storage Container" "Database"
+            serviceLayer_DataStore = container "Service Layer Data Store" "Structured data store to hold aggregated data ingested from legacy systems" "Azure SQL DB" "Database"
         }
 
         NBSS = softwareSystem "National Breast Screening Service" "External Service used for managing breast screening" "external"
@@ -246,11 +254,28 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         nhsCIS2 -> sem_internalWebapp "Provides national authentication & authorisation services to"
 
         # Service Layer
-        serviceLayer_API -> serviceLayer_ProcessingQueue "Adds messages for processing using"
-        serviceLayer_MeshMailbox -> serviceLayer_ProcessingQueue "Adds messages for processing using"
-        serviceLayer_DataProcessor -> serviceLayer_ProcessingQueue "Subscribes to queue"
-        serviceLayer_DataProcessor -> pathwayCoordinator_API "Emits events for processing using"
+        serviceLayer_API -> serviceLayer_ProcessingFunctions "Adds data for processing using"
         NBSS -> serviceLayer_MeshMailbox "Sends data via"
+        serviceLayer_MeshMailbox -> serviceLayer_ProcessingFunctions "Adds messages for processing using"
+        serviceLayer_ProcessingFunctions -> serviceLayer_InternalQueues "Enqueues messages to"
+        serviceLayer_InternalQueues -> serviceLayer_ProcessingFunctions  "Dequeue messages from"
+        serviceLayer_ProcessingFunctions -> serviceLayer_FileStore "Downloads original files to"
+        serviceLayer_ProcessingFunctions -> pathwayCoordinator_API "Emits events for processing using"
+        serviceLayer_ProcessingFunctions -> serviceLayer_DataStore "Appends validated transformed data to"
+
+        serviceLayer_MeshMailbox -> serviceLayer_ProcessingFunctions_FileDiscovery
+        serviceLayer_ProcessingFunctions_FileDiscovery -> serviceLayer_InternalQueues_FileExtractQueue "Enqueues file extract message on"
+        
+        serviceLayer_InternalQueues_FileExtractQueue -> serviceLayer_ProcessingFunctions_FileExtract
+        serviceLayer_MeshMailbox -> serviceLayer_ProcessingFunctions_FileExtract
+        serviceLayer_ProcessingFunctions_FileExtract -> serviceLayer_FileStore "Stores original downloaded binary file"
+        serviceLayer_ProcessingFunctions_FileExtract -> serviceLayer_InternalQueues_FileTransformQueue "Enqueues file transform message to"
+
+        serviceLayer_InternalQueues_FileTransformQueue -> serviceLayer_ProcessingFunctions_FileTransform "Sends file transform message to"
+        serviceLayer_ProcessingFunctions_FileTransform -> serviceLayer_FileStore "Parses downloaded binary file"
+        serviceLayer_ProcessingFunctions_FileTransform -> serviceLayer_DataStore "Appends validated transformed data to"
+        
+        
 
         # Communication Manager
         pathwayCoordinator_ProductEventsQueue -> communicationsManager_eventAPI "Send participant comms event with pathway definition"
@@ -291,6 +316,12 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             include appointmentQueue
             
         }
+
+        systemContext serviceLayer dtoss8622Context {
+            include NBSS
+            include serviceLayer
+        }
+
         container appointmentAllocator AppointmentAllocator {
             include *
             autoLayout lr
@@ -351,6 +382,25 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
 
         container serviceLayer ServiceLayer {
             include *
+        }
+
+        container serviceLayer ServiceLayerContainerDtoss8622 {
+            include NBSS
+            include serviceLayer_MeshMailbox serviceLayer_ProcessingFunctions serviceLayer_InternalQueues serviceLayer_DataStore serviceLayer_FileStore
+        }
+
+        dynamic serviceLayer_ProcessingFunctions ServiceLayerComponentsDtoss8622 {
+            serviceLayer_ProcessingFunctions_FileDiscovery -> serviceLayer_MeshMailbox "Gets list of files"
+            serviceLayer_ProcessingFunctions_FileDiscovery -> serviceLayer_InternalQueues_FileExtractQueue "Enqueues file extract message on"
+            
+            serviceLayer_InternalQueues_FileExtractQueue -> serviceLayer_ProcessingFunctions_FileExtract "Sends file extract message to"
+            serviceLayer_ProcessingFunctions_FileExtract -> serviceLayer_MeshMailbox "Downloads and acknowledges file"
+            serviceLayer_ProcessingFunctions_FileExtract -> serviceLayer_FileStore "Stores original downloaded binary file"
+            serviceLayer_ProcessingFunctions_FileExtract -> serviceLayer_InternalQueues_FileTransformQueue "Enqueues file transform message to"
+
+            serviceLayer_InternalQueues_FileTransformQueue -> serviceLayer_ProcessingFunctions_FileTransform "Sends file transform message to"
+            serviceLayer_ProcessingFunctions_FileTransform -> serviceLayer_FileStore "Parses downloaded binary file"
+            serviceLayer_ProcessingFunctions_FileTransform -> serviceLayer_DataStore "Appends validated transformed data to"
         }
         
         component participantManager_API ParticipantManagerAPI { 
