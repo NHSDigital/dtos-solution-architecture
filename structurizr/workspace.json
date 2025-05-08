@@ -3,8 +3,12 @@
   "description" : "High level context diagram for all products within Digital Transformation of Screening",
   "documentation" : { },
   "id" : 1,
+<<<<<<< HEAD
   "lastModifiedAgent" : "structurizr-ui",
   "lastModifiedDate" : "2025-05-09T12:29:27Z",
+=======
+  "lastModifiedDate" : "2025-05-07T15:25:30Z",
+>>>>>>> 7600187 (Cohort Manager updates)
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -2185,8 +2189,12 @@
     } ],
     "configuration" : {
       "branding" : { },
+<<<<<<< HEAD
       "lastSavedView" : "BusinessAudit",
       "metadataSymbols" : "SquareBrackets",
+=======
+      "lastSavedView" : "cohortManagerSystemContext",
+>>>>>>> 7600187 (Cohort Manager updates)
       "styles" : {
         "elements" : [ {
           "color" : "#ffffff",
@@ -2223,7 +2231,7 @@
     },
     "containerViews" : [ {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2231,18 +2239,14 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 811,
-        "width" : 1620
-      },
       "elements" : [ {
         "id" : "11",
-        "x" : 219,
-        "y" : 185
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "19",
-        "x" : 969,
-        "y" : 185
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "AppointmentAllocator",
@@ -2253,7 +2257,7 @@
       "softwareSystemId" : "10"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2261,42 +2265,38 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 2691,
-        "width" : 3070
-      },
       "elements" : [ {
         "id" : "1",
-        "x" : 199,
-        "y" : 165
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "3",
-        "x" : 199,
-        "y" : 865
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "13",
-        "x" : 899,
-        "y" : 265
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "14",
-        "x" : 899,
-        "y" : 865
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "15",
-        "x" : 1649,
-        "y" : 565
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "16",
-        "x" : 2399,
-        "y" : 565
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "17",
-        "x" : 899,
-        "y" : 1465
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "18",
-        "x" : 899,
-        "y" : 2065
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "AppointmentBooker",
@@ -2315,7 +2315,7 @@
       "softwareSystemId" : "12"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2323,26 +2323,22 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 1411,
-        "width" : 2320
-      },
       "elements" : [ {
         "id" : "4",
-        "x" : 200,
-        "y" : 435
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "20",
-        "x" : 900,
-        "y" : 485
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "21",
-        "x" : 1650,
-        "y" : 785
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "22",
-        "x" : 1650,
-        "y" : 185
+        "x" : 0,
+        "y" : 0
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "BIAndDataAnalysis",
@@ -2357,7 +2353,7 @@
       "softwareSystemId" : "19"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2365,38 +2361,39 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "dimensions" : {
-        "height" : 1991,
-        "width" : 2370
-      },
       "elements" : [ {
         "id" : "12",
-        "x" : 199,
-        "y" : 165
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "24",
-        "x" : 949,
-        "y" : 765
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "25",
-        "x" : 949,
-        "y" : 1365
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "26",
-        "x" : 1699,
-        "y" : 765
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "27",
-        "x" : 1699,
-        "y" : 1365
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "32",
-        "x" : 199,
-        "y" : 765
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "57",
+<<<<<<< HEAD
         "x" : 199,
         "y" : 1365
+=======
+        "x" : 0,
+        "y" : 0
+>>>>>>> 7600187 (Cohort Manager updates)
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "BusinessAudit",
@@ -3230,6 +3227,7 @@
       "key" : "dtosSystemContext",
       "order" : 1,
       "relationships" : [ {
+<<<<<<< HEAD
         "id" : "111",
         "vertices" : [ {
           "x" : 3179,
@@ -3271,6 +3269,25 @@
           "x" : 3310,
           "y" : 1494
         } ]
+=======
+        "id" : "111"
+      }, {
+        "id" : "112"
+      }, {
+        "id" : "113"
+      }, {
+        "id" : "114"
+      }, {
+        "id" : "115"
+      }, {
+        "id" : "116"
+      }, {
+        "id" : "117"
+      }, {
+        "id" : "118"
+      }, {
+        "id" : "119"
+>>>>>>> 7600187 (Cohort Manager updates)
       }, {
         "id" : "120"
       }, {
