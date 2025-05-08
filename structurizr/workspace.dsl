@@ -40,7 +40,38 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         capacityAndDemandPlanner = softwareSystem "Capacity and Demand Planner" "Service for optimising capacity vs demand constraints"
         capacityManager = softwareSystem "Capacity Manager" "Service to centralise the overall system capacity"
         cohortingAsAService = softwareSystem "Cohorting as a Service" "Service which produces a list of eligible participants based on a cohort definition"
-        cohortManager = softwareSystem "Cohort Manager" "Service used for managing eligible participants in lieu of high quality data"
+        cohortManager = softwareSystem "Cohort Manager" "Service used for managing eligible participants in lieu of high quality data"{
+            ServiceNow_Integration_Service = container "Service Now Integration"
+            Demographic_Integration_Service = container "Demographic integration service "
+            CaaS_Integration_Service = container "CaaS Integration Service" "Process CaaS file" {
+                CaaS_Integration_Service_MESHFILE_RETRIEVAL = component "CaaS file retrieval" "Azure function for retrieving file" ".net Azure Function"
+                CaaS_Integration_Service_ReceiveCaaSfile = component "Process CaaS file " ".net Azure Function"
+            }
+            demographic_Service = container "Demographic Service" "Process and store demographic data"
+            participantmanagement_Service = container "Participant Management Service" "Store participant profile" {
+                participantmanagement_Service_Add_Participant = component "Add participant" 
+                participantmanagement_Service_Update_Participant = component "Update participant"
+                participantmanagement_Service_Remove_Participant = component "Remove participant"
+            }
+            cohortdistribution_Service = container "Cohort Distribution Service " "Service to distribute cohort to BS Select" {
+                cohortdistribution_Service_validation = component "Validate cohort to be distributed"
+                cohortdistribution_Service_Transformation = component "Cohort Distribution Transformation Rules"
+                cohortdistribution_Service_retrieve_participantdata = component "Retrieve participant data"
+            }
+           screeningvalidation_Service = container "Cohort Validation Service" "Service to validate pariticant demographic data"
+            exceptionmanagement_Service = container "Exception Management Service" "Stores exception log"
+            exception_visualiser = container "Exception Visualiser" "Web front to display exception log"
+            business_AuditService = container "Audit Log Service" "Write audit log to business audit"{
+                business_AuditService_ReceiveAuditLog = component "Receive Changes"
+                business_AuditService_WriteAuditLog = component "Write Audit Log"
+            }
+            cohortmanagerscreening_dataservices = container "Cohort Manager Data Services" "Read and write to data store"{
+                cohortmanagerscreening_dataservices_read = component "Read Data"
+                cohortmanagerscreening_dataservices_write = component "Write Data"
+                
+            }
+            cohortmanager_datastore = container "Cohort Manager datastore" "Participant, Demographic, Exception, Reference" "Database" "Database" 
+        }
         communicationsManager = softwareSystem "Communications Manager" "Service for centralising all communication from screening programmes to the participant"{
             communicationsManager_eventAPI = container "Communication Manager API" "Receive Comms events from various products"
             communicationManager_EventHandler = container "Communication Manager Event Handler" "Categorise communication events"
@@ -103,9 +134,25 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         Bowel = softwareSystem "Bowel Screening System" "External Service used for managing bowel screening" "external"
         DES = softwareSystem "Diabetic Eye Screening" "External Service used for managing diabetic eye screening" "external"
         AAA = softwareSystem "Abdominal aortic aneurysm" "External Service used for managing AAA screening" "external"
+        BSSelect = softwareSystem "Breast Screening System" "External service used to perform call/recall" "external"
+        PDS = softwareSystem "PDS" "NHS Demographic Service" "external"
+        ServiceNow = softwareSystem "Service Now" "Ticketing service" "external"
+        NEIMS = softwareSystem "NEIMS" "Demographic Change Event" "external"
+        CaaS = softwareSystem "CaaS" "Determines eligibility" "external"
+        NDRS = softwareSystem "NDRS" "VHR referral" "external"
+        ITOC = softwareSystem "ITOC" "Monitoring Log" "external"
 
-        cohortingAsAService -> cohortManager "Notifies of new eligible participant using"
+        CaaS -> cohortManager "Notifies of new and amended eligible participants"
+        Caas -> NDRS "Get VHR referral"
+        cohortManager -> CaaS "Manually added VHR participants"
+        cohortManager -> BSSelect "Distribute validated cohort"
+        BSSelect -> cohortManager "Reference data"
+        cohortManager -> PDS  "Get Demographics"
+        NEIMS -> cohortManager "Notify demographic change"
+        ServiceNow -> cohortManager "Manually add and update participant"
+        cohortManager -> ServiceNow "Raise and update tickets"
         cohortManager -> pathwayCoordinator "Notifies of new eligible participant using"
+        cohortManager -> ITOC "Send monitoring logs"
         participantManager -> pathwayCoordinator "Notifies of participant ready for screening using"
         pathwayCoordinator -> participantManager "Manages participant's episode (appointments, closed episodes) using"
         pathwayCoordinator -> appointmentAllocator "Gets slot for participant using"
@@ -261,6 +308,28 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         communicationManager_NotifyAPI -> communicationManager_DBStore "Get the payload "
         communicationManager_NotifyAPI -> nhsNotify "Send Payload"
 
+        # Cohort Manager
+        
+        CaaS_Integration_Service -> demographic_Service "Sends demographic data for each pariticpant"
+        CaaS_Integration_Service -> participantmanagement_Service "Sends participant information"
+        ServiceNow_Integration_Service -> participantmanagement_Service "Add and update participant"
+        participantmanagement_Service -> demographic_Service "Get demographic"
+        demographic_Service -> Demographic_Integration_Service "Get demographic"
+        participantmanagement_Service -> cohortdistribution_Service "Send participant information"
+        screeningvalidation_Service -> participantmanagement_Service "Runs validation rules"
+        screeningvalidation_Service -> exceptionmanagement_Service "Writes exception log"
+        cohortdistribution_Service -> exceptionmanagement_Service "Writes exception log"
+        exception_visualiser -> cohortmanagerscreening_dataservices "Reads and update exception logs"
+        participantmanagement_Service -> business_AuditService "Write change log"
+        demographic_Service -> business_AuditService "Write change log"
+        cohortdistribution_Service -> business_AuditService "Write change log"
+        cohortmanagerscreening_dataservices -> cohortmanager_datastore "Read and Write"
+        demographic_Service -> cohortmanagerscreening_dataservices "Read and Write Request"
+        participantmanagement_Service -> cohortmanagerscreening_dataservices "Read and Write Request"
+        cohortdistribution_Service -> cohortmanagerscreening_dataservices "Read and Write Request"
+        exceptionmanagement_Service -> cohortmanagerscreening_dataservices "Write exceptions"
+        
+
     }
 
     views {
@@ -269,6 +338,17 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             include *
         }
 
+        systemLandscape cohortManagerSystemContext "Cohort Manager system landscape"{
+            include cohortManager
+            include BSSelect
+            include PDS
+            include ServiceNow
+            include BusinessAudit
+            include NEIMS
+            include CaaS
+            include NDRS
+            include ITOC
+        }
         systemLandscape dtos5thTeamContext "Core focus of the 5th team"{
             include NBSS
             include CSMS
@@ -321,7 +401,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         }
         container cohortManager CohortManager {
             include *
-            autoLayout lr
+            
         }
         container communicationsManager CommunicationsManager {
             include *
