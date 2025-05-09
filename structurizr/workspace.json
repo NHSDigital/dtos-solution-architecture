@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-05-09T07:10:06Z",
+  "lastModifiedDate" : "2025-05-09T12:29:27Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -2185,7 +2185,7 @@
     } ],
     "configuration" : {
       "branding" : { },
-      "lastSavedView" : "CohortManager",
+      "lastSavedView" : "BusinessAudit",
       "metadataSymbols" : "SquareBrackets",
       "styles" : {
         "elements" : [ {
@@ -2417,17 +2417,13 @@
       "softwareSystemId" : "23"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 752
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -2435,17 +2431,13 @@
       "softwareSystemId" : "28"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 842
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
@@ -2453,17 +2445,13 @@
       "softwareSystemId" : "29"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
-      },
-      "dimensions" : {
-        "height" : 400,
-        "width" : 752
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
