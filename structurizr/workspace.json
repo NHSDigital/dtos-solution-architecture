@@ -3,7 +3,8 @@
   "description" : "High level context diagram for all products within Digital Transformation of Screening",
   "documentation" : { },
   "id" : 1,
-  "lastModifiedDate" : "2025-05-07T15:25:30Z",
+  "lastModifiedAgent" : "structurizr-ui",
+  "lastModifiedDate" : "2025-05-09T07:10:06Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
@@ -2184,7 +2185,8 @@
     } ],
     "configuration" : {
       "branding" : { },
-      "lastSavedView" : "cohortManagerSystemContext",
+      "lastSavedView" : "CohortManager",
+      "metadataSymbols" : "SquareBrackets",
       "styles" : {
         "elements" : [ {
           "color" : "#ffffff",
@@ -2221,7 +2223,7 @@
     },
     "containerViews" : [ {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2229,14 +2231,18 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 811,
+        "width" : 1620
+      },
       "elements" : [ {
         "id" : "11",
-        "x" : 0,
-        "y" : 0
+        "x" : 219,
+        "y" : 185
       }, {
         "id" : "19",
-        "x" : 0,
-        "y" : 0
+        "x" : 969,
+        "y" : 185
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "AppointmentAllocator",
@@ -2247,7 +2253,7 @@
       "softwareSystemId" : "10"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2255,38 +2261,42 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 2691,
+        "width" : 3070
+      },
       "elements" : [ {
         "id" : "1",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 165
       }, {
         "id" : "3",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 865
       }, {
         "id" : "13",
-        "x" : 0,
-        "y" : 0
+        "x" : 899,
+        "y" : 265
       }, {
         "id" : "14",
-        "x" : 0,
-        "y" : 0
+        "x" : 899,
+        "y" : 865
       }, {
         "id" : "15",
-        "x" : 0,
-        "y" : 0
+        "x" : 1649,
+        "y" : 565
       }, {
         "id" : "16",
-        "x" : 0,
-        "y" : 0
+        "x" : 2399,
+        "y" : 565
       }, {
         "id" : "17",
-        "x" : 0,
-        "y" : 0
+        "x" : 899,
+        "y" : 1465
       }, {
         "id" : "18",
-        "x" : 0,
-        "y" : 0
+        "x" : 899,
+        "y" : 2065
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "AppointmentBooker",
@@ -2305,7 +2315,7 @@
       "softwareSystemId" : "12"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2313,22 +2323,26 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 1411,
+        "width" : 2320
+      },
       "elements" : [ {
         "id" : "4",
-        "x" : 0,
-        "y" : 0
+        "x" : 200,
+        "y" : 435
       }, {
         "id" : "20",
-        "x" : 0,
-        "y" : 0
+        "x" : 900,
+        "y" : 485
       }, {
         "id" : "21",
-        "x" : 0,
-        "y" : 0
+        "x" : 1650,
+        "y" : 785
       }, {
         "id" : "22",
-        "x" : 0,
-        "y" : 0
+        "x" : 1650,
+        "y" : 185
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "BIAndDataAnalysis",
@@ -2343,7 +2357,7 @@
       "softwareSystemId" : "19"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2351,34 +2365,38 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 1991,
+        "width" : 2370
+      },
       "elements" : [ {
         "id" : "12",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 165
       }, {
         "id" : "24",
-        "x" : 0,
-        "y" : 0
+        "x" : 949,
+        "y" : 765
       }, {
         "id" : "25",
-        "x" : 0,
-        "y" : 0
+        "x" : 949,
+        "y" : 1365
       }, {
         "id" : "26",
-        "x" : 0,
-        "y" : 0
+        "x" : 1699,
+        "y" : 765
       }, {
         "id" : "27",
-        "x" : 0,
-        "y" : 0
+        "x" : 1699,
+        "y" : 1365
       }, {
         "id" : "32",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 765
       }, {
         "id" : "57",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 1365
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "BusinessAudit",
@@ -2399,13 +2417,17 @@
       "softwareSystemId" : "23"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 752
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CampaignManager",
@@ -2413,7 +2435,7 @@
       "softwareSystemId" : "28"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -2421,19 +2443,27 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 842
+      },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityAndDemandPlanner",
       "order" : 10,
       "softwareSystemId" : "29"
     }, {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
         "rankDirection" : "LeftRight",
         "rankSeparation" : 300,
         "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 400,
+        "width" : 752
       },
       "externalSoftwareSystemBoundariesVisible" : false,
       "key" : "CapacityManager",
@@ -3212,23 +3242,47 @@
       "key" : "dtosSystemContext",
       "order" : 1,
       "relationships" : [ {
-        "id" : "111"
+        "id" : "111",
+        "vertices" : [ {
+          "x" : 3179,
+          "y" : 1763
+        } ]
       }, {
         "id" : "112"
       }, {
-        "id" : "113"
+        "id" : "113",
+        "vertices" : [ {
+          "x" : 3310,
+          "y" : 1494
+        } ]
       }, {
-        "id" : "114"
+        "id" : "114",
+        "vertices" : [ {
+          "x" : 3310,
+          "y" : 1494
+        } ]
       }, {
-        "id" : "115"
+        "id" : "115",
+        "vertices" : [ {
+          "x" : 3179,
+          "y" : 1763
+        } ]
       }, {
         "id" : "116"
       }, {
         "id" : "117"
       }, {
-        "id" : "118"
+        "id" : "118",
+        "vertices" : [ {
+          "x" : 3179,
+          "y" : 1763
+        } ]
       }, {
-        "id" : "119"
+        "id" : "119",
+        "vertices" : [ {
+          "x" : 3310,
+          "y" : 1494
+        } ]
       }, {
         "id" : "120"
       }, {
