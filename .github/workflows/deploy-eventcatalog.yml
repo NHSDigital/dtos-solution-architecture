@@ -3,7 +3,7 @@ name: Deploy EventCatalog
 on:
   push:
     branches:
-      - main
+      - current-architecture
     paths:
       - "eventcatalog/nhse-screening-catalog/**"
   workflow_dispatch:
