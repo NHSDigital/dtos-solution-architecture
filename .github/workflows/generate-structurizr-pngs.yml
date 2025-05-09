@@ -68,10 +68,10 @@ jobs:
           node export-diagrams.js http://localhost:8080/workspace/diagrams png
 
       # Step 9: Copy pngs to images folder
-      - name: Copy diagrams to /images
+      - name: Copy diagrams to eventcatalog/nhse-screening-catalog/public/c4
         run: |
-          mkdir -p images
-          cp structurizr/puppeteer/*.png images/
+          mkdir -p eventcatalog/nhse-screening-catalog/public/c4
+          cp structurizr/puppeteer/*.png eventcatalog/nhse-screening-catalog/public/c4
           rm -rf structurizr/puppeteer
 
       # Step 10: Commit and push diagrams to the PR branch

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AppointmentBookedBusinessEvent",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "description": "A system-generated, globally unique identifier assigned to each instance of the 'AppointmentCancelled' business event."
+    },
+    "metaTimestamp": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "description": "A timestamp reflecting when the originating system generated its internal record of this event."
+    },
+    "holdingClinicIndicator": {
+      "type": [
+        "null",
+        "boolean"
+      ],
+      "description": "This attribute is a binary flag indicating whether the booked appointment is associated with a designated \"holding clinic.\""
+    }
+  },
+  "required": [
+    "eventId"
+  ]
+}
