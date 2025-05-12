@@ -3,9 +3,7 @@ name: Deploy EventCatalog
 on:
   push:
     branches:
-      - main
-    paths:
-      - "eventcatalog/nhse-screening-catalog/**"
+      - current-architecture
   workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
