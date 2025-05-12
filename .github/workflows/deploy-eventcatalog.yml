@@ -18,10 +18,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: eventcatalog/nhse-screening-catalog
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,22 +29,35 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
+        working-directory: eventcatalog/nhse-screening-catalog
         run: npm install
       - name: Build
+        working-directory: eventcatalog/nhse-screening-catalog
         run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./eventcatalog/nhse-screening-catalog/dist
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
+# ---- Build Structurizr site using Docker ----
+      - name: Build Structurizr site
+        working-directory: structurizr
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}/structurizr:/var/model \
+            ghcr.io/avisi-cloud/structurizr-site-generatr \
+            generate --workspace-file workspace.dsl
+      
+            # ---- Prepare dist folder ----
+      - name: Prepare dist folder for deploy
+        run: |
+          mkdir -p dist/eventcatalog
+          mkdir -p dist/structurizr
+          cp -r landing/index.html dist/index.html
+          cp -r eventcatalog/nhse-screening-catalog/dist/* dist/eventcatalog/
+          cp -r structurizr/build/* dist/structurizr/
+
+      # ---- Deploy ----
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
