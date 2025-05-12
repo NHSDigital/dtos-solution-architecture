@@ -67,7 +67,11 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             }
             screeningvalidation_Service = container "Cohort Validation Service" "Service to validate pariticant demographic data"
             exceptionmanagement_Service = container "Exception Management Service" "Stores exception log"
-            exception_visualiser = container "Exception Visualiser" "Web front to display exception log"
+            exception_visualiser = container "Exception Visualiser" "Web front to display exception log"{
+                exception_visualiser_webUI = component "Display exceptions"
+                exception_visualiser_GetAPI = component "Get Exceptions"
+                exception_visualiser_UpdateAPI = component "Update Exceptions"
+            }
             business_AuditService = container "Audit Log Service" "Write audit log to business audit"{
                 business_AuditService_ReceiveAuditLog = component "Receive Changes"
                 business_AuditService_WriteAuditLog = component "Write Audit Log"
@@ -409,6 +413,9 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         container cohortManager CohortManager {
             include *
             
+        }
+        component exception_visualiser {
+            include *
         }
         container communicationsManager CommunicationsManager {
             include *
