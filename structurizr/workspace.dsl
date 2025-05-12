@@ -41,8 +41,15 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         capacityManager = softwareSystem "Capacity Manager" "Service to centralise the overall system capacity"
         cohortingAsAService = softwareSystem "Cohorting as a Service" "Service which produces a list of eligible participants based on a cohort definition"
         cohortManager = softwareSystem "Cohort Manager" "Service used for managing eligible participants in lieu of high quality data"{
-            ServiceNow_Integration_Service = container "Service Now Integration"
-            Demographic_Integration_Service = container "Demographic integration service "
+            ServiceNow_Integration_Service = container "Service Now Integration"{
+                ServiceNow_Integration_Service_API = component "Receieve Add Request"
+                ServiceNow_Integration_Service_process = component "Process Add Request"
+            }
+            Demographic_Integration_Service = container "Demographic integration service "{
+                Demographic_Integration_Service_PDS_API = component "Get demohgraphic API"
+                Demographic_Integration_Service_Update = component "Retrieve Update Notification"
+                Demographic_Integration_Service_Queue = component "Demographic update queue"
+            }
             CaaS_Integration_Service = container "CaaS Integration Service" "Process CaaS file" {
                 CaaS_Integration_Service_MESHFILE_RETRIEVAL = component "CaaS file retrieval" "Azure function for retrieving file" ".net Azure Function"
                 CaaS_Integration_Service_ReceiveCaaSfile = component "Process CaaS file " ".net Azure Function"
@@ -58,9 +65,13 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
                 cohortdistribution_Service_Transformation = component "Cohort Distribution Transformation Rules"
                 cohortdistribution_Service_retrieve_participantdata = component "Retrieve participant data"
             }
-           screeningvalidation_Service = container "Cohort Validation Service" "Service to validate pariticant demographic data"
+            screeningvalidation_Service = container "Cohort Validation Service" "Service to validate pariticant demographic data"
             exceptionmanagement_Service = container "Exception Management Service" "Stores exception log"
-            exception_visualiser = container "Exception Visualiser" "Web front to display exception log"
+            exception_visualiser = container "Exception Visualiser" "Web front to display exception log"{
+                exception_visualiser_webUI = component "Display exceptions"
+                exception_visualiser_GetAPI = component "Get Exceptions"
+                exception_visualiser_UpdateAPI = component "Update Exceptions"
+            }
             business_AuditService = container "Audit Log Service" "Write audit log to business audit"{
                 business_AuditService_ReceiveAuditLog = component "Receive Changes"
                 business_AuditService_WriteAuditLog = component "Write Audit Log"
@@ -316,7 +327,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         participantmanagement_Service -> demographic_Service "Get demographic"
         demographic_Service -> Demographic_Integration_Service "Get demographic"
         participantmanagement_Service -> cohortdistribution_Service "Send participant information"
-        screeningvalidation_Service -> participantmanagement_Service "Runs validation rules"
+        demographic_Service -> screeningvalidation_Service "Validates demographics"
         screeningvalidation_Service -> exceptionmanagement_Service "Writes exception log"
         cohortdistribution_Service -> exceptionmanagement_Service "Writes exception log"
         exception_visualiser -> cohortmanagerscreening_dataservices "Reads and update exception logs"
@@ -403,6 +414,9 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             include *
             
         }
+        component exception_visualiser {
+            include *
+        }
         container communicationsManager CommunicationsManager {
             include *
             autoLayout lr
@@ -437,6 +451,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             include *
             autoLayout lr
         }
+         
 
         styles {
             element "Element" {
