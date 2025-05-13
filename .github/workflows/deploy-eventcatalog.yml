@@ -32,12 +32,14 @@ jobs:
       - name: Build
         working-directory: eventcatalog/nhse-screening-catalog
         run: npm run build
+      - name: Show workspace structure
+        run: ls -R
 
 # ---- Build Structurizr site using Docker ----
       - name: Build Structurizr site
         run: |
           docker run --rm \
-            -v /home/runner/work/dtos-solution-architecture/structurizr:/var/model \
+            -v ${{ github.workspace }}/structurizr:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr \
             generate-site --workspace-file workspace.dsl
       
