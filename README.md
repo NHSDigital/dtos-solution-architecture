@@ -37,21 +37,21 @@ Then run the container (commands vary by operating system):
 ##### MacOS and Linux
 
 ```bash
-cd eventcatalog/nhse-screening-catalog
+cd structurizr
 docker run -it --rm -p 8080:8080 -v ./:/usr/local/structurizr structurizr/lite
 ```
 
 Note: For MacOS Sequoia 15.2 and later, use this command instead to avoid sigterm exceptions:
 
 ```bash
-cd eventcatalog/nhse-screening-catalog
+cd structurizr
 docker run --rm -e JAVA_TOOL_OPTIONS="-XX:UseSVE=0" -p 8080:8080 -v ./:/usr/local/structurizr structurizr/lite
 ```
 
 ##### Windows
 
 ```bash
-cd eventcatalog/nhse-screening-catalog
+cd structurizr
 docker run -it --rm -p 8080:8080 -v %cd%:/usr/local/structurizr structurizr/lite
 ```
 
