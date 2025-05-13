@@ -44,7 +44,6 @@ jobs:
             -v ${{ github.workspace }}/structurizr:/var/model:rw \
             ghcr.io/avisi-cloud/structurizr-site-generatr \
             generate-site --workspace-file workspace.dsl \
-            --assets-dir assets
       
       - name: Install tree
         run: sudo apt-get update && sudo apt-get install -y tree
