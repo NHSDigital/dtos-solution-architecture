@@ -33,10 +33,6 @@ jobs:
         working-directory: eventcatalog/nhse-screening-catalog
         run: npm run build
 # ---- Build Structurizr site using Docker ----
-      - name: Prepare for c4 build
-        run: |
-          mkdir -p structurizr/build/site/
-
       - name: Build Structurizr site
         continue-on-error: true
         run: |
@@ -45,13 +41,6 @@ jobs:
             -v ${{ github.workspace }}/structurizr:/var/model:rw \
             ghcr.io/avisi-cloud/structurizr-site-generatr \
             generate-site --workspace-file workspace.dsl \
-      
-      - name: Install tree
-        run: sudo apt-get update && sudo apt-get install -y tree
-          
-      - name: Show folder structure
-        run: tree -a -L 3
-
 # ---- Prepare dist folder ----
       - name: Prepare dist folder for deploy
         run: |
@@ -67,5 +56,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: gh-pages
+          publish_branch: github-pages
           force_orphan: true
