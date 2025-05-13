@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-05-09T12:29:27Z",
+  "lastModifiedDate" : "2025-05-13T13:16:20Z",
   "model" : {
     "people" : [ {
       "description" : "External user eligible for screening",
