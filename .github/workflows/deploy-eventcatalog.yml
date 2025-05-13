@@ -41,7 +41,7 @@ jobs:
         continue-on-error: true
         run: |
           docker run --rm \
-            -v ${{ github.workspace }}/structurizr:/var/model \
+            -v ${{ github.workspace }}/structurizr:/var/model:rw \
             ghcr.io/avisi-cloud/structurizr-site-generatr \
             generate-site --workspace-file workspace.dsl \
             --assets-dir assets
