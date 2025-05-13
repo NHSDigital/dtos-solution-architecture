@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - current-architecture
+      - main
   workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
