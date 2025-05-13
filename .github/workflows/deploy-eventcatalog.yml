@@ -35,7 +35,6 @@ jobs:
 
 # ---- Build Structurizr site using Docker ----
       - name: Build Structurizr site
-        working-directory: structurizr
         run: |
           docker run --rm \
             -v /home/runner/work/dtos-solution-architecture/structurizr:/var/model \
