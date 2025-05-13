@@ -45,7 +45,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y tree
           
       - name: Show folder structure
-        run: tree -a -L 5
+        run: tree -a -L 3
 
 # ---- Prepare dist folder ----
       - name: Prepare dist folder for deploy
