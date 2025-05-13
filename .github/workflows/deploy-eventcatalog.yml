@@ -1,4 +1,4 @@
-name: Deploy EventCatalog
+name: Deploy
 
 on:
   push:
@@ -41,16 +41,16 @@ jobs:
             ghcr.io/avisi-cloud/structurizr-site-generatr \
             generate-site --workspace-file workspace.dsl
       
-            # ---- Prepare dist folder ----
+# ---- Prepare dist folder ----
       - name: Prepare dist folder for deploy
         run: |
           mkdir -p dist/eventcatalog
           mkdir -p dist/structurizr
-          cp -r landing/index.html dist/index.html
+          cp -r index.html dist/index.html
           cp -r eventcatalog/nhse-screening-catalog/dist/* dist/eventcatalog/
           cp -r structurizr/build/* dist/structurizr/
 
-      # ---- Deploy ----
+# ---- Deploy ----
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
