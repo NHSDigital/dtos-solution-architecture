@@ -33,6 +33,10 @@ jobs:
         working-directory: eventcatalog/nhse-screening-catalog
         run: npm run build
 # ---- Build Structurizr site using Docker ----
+      - name: Prepare for c4 build
+        run: |
+          mkdir -p structurizr/build/site/
+
       - name: Build Structurizr site
         continue-on-error: true
         run: |
