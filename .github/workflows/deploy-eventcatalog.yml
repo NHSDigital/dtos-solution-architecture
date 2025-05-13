@@ -50,9 +50,13 @@ jobs:
           cp -r eventcatalog/nhse-screening-catalog/dist/* dist/eventcatalog/
           cp -r structurizr/build/* dist/structurizr/
 
-# ---- Deploy ----
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+# ---- Upload artifact for Pages ----
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          path: ./dist
+
+# ---- Deploy to GitHub Pages ----
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
