@@ -1,14 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Documentation Portal</title>
-</head>
-<body>
-  <h1>Welcome to the Documentation Portal</h1>
-  <ul>
-    <li><a href="eventcatalog/">Event Catalog</a></li>
-    <li><a href="structurizr/site/">C4 Diagrams</a></li>
-  </ul>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DTOS Solution Architecture</title>
+
+    <!-- NHS.UK Design System CSS & JS -->
+    <link
+      rel="stylesheet"
+      href="https://design-system.digital.nhs.uk/cdn/v0.176.0/stylesheets/nhsd-frontend.css"
+    />
+    <script
+      src="https://design-system.digital.nhs.uk/cdn/v0.176.0/scripts/nhsd-frontend.js"
+      defer
+    ></script>
+  </head>
+
+  <body class="nhsuk-template__body">
+    <div class="nhsuk-width-container">
+      <main class="nhsuk-main-wrapper" id="main-content" role="main">
+        <div
+          class="nhsd-o-hero nhsd-!t-bg-bright-blue-20-tint nhsd-o-hero--left-align"
+        >
+          <div class="nhsd-o-hero__content-container">
+            <div class="nhsd-o-hero__inner-content-container">
+              <span class="nhsd-t-heading-xxl nhsd-!t-margin-bottom-6"
+                >National Screening Platform</span
+              >
+              <p class="nhsd-t-heading-s nhsd-!t-margin-bottom-0">
+                These pages represent the Solution Architecture for the National
+                Screening Platform. A centralised solution supporting all
+                screening pathways
+              </p>
+              <div></div>
+            </div>
+          </div>
+          <div
+            class="nhsd-a-digiblocks nhsd-a-digiblocks--pos-tr nhsd-a-digiblocks--col-blue"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 550">
+              <g>
+                <g transform="translate(222, 224)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#BFD7ED"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#B2CFEA"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#A6C7E6"
+                  ></polygon>
+                </g>
+                <g transform="translate(328.5, 367.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#FBFAFA"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#F5F5F4"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#EFF2F1"
+                  ></polygon>
+                </g>
+                <g transform="translate(151, 306)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#3C4D57"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#32434C"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#313D45"
+                  ></polygon>
+                </g>
+                <g transform="translate(80, 306)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#FBFAFA"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#F5F5F4"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#EFF2F1"
+                  ></polygon>
+                </g>
+              </g>
+              <g>
+                <g transform="translate(186.5, 203.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#FBFAFA"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#F5F5F4"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#EFF2F1"
+                  ></polygon>
+                </g>
+                <g transform="translate(186.5, 285.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#00267A"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#001F75"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#001766"
+                  ></polygon>
+                </g>
+                <g transform="translate(222, 306)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#00267A"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#001F75"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#001766"
+                  ></polygon>
+                </g>
+                <g transform="translate(9, 306)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#00267A"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#001F75"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#001766"
+                  ></polygon>
+                </g>
+                <g transform="translate(257.5, 449.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#F5D507"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#F2CB0C"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#EEC000"
+                  ></polygon>
+                </g>
+              </g>
+              <g>
+                <g transform="translate(186.5, 203.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#6D7B86"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#62717A"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#5C6B75"
+                  ></polygon>
+                </g>
+                <g transform="translate(399.5, 326.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#BFD7ED"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#B2CFEA"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#A6C7E6"
+                  ></polygon>
+                </g>
+                <g transform="translate(222, 306)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#FBFAFA"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#F5F5F4"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#EFF2F1"
+                  ></polygon>
+                </g>
+              </g>
+              <g>
+                <g transform="translate(328.5, 162.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#F5D507"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#F2CB0C"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#EEC000"
+                  ></polygon>
+                </g>
+                <g transform="translate(399.5, 244.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#00267A"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#001F75"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#001766"
+                  ></polygon>
+                </g>
+                <g transform="translate(115.5, 162.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#6D7B86"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#62717A"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#5C6B75"
+                  ></polygon>
+                </g>
+                <g transform="translate(186.5, 244.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#0062CC"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#005ABE"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#0050B5"
+                  ></polygon>
+                </g>
+                <g transform="translate(328.5, 326.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#0062CC"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#005ABE"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#0050B5"
+                  ></polygon>
+                </g>
+                <g transform="translate(257.5, 326.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#3C4D57"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#32434C"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#313D45"
+                  ></polygon>
+                </g>
+              </g>
+              <g>
+                <g transform="translate(328.5, 244.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#DADFDF"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#CDD5D6"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#C5CDCF"
+                  ></polygon>
+                </g>
+                <g transform="translate(257.5, 285.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#0062CC"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#005ABE"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#0050B5"
+                  ></polygon>
+                </g>
+                <g transform="translate(44.5, 203.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#6D7B86"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#62717A"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#5C6B75"
+                  ></polygon>
+                </g>
+                <g transform="translate(151, 265)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#BFD7ED"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#B2CFEA"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#A6C7E6"
+                  ></polygon>
+                </g>
+              </g>
+              <g>
+                <g transform="translate(435, 142)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#0062CC"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#005ABE"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#0050B5"
+                  ></polygon>
+                </g>
+              </g>
+              <g>
+                <g transform="translate(328.5, 39.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#BFD7ED"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#B2CFEA"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#A6C7E6"
+                  ></polygon>
+                </g>
+                <g transform="translate(222, 19)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#00267A"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#001F75"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#001766"
+                  ></polygon>
+                </g>
+                <g transform="translate(257.5, 80.5)">
+                  <polygon
+                    points="0,20.5 35.5,0 71,20.5 35.5,41"
+                    fill="#DADFDF"
+                  ></polygon>
+                  <polygon
+                    points="35.5,82 71,61.4 71,20.5 35.5,41"
+                    fill="#CDD5D6"
+                  ></polygon>
+                  <polygon
+                    points="0,20.5 0,61.4 35.5,82 35.5,41"
+                    fill="#C5CDCF"
+                  ></polygon>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="nhsd-o-card-list">
+          <div class="nhsd-t-grid">
+            <div class="nhsd-t-row nhsd-o-card-list__items">
+              <!-- C4 Models -->
+              <div class="nhsd-t-col-xs-12 nhsd-t-col-s-6">
+                <div class="nhsd-m-card">
+                  <a
+                    href="/structurizr"
+                    class="nhsd-a-box-link"
+                    aria-label="View solution architecture models"
+                  >
+                    <div class="nhsd-a-box nhsd-a-box--bg-blue">
+                      <div class="nhsd-m-card__content_container">
+                        <div class="nhsd-m-card__content-box">
+                          <span class="nhsd-t-heading-s"
+                            >Solution Architecture</span
+                          >
+                          <p class="nhsd-t-body-s">
+                            Explore interactive C4 models of the National
+                            screening platform — systems, containers, and
+                            responsibilities.
+                          </p>
+                        </div>
+                        <div class="nhsd-m-card__button-box">
+                          <span class="nhsd-a-button nhsd-a-button--invert">
+                            <span class="nhsd-a-button__label"
+                              >View C4 Models</span
+                            >
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Event Catalog -->
+              <div class="nhsd-t-col-xs-12 nhsd-t-col-s-6">
+                <div class="nhsd-m-card">
+                  <a
+                    href="/eventcatalog"
+                    class="nhsd-a-box-link"
+                    aria-label="Explore the event catalog"
+                  >
+                    <div class="nhsd-a-box nhsd-a-box--bg-light-grey">
+                      <div class="nhsd-m-card__content_container">
+                        <div class="nhsd-m-card__content-box">
+                          <span class="nhsd-t-heading-s">Event Catalog</span>
+                          <p class="nhsd-t-body-s">
+                            Discover the events driving the platform —
+                            producers, consumers, and message flows.
+                          </p>
+                        </div>
+                        <div class="nhsd-m-card__button-box">
+                          <span class="nhsd-a-button">
+                            <span class="nhsd-a-button__label"
+                              >Explore Events</span
+                            >
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer class="nhsuk-footer" role="contentinfo">
+      <div class="nhsuk-width-container">
+        <p class="nhsuk-footer__copyright">&copy; NHS England 2025</p>
+      </div>
+    </footer>
+  </body>
 </html>
