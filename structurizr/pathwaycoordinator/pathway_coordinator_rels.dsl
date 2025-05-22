@@ -11,7 +11,7 @@ pathwayCoordinator.participantEventHandler -> pathwayCoordinator.inbound_API "Ac
 pathwayCoordinator.participantEventHandler -> pathwayCoordinator.productEventsQueue "Communicates with the products using"
 pathwayCoordinator.contextManager_ParticipantEventHandler -> pathwayCoordinator.participantEventsQueue "Subscribes to messages from"
 pathwayCoordinator.contextManager_ParticipantEventHandler -> pathwayCoordinator.contextManager_API "Updates data using"
-pathwayCoordinator.API -> pathwayCoordinator.db "Accesses data from"
+pathwayCoordinator.pathwayManager_API -> pathwayCoordinator.db "Accesses data from"
 pathwayCoordinator.contextManager_API -> pathwayCoordinator.contextManager_database "Accesses data from"
 pathwayCoordinator.contextManager_internalWebapp -> pathwayCoordinator.contextManager_API "Displays data using"
 pathwayCoordinator.internalWebapp -> pathwayCoordinator.pathwayManager_API "Displays data using"
