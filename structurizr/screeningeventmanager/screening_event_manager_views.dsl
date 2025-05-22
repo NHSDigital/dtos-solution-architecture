@@ -6,5 +6,4 @@ systemContext screeningEventManager "ScreeningEventManagerSystemContext" "Target
 container screeningEventManager ScreeningEventManager {
     include *
     autoLayout lr
-    exclude SLtoPC
 }

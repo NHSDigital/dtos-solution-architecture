@@ -85,14 +85,14 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         nhsNotify -> CommunicationsManager "Sends back invitation status"
         u -> nhsLogin "Authenticates using"
         u -> nhsApp "Accesses secure NHS services using"
-        nhsApp -> participantManager.participantManager_externalWebApp "Interacts with screening service using"
-        nhsCIS2 -> participantManager.participantManager_internalWebapp "Logs on via"
+        nhsApp -> participantManager.externalWebApp "Interacts with screening service using"
+        nhsCIS2 -> participantManager.internalWebapp "Logs on via"
         ServiceNow -> cm.snowIntegration
         NEIMS -> cm.NEMSIntegration "Sent via MESH Mailbox"
         CaaS -> cm.caasIntegration.retrieveMeshFile "Sent via Mesh Mailbox"
         ServiceNow -> cm "HTTP request"
         PDS -> cm pds "HTTP request"
-        NBSS -> serviceLayer.serviceLayer_MeshMailbox "Sends data via"
+        NBSS -> serviceLayer.meshMailbox "Sends data via"
 
     }
 

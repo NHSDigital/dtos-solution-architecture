@@ -8,12 +8,12 @@ container participantManager ParticipantManager {
 }
 
 container participantManager ParticipantManager_Alpha {
-    include participantManager.participantManager_API participantManager.participantManager_database participantManager.participantManager_ExperienceAPI participantManager.participantManager_ProductEventHandler
-    include participantManager.participantManager_externalWebApp u nhsLogin
+    include participantManager.API participantManager.db participantManager.experienceAPI participantManager.productEventHandler
+    include participantManager.externalWebApp u nhsLogin
     
 }
 
-component participantManager.participantManager_API ParticipantManagerAPI { 
+component participantManager.API ParticipantManagerAPI { 
     include *
     autoLayout lr
 }

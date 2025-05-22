@@ -1,6 +1,6 @@
 businessAudit -> biandDataAnalysis "Publishes data to"
 # Business Audit
-businessAudit.businessAudit_queue -> businessAudit.businessAudit_db "Writes audit data "
-businessAudit.businessAudit_api -> businessAudit.businessAudit_db "Reads audit data"
-businessAudit.businessAudit_api -> businessAudit.businessAudit_UserInterface  "Send participant audit log data "
+businessAudit.inboundQueue -> businessAudit.db "Writes audit data "
+businessAudit.API -> businessAudit.db "Reads audit data"
+businessAudit.API -> businessAudit.web  "Send participant audit log data "
 businessAudit -> pathwayCoordinator "Subscribes to events from"

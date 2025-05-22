@@ -94,5 +94,5 @@
         //cm -> pathwayCoordinator "Notifies of new eligible participant using"
         cm -> ITOC "Send monitoring logs"
 
-        cm -> businessAudit.businessAudit_queue "Writes eligibility changes, demographic and transformation changes"
-        cm -> pathwayCoordinator.pathwayCoordinator_API "Published New Eligible Participant Event using"
+        cm -> businessAudit.inboundQueue "Writes eligibility changes, demographic and transformation changes"
+        cm -> pathwayCoordinator.inbound_API "Published New Eligible Participant Event using"
