@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - update-styling
+      - website-fixup
   workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
