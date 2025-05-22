@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - main
+      - update-styling
   workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
@@ -32,16 +32,16 @@ jobs:
       - name: Build
         working-directory: eventcatalog/nhse-screening-catalog
         run: npm run build
-# ---- Build Structurizr site using Docker ----
+      # ---- Build Structurizr site using Docker ----
       - name: Build Structurizr site
         continue-on-error: true
         run: |
           docker run --rm \
             --user $(id -u):$(id -g) \
             -v ${{ github.workspace }}/structurizr:/var/model:rw \
-            ghcr.io/avisi-cloud/structurizr-site-generatr \
+            ghcr.io/nhsdigital/dtos-structurizr-site-generatr \
             generate-site --workspace-file workspace.dsl \
-# ---- Prepare dist folder ----
+      # ---- Prepare dist folder ----
       - name: Prepare dist folder for deploy
         run: |
           mkdir -p dist/eventcatalog
@@ -50,7 +50,7 @@ jobs:
           cp -r eventcatalog/nhse-screening-catalog/dist/* dist/eventcatalog/
           cp -r structurizr/build/* dist/structurizr/
 
-# ---- Upload artifact for Pages ----
+      # ---- Upload artifact for Pages ----
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

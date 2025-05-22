@@ -57,6 +57,21 @@ docker run -it --rm -p 8080:8080 -v %cd%:/usr/local/structurizr structurizr/lite
 
 Once running, access the live view at http://localhost:8080
 
+#### Make changes to the model
+
+Work has been carried out to try and break out the component services into separate folders to improve the maintainability of the files. The large workspace.dsl was becoming unmanageable.
+
+Each product now has it's own folder. Within which there are 3 files (model, view, relationships). Additionally there is a docs folder which a base markdown file.
+
+It should be possible to isolate changes so there are fewer changes to the main workspace.dsl.
+
+##### Relationships
+
+Because of the hierarchical nature of the dsl file, relationships become problematic. As a convention, the relationships within the sub folders should only contain 2 types of relationship
+
+- Where the product initiates a request to another service
+- Where a User or Staff member interacts with the product
+
 ### 2. Event Catalog
 
 The Event Catalog is located in the `/eventcatalog/nhse-screening-catalog` directory and contains documentation for system events. Each event is documented with its schema and related information.
