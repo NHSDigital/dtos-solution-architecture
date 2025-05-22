@@ -39,7 +39,7 @@ jobs:
           docker run --rm \
             --user $(id -u):$(id -g) \
             -v ${{ github.workspace }}/structurizr:/var/model:rw \
-            ghcr.io/avisi-cloud/structurizr-site-generatr \
+            ghcr.io/nhsdigital/dtos-structurizr-site-generatr \
             generate-site --workspace-file workspace.dsl \
       # ---- Prepare dist folder ----
       - name: Prepare dist folder for deploy
