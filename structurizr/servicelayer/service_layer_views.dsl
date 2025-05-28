@@ -10,9 +10,11 @@ systemContext serviceLayer "dtoss8622Context" "System Context Digram for Jira ti
 }
 container serviceLayer "FutureStateCaaS-SNowintegrationServiceLayer"{
     include servicelayer.caasIntegrationservice servicelayer.caasProcessingFunction servicelayer.eligibleParticipantInboundQueue servicelayer.participantTransformationFunction servicelayer.eligibleParticipantQueue servicelayer.ServiceNowIntegrationAPI servicelayer.meshMailBoxCaaS servicelayer.eligibleParticipantInboundQueue NEIMSSubscriptionAPI servicelayer.NEIMSubscriptionIntegration servicelayer.PDSIntegrationAPI PDS NEIMSSubscriptionAPI
+    autolayout lr
 }
 container serviceLayer "FutureStateDemographicIntegrationServiceLayer"{
     include PDS NEIMS NEIMSSubscriptionAPI servicelayer.NEIMSubscriptionIntegration servicelayer.meshMailBoxNEIMS servicelayer.PDSIntegrationAPI servicelayer.demographicChangeEventInboundQueue servicelayer.eligibleParticipantInboundQueue
+    autolayout lr
 }
 container serviceLayer ServiceLayer {
     include *
