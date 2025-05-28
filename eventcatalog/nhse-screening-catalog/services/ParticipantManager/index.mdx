@@ -1,0 +1,58 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: ParticipantManager
+
+# Display name of the Service, rendered in EventCatalog
+name: Participant Manager
+
+# Version of the Service
+version: ComingSoon
+
+owners:
+  - team-mays
+
+# Short summary of your Service
+summary: |
+  Manages participant information and their screening journey, including profile management, eligibility tracking, and screening history.
+
+specifications:
+  openapiPath: openapi.yml
+
+# Optional messages this service receives and it's version
+receives:
+  - id: CreateEnrolment
+    version: 0.0.1
+  - id: DeleteEnrolment
+    version: 0.0.1
+  - id: CloseEpisode
+    version: 0.0.1
+  - id: OpenEpisode
+    version: 0.0.1
+  - id: ReopenEpisode
+    version: 0.0.1
+
+# Optional messages this service sends and it's version
+sends:
+  - id: EnrolmentCreated
+    version: 0.0.1
+  - id: EnrolmentDeleted
+    version: 0.0.1
+  - id: EpisodeClosed
+    version: 0.0.1
+  - id: EpisodeReOpened
+    version: 0.0.1
+  - id: EpisodeOpened
+    version: 0.0.1
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: Core Service
+    backgroundColor: green
+    textColor: white
+---
+
+## Overview
+
+The Participant Manager service is responsible for managing participant information and their screening journey within the system. It handles participant profiles, eligibility tracking, and maintains their screening history.
+
+## Container Diagram

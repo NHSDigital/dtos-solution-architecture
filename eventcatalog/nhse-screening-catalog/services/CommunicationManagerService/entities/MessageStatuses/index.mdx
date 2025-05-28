@@ -1,0 +1,59 @@
+---
+# the id of the entity (used in EventCatalog)
+id: MessageStatuses
+# the name of the entity
+name: Message Statuses
+# the version of the entity
+version: 0.0.1
+# whether the entity is an aggregate root (optional)
+aggregateRoot: false
+# a summary of the entity (optional)
+summary: Represents a single message status.
+# the properties of the entity (optional)
+properties:
+  - name: created_at
+    type: timestamp
+    required: true
+    description: Datetime stamp for record creation
+  - name: details
+    type: string
+    required: false
+    description: HTTP payload of the information in the record
+  - name: idempotency_key
+    type: string
+    required: true
+    description: Key to ensure idempotent messages
+  - name: message_id
+    type: string
+    required: false
+    description: Identifier for message
+  - name: message_reference
+    type: UUID
+    required: true
+    description: Unique identifier for message
+  - name: status
+    type: string
+    required: true
+    description: Current status of the message
+    enum:
+      [
+        "created",
+        "delivered",
+        "enriched",
+        "failed",
+        "pending_enrichment",
+        "sending",
+      ]
+---
+
+## Overview
+
+Line item record for each of the messages sent to NHS Notify
+
+### Entity Properties
+
+<EntityPropertiesTable />
+
+## Relationships
+
+## Examples

@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Simplified Appointment Payload",
+  "type": "object",
+  "required": [
+    "appointmentId",
+    "appointmentDate",
+    "appointmentTime",
+    "appointmentStatusCode"
+  ],
+  "properties": {
+    "appointmentId": {
+      "type": "string",
+      "description": "The unique identifier assigned to the appointment by the originating source system (e.g., a local hospital system or scheduling application). It's important to note that the format and structure of this appointmentId may vary significantly depending on the specific source system that created the appointment. This identifier allows for referencing the appointment within the context of the originating system."
+    },
+    "appointmentType": {
+      "type": "string",
+      "description": "Specifies the category or nature of the appointment. This attribute may contain one or more values, depending on the level of detail provided by the originating system (e.g., 'Initial Screening', 'Follow-up Assessment', 'Telephone Consultation'). The values used will be specific to the originating system and might require mapping to a standardised set of appointment types for consistent reporting and analysis across the National Screening Platform."
+    },
+    "appointmentDate": {
+      "type": "string",
+      "pattern": "^[0-9]{8}$",
+      "description": "The scheduled date of the appointment, formatted as YYYYMMDD. This attribute provides the year, month, and day of the original appointment. The consistent YYYYMMDD format ensures unambiguous interpretation of the date across different systems."
+    },
+    "appointmentTime": {
+      "type": "string",
+      "pattern": "^[0-9]{4}$",
+      "description": "The scheduled time of the appointment, represented in 24-hour format as HHMM. This attribute, when combined with the appointmentDate, provides the complete scheduled date and time of the original appointment. The 24-hour format ensures clarity and avoids ambiguity related to AM/PM designations."
+    },
+    "appointmentStatusCode": {
+      "type": "string",
+      "description": "The values for this attribute are drawn from a centrally managed and standardised reference dataset within the National Screening Platform. This ensures consistent interpretation of appointment statuses across all integrated systems."
+    },
+    "appointmentStatusDisplay": {
+      "type": "string",
+      "description": "A human-readable description corresponding to the appointmentStatusCode. The values for this attribute are derived from the same centrally managed and standardised reference dataset as the appointmentStatusCode, ensuring a consistent and easily understandable representation of the appointment's status (e.g., 'Cancelled', 'Booked'). This attribute provides clarity on the meaning of the status code."
+    },
+    "appointmentBookedByCode": {
+      "type": "string",
+      "description": "A code specifying the entity that initiated the booking of the appointment. The values for this attribute are governed by a centrally managed and standardised reference dataset within the National Screening Platform. This ensures consistent identification of the booking party across all systems. The corresponding human-readable description for this code is provided in the appointmentBookedByDisplay attribute."
+    },
+    "appointmentBookedByDisplay": {
+      "type": "string",
+      "description": "A human-readable description corresponding to the appointmentBookedByCode, indicating who initiated the cancellation of the appointment. The values for this attribute are derived from the same centrally managed and standardised reference dataset as the appointmentBookedByCode, providing a clear understanding of the booking entity (e.g., 'Screening Office', 'Participant'). This attribute complements the code by offering a user-friendly representation."
+    },
+    "episodeID": {
+      "type": "string",
+      "description": "A unique identifier assigned to the specific episode of care or screening process to which this appointment belongs. An episode might encompass a series of related appointments, tests, and outcomes for a participant within a particular screening pathway. This episodeID allows for the grouping and tracking of all activities associated with a single screening episode. Its format and generation are determined by the originating system."
+    },
+    "managingEntityId": {
+      "type": "string",
+      "description": "A unique identifier representing the specific screening office or service provider responsible for managing the appointment. The values for this managingEntityId are drawn from a centrally managed and standardised reference dataset within the National Screening Platform. This ensures consistent identification of the responsible entity (e.g., a specific hospital trust or screening office) across all systems."
+    },
+    "appointmentFacilityCode": {
+      "type": "string",
+      "description": "This attribute represents a unique code that identifies the specific clinic or healthcare facility where the appointment has been booked. This code can be used to differentiate between various locations within a healthcare provider network or organisation. It allows for accurate routing, reporting, and analysis of appointment data based on the physical location of the service. The absence of this attribute might indicate a virtual appointment or a scenario where a specific clinic code is not applicable."
+    },
+    "appointmentLocationCode": {
+      "type": "string",
+      "description": "This attribute specifies a code that uniquely identifies the physical location of the place where the appointment is scheduled. This code provides a granular identifier for the specific building, campus, or site of the screening service delivery."
+    },
+    "appointmentLocationName": {
+      "type": "string",
+      "description": "This attribute provides the human-readable name of the clinic or place where the appointment is scheduled. This name is intended for display purposes and helps users easily identify the location of their appointment. While a appointmentLocationCode provides a unique, system-identifiable reference, the appointmentLocationName offers a more intuitive and recognisable label for the participant and staff."
+    },
+    "appointmentLocationNameAlias": {
+      "type": "string",
+      "description": "This attribute specifies the name of the clinic or healthcare facility as it should appear on official correspondence, such as appointment letters or other patient communications. This might differ slightly from the internal appointmentLocationName and could include specific formatting, legal names, or a more patient-facing presentation."
+    },
+    "appointmentLocationAddressLine1": {
+      "type": "string",
+      "description": "This attribute represents the first line of the physical address for the location where the appointment is scheduled. It typically contains the street number and street name of the facility."
+    },
+    "appointmentLocationAddressLine2": {
+      "type": "string",
+      "description": "This attribute represents the second line of the physical address for the location where the appointment is scheduled."
+    },
+    "appointmentLocationAddressLine3": {
+      "type": "string",
+      "description": "This attribute represents the third line of the physical address for the location where the appointment is scheduled."
+    },
+    "appointmentLocationAddressLine4": {
+      "type": "string",
+      "description": "This attribute represents the fourth line of the physical address for the location where the appointment is scheduled."
+    },
+    "appointmentLocationAddressLine5": {
+      "type": "string",
+      "description": "This attribute represents the fifth line of the physical address for the location where the appointment is scheduled."
+    },
+    "appointmentLocationPostalCode": {
+      "type": "string",
+      "description": "This attribute specifies the post code for the location where the appointment is scheduled."
+    },
+    "holdingClinicIndicator": {
+      "type": "boolean",
+      "description": "This attribute is a binary flag indicating whether the booked appointment is associated with a designated \"holding clinic.\" A holding clinic might serve as a temporary location or a specific service point for initial assessment, triage, or specific appointment types before a patient is directed to a more specialised clinic."
+    },
+    "screeningBatchId": {
+      "type": "string",
+      "description": "An optional identifier assigned by the originating source system to group a set of screening-related activities or records, if such a batch concept is applicable to the appointment cancellation. If the source system processes appointments in batches, this screeningBatchId can be used to correlate this appointment with its original batch. The presence and value of this attribute depend on the capabilities of the originating system."
+    }
+  }
+}

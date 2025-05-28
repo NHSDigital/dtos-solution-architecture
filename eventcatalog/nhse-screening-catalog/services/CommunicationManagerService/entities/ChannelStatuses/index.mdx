@@ -1,0 +1,51 @@
+---
+# the id of the entity (used in EventCatalog)
+id: ChannelStatuses
+# the name of the entity
+name: Channel Statuses
+# the version of the entity
+version: 0.0.1
+# whether the entity is an aggregate root (optional)
+aggregateRoot: false
+# a summary of the entity (optional)
+summary: Represents the status of a single message for a single channel's status
+# the properties of the entity (optional)
+properties:
+  - name: message_id
+    type: string
+    required: true
+    description: Message identifier
+  - name: message_reference
+    type: UUID
+    required: true
+    description: Message reference
+  - name: details
+    type: string
+    required: false
+    description: JSON object
+  - name: created_at
+    type: timestamp
+    required: true
+    description: Datetime stamp for record creation
+  - name: idempotency_key
+    type: string
+    required: true
+    description: Key to ensure idempotent messages
+  - name: status
+    type: string
+    required: true
+    description: Current status of the batch
+    enum: ["created", "delivered", "enriched", "failed", "pending_enrichment"]
+---
+
+## Overview
+
+Channel status for a given message
+
+### Entity Properties
+
+<EntityPropertiesTable />
+
+## Relationships
+
+## Examples

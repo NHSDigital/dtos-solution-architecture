@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FHIR Appointment Resource",
+  "type": "object",
+  "required": ["resourceType", "identifier", "status", "start"],
+  "properties": {
+    "resourceType": {
+      "type": "string",
+      "const": "Appointment",
+      "description": "This must be set to 'Appointment' to conform with the FHIR Appointment resource specification."
+    },
+    "identifier": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["value"],
+        "properties": {
+          "system": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "minItems": 1,
+      "description": "A list of identifiers associated with the appointment, such as an ID from the source system."
+    },
+    "status": {
+      "type": "string",
+      "description": "The overall status of the appointment, such as 'booked' or 'cancelled'."
+    },
+    "serviceType": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The specific type of appointment being booked, such as 'Initial Screening'."
+    },
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The start date and time of the appointment, in full ISO 8601 format (e.g., 2025-04-28T09:30:00+00:00)."
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "extension": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["url"],
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "valueCodeableConcept": {
+                "type": "object",
+                "properties": {
+                  "coding": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "display": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "valueBoolean": {
+                "type": "boolean"
+              }
+            }
+          },
+          "description": "Extensions to the Appointment resource, used to capture custom attributes such as who booked the appointment."
+        }
+      },
+      "description": "Metadata about the resource, including extensions like bookedBy and holdingClinicIndicator."
+    },
+    "episodeOfCare": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "object",
+            "properties": {
+              "system": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "description": "Reference to the episode of care that this appointment is associated with."
+    },
+    "managingEntity": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string"
+        }
+      },
+      "description": "Reference to the organization or group managing the appointment."
+    },
+    "location": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The location(s) where the appointment will occur, as references to contained or external resources."
+    },
+    "contained": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Resources that are referenced from this appointment but are included inline (e.g., a Location resource)."
+    }
+  }
+}

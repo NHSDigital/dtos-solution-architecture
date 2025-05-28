@@ -118,6 +118,14 @@ The Event Catalog will show all documented events in the system, organized by do
 
 The architecture model is defined in the `workspace.dsl` file using a domain-specific language. Reference documentation can be found at [https://docs.structurizr.com/dsl/language](https://docs.structurizr.com/dsl/language).
 
+The workspace.dsl has been broken down and now makes extensive use of includes. Each 'product' now has its own sub directory, within which there are 3 files:
+
+- \*\_model.dsl - should contain the model definitions for a product
+- \*\_rels.dsl - should contain the relationships relevant to a specific product
+- \*\_views.dsl - should contain the views appropriate to a specific product
+
+Additionally there is now a docs folder in the product folders. These can be added to with necessary documentation and will be published with the diagrams at the same time.
+
 The model follows a hierarchy:
 
 - SystemContext (top-level)
@@ -131,7 +139,7 @@ Best practices:
 - Document to Component level only when necessary
 - Make changes on a branch and create a Pull Request
 - DO NOT merge directly into main
-- Changes will automatically update referenced images in Confluence
+- Managing relationships can be challenging. Therefore as a rule, specify relationships within a product where that product is the initiator of an interaction. For external system relationships, specify and reference them in the main workspace.dsl
 
 ### Event Catalog Changes
 
@@ -146,3 +154,11 @@ How to make changes to the eventcatalog is covered very explicitly in the docuem
 5. Merge only after approval
 
 Remember: Never merge directly into the main branch. All changes must go through the Pull Request process.
+
+## Publishing
+
+The contents of the C4 and Eventcatalog once merged into **Main** will now get published to this site - https://nhsdigital.github.io/dtos-solution-architecture through the deploy-eventcatalog.yml github action. It does this by running two separate tasks: -
+
+- It executes `npm run build` in the eventcatalog folder to generate the contents for the eventcatalog
+- It then execute `ghcr.io/nhsdigital/dtos-structurizr-site-generatr generate-site` which uses this [site's](https://github.com/NHSDigital/dtos-structurizr-site-generatr) docker image to produce an NHS themed static website
+- The two sets of files are zipped up and deployed using github pages for the repository.

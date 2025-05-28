@@ -1,0 +1,56 @@
+{
+  "resourceType": "Appointment",
+  "id": "appointment-001",
+  "status": "booked",
+  "appointmentType": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v2-0276",
+        "code": "FOLLOWUP",
+        "display": "A follow up visit from a previous appointment"
+      }
+    ]
+  },
+  "serviceType": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/service-type",
+          "code": "272",
+          "display": "Breast Screen"
+        }
+      ]
+    }
+  ],
+  "start": "2025-07-15T09:30:00+01:00",
+  "end": "2025-07-15T10:00:00+01:00",
+  "participant": [
+    {
+      "actor": {
+        "reference": "Patient/patient-123",
+        "display": "John Smith"
+      },
+      "required": "required",
+      "status": "accepted"
+    },
+    {
+      "type": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+              "code": "LOC",
+              "display": "Location"
+            }
+          ]
+        }
+      ],
+      "actor": {
+        "reference": "Location/location-456",
+        "display": "Leeds Screening Centre - Room A"
+      },
+      "required": "required",
+      "status": "accepted"
+    }
+  ]
+}

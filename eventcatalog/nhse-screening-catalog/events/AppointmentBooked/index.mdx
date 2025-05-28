@@ -2,27 +2,47 @@
 # id of your event, used for slugs and references in EventCatalog.
 id: AppointmentBooked
 
-# Display name of the Event, rendered in EventCatalog
+# Display name of the event, rendered in EventCatalog
 name: Appointment Booked
 
-# Version of the Event
+# Version of the event
 version: 0.0.1
 
-# Short summary of your Event
+# Short summary of your event
 summary: |
-  Event indicating that an allocated appointment has been successfully booked and confirmed by a participant.
+  Appointment booked event
 
 # Optional badges, rendered to UI by EventCatalog
 badges:
-  - content: Validated event
-    backgroundColor: purple
-    textColor: purple
+  - content: New event
+    backgroundColor: blue
+    textColor: blue
 ---
 
 ## Overview
 
-The AppointmentBooked event is published when the AppointmentBooker service successfully books and confirms an allocated appointment slot. This event indicates that the participant has confirmed their attendance and the appointment details have been finalised.
+Triggered after an appointment is booked for a Participant with a screening office whose sub-specialty supports the required clinical procedure. Provides details about appointment information.
 
-## Event Data
+## Internal JSON Messages
 
-<Schema />
+Messages within the NSP, whilst adhering to the FHIR data model, do not need to subscribe to the FHIR payload structure
+
+### Internal JSON Schema
+
+<SchemaViewer id="internal" file="internal_schema.json" />
+
+### Internal Sample JSON Payload
+
+<Schema title="Internal json example" file="internal_example.json" />
+
+## External JSON Messages
+
+As a principle, externally consumed data messages will adhere to FHIR 4.0.1 standards
+
+### External JSON Schema
+
+<SchemaViewer title="FHIR based schema" id="fhir" file="fhir_schema.json" />
+
+### External Sample JSON Payload
+
+<Schema title="Internal json example" file="fhir_example.json" />
