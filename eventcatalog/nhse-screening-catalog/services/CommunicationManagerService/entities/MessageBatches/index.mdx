@@ -1,0 +1,55 @@
+---
+# the id of the entity (used in EventCatalog)
+id: MessageBatches
+# the name of the entity
+name: Message Batches
+# the version of the entity
+version: 0.0.1
+# whether the entity is an aggregate root (optional)
+aggregateRoot: false
+# a summary of the entity (optional)
+summary: Represents a single batch, containing multiple messages.
+# the properties of the entity (optional)
+properties:
+  - name: id
+    type: Integer
+    required: true
+    description: Unique identifier for the batch
+  - name: batch_id
+    type: string
+    required: false
+    description: Identifier created by NHS Notify
+  - name: batch_reference
+    type: UUID
+    required: true
+    description: Unique identifier for batch instance
+  - name: created_at
+    type: timestamp
+    required: true
+    description: Datetime stamp for batch creation
+  - name: status
+    type: string
+    required: true
+    description: Current status of the batch
+    enum: ["failed", "not_sent", "sent"]
+  - name: details
+    type: string
+    required: false
+    description: HTTP payload of the information in the batch
+  - name: response
+    type: string
+    required: false
+    description: HTTP response from NHS Notify
+---
+
+## Overview
+
+Batch of messages sent to the NHS Notify Batch endpoint
+
+### Entity Properties
+
+<EntityPropertiesTable />
+
+## Relationships
+
+## Examples

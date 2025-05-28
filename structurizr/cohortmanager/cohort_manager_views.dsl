@@ -1,15 +1,18 @@
-systemContext cm "WholeSystemContext" "Target System Context Diagram" {
-    include *
-    autolayout lr
-}
-
-systemContext cm "RoutineCohort" "Routine Cohort System Context Diagram" {
+systemContext cm "RoutineCohort" {
+    title "System context diagram for routine cohort"
     include cm CaaS BSSelect st
     autolayout lr
 }
 
-systemContext cm "Block" "Block Participant System Context" {
+systemContext cm "Block"{
+    title "Block Participant System Context" 
     include cm st NEIMS
+    autolayout lr
+}
+
+systemContext cm "WholeSystemContext"{
+    title "Target cohort manager system context"
+    include *
     autolayout lr
 }
 

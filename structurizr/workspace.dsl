@@ -127,7 +127,14 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
             "generatr.site.cdn" "https://cdn.jsdelivr.net/npm"
             "generatr.site.theme" "auto"
         }
-        systemLandscape "SystemLandscape" "Overall system landscape"{
+        systemLandscape "CurrentSystemLandscape"{
+            title "Current deployed System Landscape view"
+            include CommunicationsManager nhsNotify
+            autoLayout 
+        }
+
+        systemLandscape "TargetSystemLandscape" {
+            title "Target System Landscape view"
             include *
             autoLayout 
         }

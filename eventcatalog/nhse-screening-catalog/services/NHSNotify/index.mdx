@@ -1,0 +1,35 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: NHSNotify
+
+# Display name of the Service, rendered in EventCatalog
+name: NHS Notify
+
+# Version of the Service
+version: Current
+
+# Short summary of your Service
+summary: |
+  Common service available across multiple NHS services that manages the digital communications to the citizen.
+
+receives:
+  - id: SendBatchOfMessages
+    version: 0.0.1
+  - id: GetMessageStatus
+    version: 0.0.1
+
+specifications:
+  openapiPath: openapi.yml
+
+# Optional badges, rendered to UI by EventCatalog
+badges:
+  - content: External Service
+    backgroundColor: grey
+    textColor: white
+---
+
+## Overview
+
+Centrally managed service used for managing the sending of digital communications to the Citizen. It does this by having a series of fallback procedures, starting with text, email and eventually deferring to letters. Significantly reduces the printing
+
+<NodeGraph />
