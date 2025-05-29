@@ -1,3 +1,4 @@
 appointmentAllocator -> appointmentBooker "Gets available slots using"
 appointmentAllocator -> biandDataAnalysis "Retrieves participants usage patterns"      
-appointmentAllocator -> biandDataAnalysis "Publishes data to"        
+appointmentAllocator -> biandDataAnalysis "Publishes data to"  
+appointmentAllocator.webApp -> appointmentAllocator.apiApp "We talk shiz"      
