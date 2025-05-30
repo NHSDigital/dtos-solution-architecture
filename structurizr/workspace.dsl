@@ -34,7 +34,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         BSSelect = softwareSystem "Breast Screening Select" "NHSE Service used to manage the cohort of participants for breast screening" "External System"
         PDS = softwareSystem "PDS" "NHS Demographic Service" "External System"
         ServiceNow = softwareSystem "Service Now" "Ticketing service" "External System"
-        NEIMS = softwareSystem "NEIMS" "Demographic Change Event" "External System"
+        NEMS = softwareSystem "NEMS" "Demographic Change Event" "External System"
         CaaS = softwareSystem "Cohorting as a Service" "Service which produces a list of eligible participants based on a cohort definition" "External System"
         NDRS = softwareSystem "NDRS" "Data source for VHR referral" "External System"
         ITOC = softwareSystem "ITOC" "Centralised Monitoring Log" "External System"
@@ -88,7 +88,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         nhsApp -> participantManager.externalWebApp "Interacts with screening service using"
         nhsCIS2 -> participantManager.internalWebapp "Logs on via"
         ServiceNow -> cm.snowIntegration
-        NEIMS -> cm.NEMSIntegration "Sent via MESH Mailbox"
+        NEMS -> cm.NEMSIntegration "Sent via MESH Mailbox"
         CaaS -> cm.caasIntegration.retrieveMeshFile "Sent via Mesh Mailbox"
         ServiceNow -> cm "HTTP request"
         PDS -> cm pds "HTTP request"

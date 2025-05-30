@@ -6,7 +6,13 @@ systemContext cm "RoutineCohort" {
 
 systemContext cm "Block"{
     title "Block Participant System Context" 
-    include cm st NEIMS
+    include cm st NEMS PDS
+    autolayout lr
+}
+
+systemContext cm "ManualAdd"{
+    title "Manual Add Participant System Context" 
+    include cm st NEMS PDS ServiceNow BSSelect
     autolayout lr
 }
 
@@ -19,11 +25,6 @@ systemContext cm "WholeSystemContext"{
 container cm "WholeContainerDiagram" {
     include *
     autolayout lr   
-}
-
-component cm.caasIntegration "AddComponentDiagram" {
-    include cm.caasIntegration.retrieveMeshFile cm.caasIntegration.ReceiveCaaSFile cm.participantManagement.addParticipant
-    autolayout lr
 }
 
 component cm.screeningData "ScreeningDataService" {

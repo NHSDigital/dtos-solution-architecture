@@ -7,13 +7,13 @@
             ReceiveCaaSFile = component "ReceiveCaasFile"
         }
         addQueue = container "AddParticipantQueue" {
-            tags "queue"
+            tags "Queue"
         }
         cohortQueue = container "CohortDistributionQueue" {
-            tags "queue"
+            tags "Queue"
         }
         updateQueue = container "UpdateParticipantQueue" {
-            tags "queue"
+            tags "Queue"
         }
         participantManagement = container "Participant Management Service" {
             tags "microService"
@@ -76,6 +76,7 @@
 
             staticValidation = component "StaticValidation"
             lookupValidation = component "LookupValidation"
+            
             removeException = component "RemoveException"
         }
 
@@ -98,6 +99,12 @@
         blobBadFile = container "Failed file blob storage" {
             tags "Database"
         }
+        cohortManagerDB = container "Cohort Manager Database" {
+            tags "Database"
+            technology "Azure SQL DB"
+        }
+        
+       /*
         databaseParticipantManagement = container "Participant Management table" {
             tags "Database"
         }
@@ -129,4 +136,5 @@
         databaseBSSOutcode = container "BSS Outcode Mapping Lookup"{
             tags "Database"
         }
+        */
     }

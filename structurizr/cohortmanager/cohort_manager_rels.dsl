@@ -3,13 +3,14 @@
         //external systems
         st -> cm 
         cm -> BSSelect "Data via API"
-       // nems -> cm "Deposit file in MESH"
-        cm -> NEIMS "Un/Subscribe HTTP Request"
-       // CaaS -> cm "Deposit file in MESH"
+        cm -> NEMS "Un/Subscribe HTTP Request"
+       
 
         //CaaS Integration
         
         cm.caasIntegration.retrieveMeshFile -> cm.caasIntegration.ReceiveCaaSFile
+        cm.caasIntegration.retrieveMeshFile -> cm.blobCaaS
+        cm.caasIntegration.retrieveMeshFile -> cm.blobBadFile
         cm.caasIntegration.ReceiveCaaSFile -> cm.addQueue
         cm.caasIntegration.ReceiveCaaSFile -> cm.updateQueue
         cm.caasIntegration.ReceiveCaaSFile -> cm.participantManagement.removeParticipant
@@ -58,8 +59,8 @@
 
         //DemographicServices
         cm.demographicServices.pdsGet -> PDS "HTTP request by NHS No."
-        cm.demographicServices.NEMSSub -> NEIMS
-        cm.demographicServices.NEMSUnsub -> NEIMS
+        cm.demographicServices.NEMSSub -> NEMS
+        cm.demographicServices.NEMSUnsub -> NEMS
         cm.demographicServices.demographicData -> cm.participantManagement.addParticipant
                 
         //Admin
@@ -85,10 +86,12 @@
         //NEMS Integration
 
         cm.NEMSIntegration -> cm.updateQueue
+        cm.NEMSIntegration -> cm.blobNems
 
         //ServiceNowIntegration
         
         cm.snowIntegration -> cm.updateQueue
+        cm.snowIntegration -> cm.addQueue
 
 
         //cm -> pathwayCoordinator "Notifies of new eligible participant using"
