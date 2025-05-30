@@ -86,7 +86,7 @@
         //NEMS Integration
 
         cm.NEMSIntegration -> cm.updateQueue
-        cm.NEMSIntegration -> cm.blobNems
+       
 
         //ServiceNowIntegration
         
