@@ -14,3 +14,22 @@ serviceLayer.processingFunctions.fileExtract -> serviceLayer.internalQueues.file
 serviceLayer.internalQueues.fileTransformQueue -> serviceLayer.processingFunctions.fileTransform "Sends file transform message to"
 serviceLayer.processingFunctions.fileTransform -> serviceLayer.serviceLayer_FileStore "Parses downloaded binary file"
 serviceLayer.processingFunctions.fileTransform -> serviceLayer.serviceLayer_DataStore "Appends validated transformed data to"
+
+# Eligible Participant Integration (CaaS/Service Now)
+servicelayer.caasIntegrationservice -> servicelayer.meshMailBoxCaaS "Retrieve CaaS file" 
+servicelayer.caasIntegrationservice -> servicelayer.caasProcessingFunction "Send file for processing"
+servicelayer.caasProcessingFunction -> servicelayer.eligibleParticipantInboundQueue "Sends participant records"
+servicelayer.participantTransformationFunction -> servicelayer.eligibleParticipantInboundQueue "Get participant record"
+servicelayer.participantTransformationFunction -> servicelayer.eligibleParticipantQueue "Send standardised participant record"
+servicelayer.ServiceNowIntegrationAPI -> servicelayer.eligibleParticipantInboundQueue "Send manually add participants"
+
+#Demographic Integration (PDS,NEIMS)
+servicelayer.demographicChangeEventInboundQueue -> servicelayer.meshMailBoxNEIMS "Retrieve demographic change event"
+servicelayer.demographicChangeEventInboundQueue -> servicelayer.PDSIntegrationAPI "Get Demographic Change Details"
+servicelayer.NEIMSubscriptionIntegration -> servicelayer.eligibleParticipantInboundQueue "Get New NHS ID"
+servicelayer.PDSIntegrationAPI -> servicelayer.eligibleParticipantInboundQueue "Get New NHS ID"
+
+//external system integration
+servicelayer.PDSIntegrationAPI -> PDS "Get Demographic Data"
+NEIMS -> servicelayer.meshMailBoxNEIMS "Sent demographic change event VIA mesh"
+servicelayer.NEIMSubscriptionIntegration -> NEIMSSubscriptionAPI "Explicit subscription" 

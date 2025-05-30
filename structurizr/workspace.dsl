@@ -35,6 +35,7 @@ workspace "Digital Transformation of Screening" "High level context diagram for 
         PDS = softwareSystem "PDS" "NHS Demographic Service" "External System"
         ServiceNow = softwareSystem "Service Now" "Ticketing service" "External System"
         NEIMS = softwareSystem "NEIMS" "Demographic Change Event" "External System"
+        NEIMSSubscriptionAPI = softwareSystem "NEIMS Subscription API" "Subscribe and unsubscribe NHS Number" "External System"
         CaaS = softwareSystem "Cohorting as a Service" "Service which produces a list of eligible participants based on a cohort definition" "External System"
         NDRS = softwareSystem "NDRS" "Data source for VHR referral" "External System"
         ITOC = softwareSystem "ITOC" "Centralised Monitoring Log" "External System"
